@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Marcello Ruiz | Gastroenterologista Pediátrico</title>
+<meta name="description" content="Dr. Marcello Ruiz da Silva, Gastroenterologista Pediátrico. CRM 85878 · RQE Pediatria 150713. Diagnóstico preciso e atendimento humanizado em Santos, Santo André e São Paulo.">
+<meta name="theme-color" content="#0A1526">
+<link rel="icon" href="assets/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A1526;
+  --ink-2:#12264A;
+  --paper:#F7F9FC;
+  --white:#FFFFFF;
+  --peach:#F2B88A;
+  --peach-deep:#E09E63;
+  --line-d:rgba(10,21,38,.12);
+  --line-l:rgba(255,255,255,.16);
+  --txt-d:#33405A;
+  --txt-l:rgba(255,255,255,.72);
+  --font-d:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-b:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:var(--font-b);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--peach);color:var(--ink)}
+
+/* ---------- utilitários ---------- */
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.label{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+.label::before{content:"";width:34px;height:1px;background:var(--peach)}
+.label .num{color:var(--peach-deep);font-weight:500}
+.dark .label .num{color:var(--peach)}
+h1,h2,h3{font-family:var(--font-d);font-weight:380;line-height:1.06;letter-spacing:-.01em}
+.title-xl{font-size:clamp(2.5rem,5.2vw,4.2rem)}
+.title-lg{font-size:clamp(2rem,4vw,3.1rem)}
+em.acc{font-style:italic;color:var(--peach-deep);font-weight:340}
+.dark em.acc{color:var(--peach)}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- header ---------- */
+header{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .45s ease,box-shadow .45s ease,color .45s ease;color:var(--white)}
+header .bar{display:flex;align-items:center;justify-content:space-between;height:96px}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--font-d);font-size:1.22rem;letter-spacing:.01em}
+.brand small{display:block;font-family:var(--font-b);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;opacity:.72;margin-top:2px}
+.brand img{height:65px;width:auto;display:none}
+nav.desk{display:flex;align-items:center;gap:34px;font-size:13px;font-weight:500;letter-spacing:.04em}
+nav.desk a{opacity:.85;transition:opacity .25s}
+nav.desk a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.05em;padding:13px 26px;border-radius:999px;border:1px solid transparent;transition:transform .35s cubic-bezier(.19,1,.22,1),background .3s,color .3s,border-color .3s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn-peach{background:var(--peach);color:var(--ink)}
+.btn-peach:hover{background:var(--white)}
+.btn-ghost{border-color:rgba(255,255,255,.4);color:var(--white)}
+.btn-ghost:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
+header nav.desk .btn{padding:11px 22px}
+header.scrolled{background:rgba(247,249,252,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--ink);box-shadow:0 1px 0 var(--line-d)}
+header.scrolled .brand img{display:block}
+header.scrolled .brand .wordmark{display:none}
+header.scrolled .btn-ghost{border-color:var(--line-d);color:var(--ink)}
+header.scrolled .btn-ghost:hover{border-color:var(--ink)}
+.burger{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px;position:relative;z-index:60}
+.burger span{position:absolute;left:10px;right:10px;height:2px;background:currentColor;transition:.35s}
+.burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:26px}
+body.menu-open .burger span:nth-child(1){top:21px;transform:rotate(45deg)}
+body.menu-open .burger span:nth-child(2){top:21px;transform:rotate(-45deg)}
+.mmenu{position:fixed;inset:0;z-index:55;background:var(--ink);color:var(--white);display:flex;flex-direction:column;justify-content:center;padding:0 clamp(24px,8vw,80px);gap:8px;opacity:0;pointer-events:none;transition:opacity .4s}
+body.menu-open .mmenu{opacity:1;pointer-events:auto}
+.mmenu a{font-family:var(--font-d);font-size:clamp(2rem,8vw,3.2rem);padding:10px 0;border-bottom:1px solid var(--line-l);opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+body.menu-open .mmenu a{opacity:1;transform:none}
+.mmenu a:nth-child(2){transition-delay:.06s}.mmenu a:nth-child(3){transition-delay:.12s}.mmenu a:nth-child(4){transition-delay:.18s}.mmenu a:nth-child(5){transition-delay:.24s}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;color:var(--white);overflow:hidden;background:var(--ink);padding-top:120px;box-sizing:border-box}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,21,38,.62) 0%,rgba(10,21,38,.30) 42%,rgba(10,21,38,.88) 100%)}
+.hero .veil::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(10,21,38,.62) 0%,rgba(10,21,38,.05) 62%)}
+.hero .content{position:relative;z-index:2;padding-bottom:clamp(96px,14vh,150px)}
+.hero .label,.hero h1,.hero p.sub,.hero .foot{text-shadow:0 1px 3px rgba(10,21,38,.45),0 4px 26px rgba(10,21,38,.5)}
+.hero h1{font-size:clamp(2.9rem,7.4vw,6rem);max-width:14ch;margin:26px 0 22px}
+.hero p.sub{max-width:52ch;font-size:clamp(1rem,1.4vw,1.16rem);line-height:1.65;color:var(--txt-l);font-weight:400}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.hero .foot{position:relative;z-index:2;border-top:1px solid var(--line-l);padding:20px 0 26px;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.hero .scroll{display:flex;align-items:center;gap:12px}
+.hero .scroll i{display:block;width:1px;height:44px;background:linear-gradient(180deg,var(--peach),transparent);animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- manifesto ---------- */
+.manifesto{padding:clamp(90px,12vw,150px) 0 clamp(70px,9vw,110px)}
+.manifesto blockquote{font-family:var(--font-d);font-weight:340;font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.28;max-width:24ch;letter-spacing:-.01em}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,56px);margin-top:clamp(56px,7vw,90px)}
+.feat{border-top:1px solid var(--line-d);padding-top:22px}
+.feat h3{font-size:1.28rem;margin-bottom:10px}
+.feat p{font-size:.93rem;line-height:1.65;color:var(--txt-d)}
+.feat .k{font-family:var(--font-d);font-style:italic;color:var(--peach-deep);font-size:.95rem;display:block;margin-bottom:14px}
+
+/* ---------- seções escuras ---------- */
+.dark{background:var(--ink);color:var(--white)}
+.dark .sub{color:var(--txt-l)}
+
+/* ---------- sobre ---------- */
+.sobre{padding:clamp(90px,12vw,160px) 0;position:relative;overflow:hidden}
+.sobre .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(48px,6vw,96px);align-items:center}
+.sobre h2{margin:24px 0 20px}
+.sobre p.bio{color:var(--txt-l);line-height:1.75;font-size:1.02rem;max-width:54ch}
+.cred{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.cred span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line-l);border-radius:999px;padding:9px 16px;color:rgba(255,255,255,.85)}
+.promises{margin-top:38px;border-top:1px solid var(--line-l)}
+.promises li{list-style:none;display:flex;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line-l);font-size:.98rem;color:rgba(255,255,255,.88)}
+.promises li::before{content:"-";color:var(--peach);flex:none}
+.sobre .photo{position:relative;display:flex;justify-content:center}
+.sobre .photo .halo{position:absolute;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2C4F8E 0%,#12264A 55%,#0A1526 100%);top:50%;left:50%;transform:translate(-50%,-50%);filter:saturate(1.1)}
+.sobre .photo .ring{position:absolute;width:86%;aspect-ratio:1;border-radius:50%;border:1px solid var(--line-l);top:50%;left:50%;transform:translate(-50%,-50%)}
+.sobre .photo img{position:relative;z-index:2;max-height:560px;filter:drop-shadow(0 30px 60px rgba(0,0,0,.45))}
+
+/* ---------- condições ---------- */
+.cond{padding:clamp(90px,12vw,160px) 0}
+.cond .head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(48px,6vw,72px)}
+.cond .head p{color:var(--txt-d);line-height:1.7;max-width:46ch;justify-self:end}
+.clist{border-top:1px solid var(--line-d)}
+.citem{display:grid;grid-template-columns:70px 1fr auto;gap:clamp(16px,3vw,40px);align-items:center;padding:26px 8px;border-bottom:1px solid var(--line-d);transition:background .35s,padding .35s}
+.citem:hover{background:var(--white);padding-left:20px;padding-right:20px}
+.citem .idx{font-family:var(--font-d);font-style:italic;font-size:1.05rem;color:var(--peach-deep)}
+.citem h3{font-size:clamp(1.15rem,2vw,1.5rem);font-weight:420}
+.citem p{font-size:.86rem;color:var(--txt-d);margin-top:6px;max-width:60ch;line-height:1.55}
+.citem .arr{font-size:1.3rem;color:var(--ink);opacity:.25;transition:.35s}
+.citem:hover .arr{opacity:1;transform:translateX(4px)}
+
+/* ---------- consulta ---------- */
+.consulta{padding:clamp(90px,12vw,160px) 0;background:var(--white)}
+.consulta .grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(48px,6vw,96px);align-items:center}
+.consulta .frame{position:relative}
+.consulta .frame::before{content:"";position:absolute;inset:24px -24px -24px 24px;border:1px solid var(--line-d);border-radius:4px}
+.consulta .frame img{position:relative;border-radius:4px;aspect-ratio:1/1.02;object-fit:cover;width:100%}
+.consulta h2{margin:24px 0 34px}
+.steps{border-top:1px solid var(--line-d)}
+.step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid var(--line-d)}
+.step .n{font-family:var(--font-d);font-style:italic;color:var(--peach-deep);font-size:1.1rem;padding-top:2px}
+.step h3{font-size:1.22rem;margin-bottom:8px}
+.step p{font-size:.92rem;line-height:1.65;color:var(--txt-d)}
+
+/* ---------- unidades ---------- */
+.units{padding:clamp(90px,12vw,160px) 0}
+.units h2{margin:24px 0 14px}
+.units .lead{color:var(--txt-l);max-width:56ch;line-height:1.7}
+.ugrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:clamp(44px,5vw,64px)}
+.ucard{border:1px solid var(--line-l);border-radius:6px;padding:34px 30px;display:flex;flex-direction:column;min-height:340px;transition:background .4s,border-color .4s,transform .4s cubic-bezier(.19,1,.22,1)}
+.ucard:hover{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.34);transform:translateY(-6px)}
+.ucard .city{font-size:10.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--peach)}
+.ucard h3{font-size:1.55rem;margin:14px 0 18px}
+.ucard .addr{font-size:.92rem;line-height:1.65;color:var(--txt-l)}
+.ucard .hours{margin-top:18px;padding-top:18px;border-top:1px solid var(--line-l);font-size:.84rem;line-height:1.7;color:rgba(255,255,255,.6)}
+.ucard .go{margin-top:auto;padding-top:24px;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;gap:10px;align-items:center;color:var(--white)}
+.ucard .go::after{content:"↗";color:var(--peach);transition:transform .3s}
+.ucard:hover .go::after{transform:translate(3px,-3px)}
+
+/* ---------- cta final ---------- */
+.final{padding:clamp(110px,15vw,190px) 0;text-align:center;position:relative;overflow:hidden}
+.final h2{font-size:clamp(2.6rem,6vw,4.8rem);max-width:16ch;margin:26px auto 20px}
+.final p{color:var(--txt-l);font-size:1.05rem}
+.final .ctas{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:44px}
+.final .phone{margin-top:26px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line-l);padding:44px 0 54px;color:rgba(255,255,255,.55);font-size:.82rem}
+footer .fgrid{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center}
+footer img{height:54px;filter:brightness(0) invert(1);opacity:.9}
+footer .crm{letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+footer .note{max-width:52ch;line-height:1.6;margin-top:22px;font-size:.76rem;opacity:.7}
+
+/* ---------- responsivo ---------- */
+@media (max-width:1020px){
+  .sobre .grid,.consulta .grid{grid-template-columns:1fr;gap:56px}
+  .sobre .photo{order:-1}
+  .sobre .photo img{max-height:440px}
+  .cond .head{grid-template-columns:1fr;align-items:start}
+  .cond .head p{justify-self:start}
+  .ugrid{grid-template-columns:1fr;max-width:520px}
+  .feats{grid-template-columns:1fr;gap:30px}
+}
+@media (max-width:760px){
+  nav.desk{display:none}
+  .burger{display:block}
+  .brand img{height:48px}
+  .hero{justify-content:flex-start;padding-top:124px}
+  .hero .content{padding-bottom:48px}
+  .hero h1{font-size:clamp(2.25rem,10.2vw,2.9rem);margin:20px 0 18px}
+  .hero .ctas{margin-top:30px}
+  .hero .foot{font-size:10px;letter-spacing:.12em;margin-top:auto}
+  .citem{grid-template-columns:44px 1fr;gap:14px}
+  .citem .arr{display:none}
+}
+@media (max-height:800px) and (min-width:761px){
+  .hero h1{font-size:clamp(2.4rem,5.6vw,4.4rem)}
+  .hero .content{padding-bottom:56px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap bar">
+    <a class="brand" href="#top">
+      <img src="assets/logo.webp" alt="Dr. Marcello Ruiz | Gastroenterologista Pediátrico">
+      <span class="wordmark">Dr. Marcello Ruiz<small>Gastroenterologia Pediátrica</small></span>
+    </a>
+    <nav class="desk">
+      <a href="#sobre">Sobre</a>
+      <a href="#condicoes">Condições</a>
+      <a href="#consulta">A consulta</a>
+      <a href="#unidades">Unidades</a>
+      <a class="btn btn-ghost" href="https://wa.me/5511975175747?text=Ol%C3%A1%2C%20eu%20venho%20do%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento." target="_blank" rel="noopener">Agendar consulta</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu">
+  <a href="#sobre">Sobre</a>
+  <a href="#condicoes">Condições</a>
+  <a href="#consulta">A consulta</a>
+  <a href="#unidades">Unidades</a>
+  <a href="https://wa.me/5511975175747?text=Ol%C3%A1%2C%20eu%20venho%20do%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento." target="_blank" rel="noopener">Agendar consulta</a>
+</div>
+
+<section class="hero" id="top">
+  <video autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" id="heroVideo">
+    <source src="assets/hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="veil"></div>
+  <div class="wrap content">
+    <p class="label reveal">Gastroenterologista Pediátrico</p>
+    <h1 class="reveal" style="--d:.12s">A saúde digestiva do seu filho, tratada com <em class="acc">excelência.</em></h1>
+    <p class="sub reveal" style="--d:.24s">Diagnóstico preciso e atendimento humanizado para crianças e adolescentes, porque cada pequeno paciente merece tempo, escuta e cuidado de verdade.</p>
+    <div class="ctas reveal" style="--d:.36s">
+      <a class="btn btn-peach" href="https://wa.me/5511975175747?text=Ol%C3%A1%2C%20eu%20venho%20do%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento." target="_blank" rel="noopener">Agendar consulta →</a>
+      <a class="btn btn-ghost" href="#sobre">Conhecer o médico</a>
+    </div>
+  </div>
+  <div class="wrap foot reveal" style="--d:.5s">
+    <span>CRM 85878 &nbsp;·&nbsp; RQE Pediatria 150713</span>
+    <span class="scroll">Role para descobrir <i></i></span>
+    <span>Santos · Santo André · São Paulo</span>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="wrap">
+    <blockquote class="reveal">“Cada consulta é feita com <em class="acc">atenção</em>, <em class="acc">escuta</em> e um plano de tratamento pensado para o seu filho.”</blockquote>
+    <div class="feats">
+      <div class="feat reveal" style="--d:.1s">
+        <span class="k">01</span>
+        <h3>Diagnóstico detalhado</h3>
+        <p>Investigação cuidadosa da história clínica e dos sintomas, com exames indicados apenas quando realmente necessários.</p>
+      </div>
+      <div class="feat reveal" style="--d:.22s">
+        <span class="k">02</span>
+        <h3>Atendimento humanizado</h3>
+        <p>Consulta no ritmo da criança, com acolhimento para os pais e linguagem clara em cada etapa do cuidado.</p>
+      </div>
+      <div class="feat reveal" style="--d:.34s">
+        <span class="k">03</span>
+        <h3>Acompanhamento contínuo</h3>
+        <p>Evolução clínica monitorada de perto, com ajustes no plano de tratamento sempre que preciso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sobre dark" id="sobre">
+  <div class="wrap grid">
+    <div>
+      <p class="label reveal"><span class="num">01</span> Sobre o médico</p>
+      <h2 class="title-lg reveal" style="--d:.1s">Dr. Marcello Ruiz da Silva</h2>
+      <p class="bio reveal" style="--d:.2s">Médico gastroenterologista pediátrico com doutorado, professor da Faculdade de Ciências Médicas de Santos (UNILUS) e anos de experiência no diagnóstico e tratamento de doenças gastrointestinais em crianças e adolescentes. Referência na Baixada Santista, acredita que um atendimento humanizado faz toda a diferença na saúde dos pequenos.</p>
+      <div class="cred reveal" style="--d:.3s">
+        <span>CRM 85878</span>
+        <span>RQE Pediatria 150713</span>
+        <span>Doutorado</span>
+        <span>Professor · UNILUS</span>
+      </div>
+      <ul class="promises reveal" style="--d:.4s">
+        <li>Atendimento especializado, adaptado às necessidades de cada criança</li>
+        <li>Diagnóstico preciso e abordagem eficiente para cada caso</li>
+        <li>Acompanhamento contínuo para garantir a melhor evolução clínica</li>
+      </ul>
+    </div>
+    <div class="photo reveal" style="--d:.25s">
+      <img src="assets/dr-marcello.webp" alt="Dr. Marcello Ruiz da Silva">
+    </div>
+  </div>
+</section>
+
+<section class="cond" id="condicoes">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <p class="label reveal"><span class="num">02</span> Especialidades</p>
+        <h2 class="title-lg reveal" style="--d:.1s">Quando procurar um <em class="acc">gastro pediatra</em></h2>
+      </div>
+      <p class="reveal" style="--d:.2s">Se seu filho apresenta sintomas como dor abdominal, refluxo ou dificuldades digestivas, eu posso ajudar. Estas são algumas das condições que diagnostico e trato no consultório:</p>
+    </div>
+    <div class="clist">
+      <div class="citem reveal"><span class="idx">01</span><div><h3>Refluxo gastroesofágico</h3><p>Regurgitação frequente, vômitos, irritabilidade e desconforto após as mamadas ou refeições.</p></div><span class="arr">→</span></div>
+      <div class="citem reveal" style="--d:.06s"><span class="idx">02</span><div><h3>Intolerância à lactose</h3><p>Distensão abdominal, gases e diarreia associados ao consumo de leite e derivados.</p></div><span class="arr">→</span></div>
+      <div class="citem reveal" style="--d:.12s"><span class="idx">03</span><div><h3>Doença celíaca</h3><p>Intolerância ao glúten com impacto no crescimento, na absorção de nutrientes e no bem-estar.</p></div><span class="arr">→</span></div>
+      <div class="citem reveal" style="--d:.18s"><span class="idx">04</span><div><h3>Síndrome do intestino irritável</h3><p>Dor abdominal recorrente associada a alterações do hábito intestinal.</p></div><span class="arr">→</span></div>
+      <div class="citem reveal" style="--d:.24s"><span class="idx">05</span><div><h3>Alergia alimentar</h3><p>Incluindo APLV (alergia à proteína do leite de vaca) e outras reações mediadas por alimentos.</p></div><span class="arr">→</span></div>
+      <div class="citem reveal" style="--d:.3s"><span class="idx">06</span><div><h3>Constipação crônica e diarreia persistente</h3><p>Investigação das causas e tratamento seguro para restabelecer o ritmo intestinal.</p></div><span class="arr">→</span></div>
+      <div class="citem reveal" style="--d:.36s"><span class="idx">07</span><div><h3>Dor abdominal funcional</h3><p>Avaliação completa das dores recorrentes sem causa aparente e de outras disfunções gastrointestinais.</p></div><span class="arr">→</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="consulta" id="consulta">
+  <div class="wrap grid">
+    <div class="frame reveal">
+      <img src="assets/consultorio.webp" alt="Dr. Marcello em seu consultório">
+    </div>
+    <div>
+      <p class="label reveal"><span class="num">03</span> Como funciona</p>
+      <h2 class="title-lg reveal" style="--d:.1s">A consulta, passo a passo</h2>
+      <div class="steps">
+        <div class="step reveal" style="--d:.16s"><span class="n">01</span><div><h3>Escuta e avaliação completa</h3><p>Histórico detalhado da criança e exame físico com calma, sem pressa e sem julgamentos.</p></div></div>
+        <div class="step reveal" style="--d:.26s"><span class="n">02</span><div><h3>Diagnóstico preciso</h3><p>Hipóteses explicadas com clareza aos pais e exames complementares apenas quando necessários.</p></div></div>
+        <div class="step reveal" style="--d:.36s"><span class="n">03</span><div><h3>Plano e acompanhamento</h3><p>Tratamento personalizado para cada paciente, com evolução monitorada consulta a consulta.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="units dark" id="unidades">
+  <div class="wrap">
+    <p class="label reveal"><span class="num">04</span> Onde atendo</p>
+    <h2 class="title-lg reveal" style="--d:.1s">Três unidades para <em class="acc">você escolher</em></h2>
+    <p class="lead reveal" style="--d:.2s">Atendimento em São Paulo, Santo André e Santos. Escolha a unidade mais próxima e agende diretamente pelo WhatsApp.</p>
+    <div class="ugrid">
+      <div class="ucard reveal" style="--d:.1s">
+        <span class="city">São Paulo · SP</span>
+        <h3>Livance · Vila Mariana</h3>
+        <p class="addr">Ed. Art Work<br>R. Domingos de Morais, 2781, 14º andar<br>Vila Mariana · CEP 04035-001</p>
+        <p class="hours">Segunda a sexta: 7h às 22h<br>Sábado: 8h às 17h</p>
+        <a class="go" href="https://wa.me/5511975175747?text=Ol%C3%A1%2C%20eu%20venho%20do%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento%20na%20Vila%20Mariana." target="_blank" rel="noopener">Agendar nesta unidade</a>
+      </div>
+      <div class="ucard reveal" style="--d:.22s">
+        <span class="city">Santo André · SP</span>
+        <h3>Livance · Santo André</h3>
+        <p class="addr">Av. Portugal, 1285, 2º e 3º pavimento<br>Centro · CEP 09040-011</p>
+        <p class="hours">Segunda a sexta: 7h às 22h<br>Sábado: 8h às 17h</p>
+        <a class="go" href="https://wa.me/5511975175747?text=Ol%C3%A1%2C%20eu%20venho%20do%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento%20em%20Santo%20Andr%C3%A9." target="_blank" rel="noopener">Agendar nesta unidade</a>
+      </div>
+      <div class="ucard reveal" style="--d:.34s">
+        <span class="city">Santos · SP</span>
+        <h3>Liferty · Santos</h3>
+        <p class="addr">Al. Armênio Mendes, 66, sala 2912<br>Aparecida · CEP 11030-000</p>
+        <p class="hours">Segunda a sexta: 8h às 18h</p>
+        <a class="go" href="https://wa.me/5511975175747?text=Ol%C3%A1%2C%20eu%20venho%20do%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento%20em%20Santos." target="_blank" rel="noopener">Agendar nesta unidade</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final dark">
+  <div class="wrap">
+    <p class="label reveal" style="justify-content:center">Agende sua consulta</p>
+    <h2 class="reveal" style="--d:.1s">Vamos cuidar da <em class="acc">saúde do seu filho</em> juntos?</h2>
+    <p class="reveal" style="--d:.2s">Agendamento rápido pelo WhatsApp: escolha a unidade e o melhor horário para a sua família.</p>
+    <div class="ctas reveal" style="--d:.3s">
+      <a class="btn btn-peach" href="https://wa.me/5511975175747?text=Ol%C3%A1%2C%20eu%20venho%20do%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento." target="_blank" rel="noopener">Chamar no WhatsApp →</a>
+      <a class="btn btn-ghost" href="#unidades">Ver unidades</a>
+    </div>
+    <p class="phone reveal" style="--d:.4s">
+      <a href="https://wa.me/5513997867273" target="_blank" rel="noopener">(13) 99786-7273</a>
+      <span aria-hidden="true"> · </span>
+      <a href="tel:+551332736828">(13) 3273-6828</a>
+    </p>
+  </div>
+</section>
+
+<footer class="dark">
+  <div class="wrap">
+    <div class="fgrid">
+      <img src="assets/logo.webp" alt="Logo Dr. Marcello Ruiz">
+      <span class="crm">Dr. Marcello Ruiz da Silva · CRM 85878 · RQE Pediatria 150713</span>
+      <span>© <span id="yy">2026</span> · Todos os direitos reservados</span>
+    </div>
+    <p class="note">Site institucional com caráter exclusivamente informativo. Nenhum conteúdo desta página substitui a consulta, o diagnóstico ou a orientação médica presencial.</p>
+    <p class="note">Agendamento e informações: (13) 99786-7273 (WhatsApp) · (13) 3273-6828 (telefone). Acompanhamento pós-consulta: (13) 99681-1279, canal automático que não recebe agendamento.</p>
+    <p class="note">Dr. Marcello Ruiz - Gastroenterologia Pediátrica é marca de AMIKA - Serviços Médicos LTDA · CNPJ 09.040.678/0001-72 · Av. Bartolomeu de Gusmão, 133 - Ponta da Praia, Santos - SP, 11030-500</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var header = document.getElementById('header');
+  var video = document.getElementById('heroVideo');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function onScroll(){
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // menu mobile
+  var burger = document.getElementById('burger');
+  burger.addEventListener('click', function(){
+    document.body.classList.toggle('menu-open');
+  });
+  document.querySelectorAll('.mmenu a').forEach(function(a){
+    a.addEventListener('click', function(){ document.body.classList.remove('menu-open'); });
+  });
+
+  // reveal on scroll
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // parallax sutil no vídeo do hero
+  if(!reduced && video){
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        var y = Math.min(window.scrollY, window.innerHeight);
+        video.style.transform = 'translateY(' + (y * 0.22) + 'px) scale(1.08)';
+        ticking = false;
+      });
+    }, {passive:true});
+  }
+
+  document.getElementById('yy').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
