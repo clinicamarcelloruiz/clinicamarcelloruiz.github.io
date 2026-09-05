@@ -32,8 +32,7 @@ WHATSAPP = "5511975175747"
 # onde veio o contato.
 WA = {
     "geral": "Olá, eu venho do site do Dr. Marcello e gostaria de mais informações sobre o atendimento.",
-    "vilamariana": "Olá, eu venho do site do Dr. Marcello e gostaria de mais informações sobre o atendimento na Vila Mariana.",
-    "santoandre": "Olá, eu venho do site do Dr. Marcello e gostaria de mais informações sobre o atendimento em Santo André.",
+    "ibirapuera": "Olá, eu venho do site do Dr. Marcello e gostaria de mais informações sobre o atendimento no Ibirapuera.",
     "santos": "Olá, eu venho do site do Dr. Marcello e gostaria de mais informações sobre o atendimento em Santos.",
 }
 
