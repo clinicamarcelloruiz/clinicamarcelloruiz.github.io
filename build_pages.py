@@ -74,6 +74,15 @@ for nome in sorted(usados):
 # Impede o GitHub Pages de processar os arquivos com Jekyll.
 (DIST / ".nojekyll").write_text("", encoding="utf-8")
 
+# O dominio proprio, escrito a cada build.
+#
+# O GitHub guarda o dominio personalizado num arquivo CNAME dentro da pasta
+# publicada. Como este script apaga docs/ inteiro antes de gerar (linha do
+# rmtree la em cima), um CNAME criado pela tela do GitHub sumiria na primeira
+# publicacao seguinte - e o site voltaria para o endereco .github.io sem
+# ninguem entender por que. Escrever aqui garante que ele sempre volte.
+(DIST / "CNAME").write_text("drmarcelloruiz.com.br\n", encoding="utf-8")
+
 total = sum(f.stat().st_size for f in DIST.rglob("*") if f.is_file())
 print(f"docs/index.html  {(DIST / 'index.html').stat().st_size / 1024:.0f} KB")
 for nome in sorted(usados):
