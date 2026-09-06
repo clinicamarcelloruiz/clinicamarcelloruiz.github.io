@@ -24,16 +24,23 @@ ROOT = Path(__file__).resolve().parent
 ASSETS = ROOT / "assets"
 DIST = ROOT / "docs"
 
-# Numero que recebe os cliques de "agendar". E o mesmo do site atual
-# (drmarcelloruiz.com.br), onde a recepcao ja atende.
-WHATSAPP = "5511975175747"
+# Numero que recebe os cliques de "agendar".
+#
+# E o numero do robo (Central de Cuidado), e nao o da recepcao: quem clica aqui
+# quer marcar, e ali ele escolhe unidade, dia e horario sozinho, na hora, sem
+# esperar ninguem responder. A recepcao continua atendendo nos telefones
+# escritos abaixo do botao, para quem prefere falar com uma pessoa.
+WHATSAPP = "5513996811279"
 
-# Textos identicos aos do site atual, para a recepcao continuar reconhecendo de
-# onde veio o contato.
+# A frase que ja vai escrita quando a pessoa toca no botao.
+#
+# Fala em agendar, e nao em "mais informacoes", porque e isso que o botao
+# promete. E diz de onde veio: quando a equipe assume a conversa, a origem do
+# contato e a primeira coisa que ela quer saber.
 WA = {
-    "geral": "Olá, eu venho do site do Dr. Marcello e gostaria de mais informações sobre o atendimento.",
-    "ibirapuera": "Olá, eu venho do site do Dr. Marcello e gostaria de mais informações sobre o atendimento no Ibirapuera.",
-    "santos": "Olá, eu venho do site do Dr. Marcello e gostaria de mais informações sobre o atendimento em Santos.",
+    "geral": "Olá! Vim pelo site do Dr. Marcello e gostaria de agendar uma consulta.",
+    "ibirapuera": "Olá! Vim pelo site do Dr. Marcello e gostaria de agendar uma consulta no Ibirapuera.",
+    "santos": "Olá! Vim pelo site do Dr. Marcello e gostaria de agendar uma consulta em Santos.",
 }
 
 html = (ROOT / "template.html").read_text(encoding="utf-8")
