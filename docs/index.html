@@ -178,6 +178,12 @@ footer{border-top:1px solid var(--line-l);padding:44px 0 54px;color:rgba(255,255
 footer .fgrid{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center;padding:26px 0}
 footer img{height:54px;filter:brightness(0) invert(1);opacity:.9}
 footer .crm{letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+/* Entrada do sistema, para a equipe. No rodape e discreta de proposito: quem
+   e da clinica sabe onde esta, quem e paciente nem repara. O login e o que
+   protege; o link so poupa a equipe de decorar o endereco. */
+footer .equipe{display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,.4);text-decoration:none;font-size:.76rem;letter-spacing:.04em;transition:color .2s}
+footer .equipe:hover{color:var(--peach)}
+footer .equipe svg{width:13px;height:13px}
 footer .fnotes{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7}
 @media (max-width:860px){footer .fnotes{grid-template-columns:1fr;gap:14px}footer .fgrid{justify-content:center;text-align:center}}
@@ -444,6 +450,10 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
       <img src="assets/logo.webp" alt="Logo Dr. Marcello Ruiz">
       <span class="crm">Dr. Marcello Ruiz da Silva · CRM 85878 · RQE Pediatria 150713</span>
       <span>© <span id="yy">2026</span> · Todos os direitos reservados</span>
+      <a class="equipe" href="/central-de-cuidado/" rel="nofollow" aria-label="Acesso da equipe ao sistema da clínica">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+        Acesso da equipe
+      </a>
     </div>
     <div class="fnotes">
       <p class="note">Site institucional com caráter exclusivamente informativo. Nenhum conteúdo desta página substitui a consulta, o diagnóstico ou a orientação médica presencial.</p>
