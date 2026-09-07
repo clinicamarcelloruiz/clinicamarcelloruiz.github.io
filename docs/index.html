@@ -171,10 +171,17 @@ body.menu-open .mmenu a{opacity:1;transform:none}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line-l);padding:44px 0 54px;color:rgba(255,255,255,.55);font-size:.82rem}
-footer .fgrid{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center}
+/* Ordem do rodape (proposta 1, aprovada em 06/09/2026): o convite do
+   Instagram sozinho no topo, uma linha, a faixa institucional (logo, CRM,
+   direitos) e as tres notas legais em colunas. Antes as notas vinham
+   empilhadas a esquerda e o lado direito ficava vazio. */
+footer .fsep{height:1px;background:var(--line-l)}
+footer .fgrid{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center;padding:26px 0}
 footer img{height:54px;filter:brightness(0) invert(1);opacity:.9}
 footer .crm{letter-spacing:.14em;text-transform:uppercase;font-size:11px}
-footer .note{max-width:52ch;line-height:1.6;margin-top:22px;font-size:.76rem;opacity:.7}
+footer .fnotes{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7}
+@media (max-width:860px){footer .fnotes{grid-template-columns:1fr;gap:14px}footer .fgrid{justify-content:center;text-align:center}}
 /* Instagram no rodape - versao 12, aprovada pelo medico em 06/09/2026.
    Bloco proprio, vertical e centralizado, acima da linha de creditos: o
    icone cheio em pessego e o convite em serifa grande fazem o perfil ser a
@@ -421,14 +428,17 @@ footer .note{max-width:52ch;line-height:1.6;margin-top:22px;font-size:.76rem;opa
         <span>@drmarcelloruizgastroped</span>
       </span>
     </a>
+    <div class="fsep"></div>
     <div class="fgrid">
       <img src="assets/logo.webp" alt="Logo Dr. Marcello Ruiz">
       <span class="crm">Dr. Marcello Ruiz da Silva · CRM 85878 · RQE Pediatria 150713</span>
       <span>© <span id="yy">2026</span> · Todos os direitos reservados</span>
     </div>
-    <p class="note">Site institucional com caráter exclusivamente informativo. Nenhum conteúdo desta página substitui a consulta, o diagnóstico ou a orientação médica presencial.</p>
-    <p class="note">Agendamento pelo WhatsApp: (13) 99681-1279, o mesmo dos botões desta página. Também atendemos em (13) 99786-7273 (WhatsApp) e (13) 3273-6828 (telefone).</p>
-    <p class="note">Dr. Marcello Ruiz - Gastroenterologia Pediátrica é marca de AMIKA - Serviços Médicos LTDA · CNPJ 09.040.678/0001-72 · Av. Bartolomeu de Gusmão, 133 - Ponta da Praia, Santos - SP, 11030-500</p>
+    <div class="fnotes">
+      <p class="note">Site institucional com caráter exclusivamente informativo. Nenhum conteúdo desta página substitui a consulta, o diagnóstico ou a orientação médica presencial.</p>
+      <p class="note">Agendamento pelo WhatsApp: (13) 99681-1279, o mesmo dos botões desta página. Também atendemos em (13) 99786-7273 (WhatsApp) e (13) 3273-6828 (telefone).</p>
+      <p class="note">Dr. Marcello Ruiz - Gastroenterologia Pediátrica é marca de AMIKA - Serviços Médicos LTDA · CNPJ 09.040.678/0001-72 · Av. Bartolomeu de Gusmão, 133 - Ponta da Praia, Santos - SP, 11030-500</p>
+    </div>
   </div>
 </footer>
 
