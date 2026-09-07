@@ -175,22 +175,25 @@ footer .fgrid{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between
 footer img{height:54px;filter:brightness(0) invert(1);opacity:.9}
 footer .crm{letter-spacing:.14em;text-transform:uppercase;font-size:11px}
 footer .note{max-width:52ch;line-height:1.6;margin-top:22px;font-size:.76rem;opacity:.7}
-/* Instagram no rodape.
-   O convite vem antes do arroba de proposito: quem chegou ate aqui leu a
-   pagina inteira, e "Acompanhe" diz o que ha do outro lado melhor do que um
-   nome de perfil solto. O icone ganha area propria para virar um alvo
-   confortavel no celular - so o desenho seria pequeno demais para o dedo. */
-.social{display:inline-flex;align-items:center;gap:13px;text-decoration:none;
-  color:#fff;transition:opacity .2s}
-.social:hover{opacity:.82}
+/* Instagram no rodape - versao 12, aprovada pelo medico em 06/09/2026.
+   Bloco proprio, vertical e centralizado, acima da linha de creditos: o
+   icone cheio em pessego e o convite em serifa grande fazem o perfil ser a
+   ultima coisa que a pagina pede, e nao um detalhe no canto. A area do
+   icone e larga para o dedo no celular. */
+.social{display:flex;flex-direction:column;align-items:center;gap:14px;
+  text-decoration:none;color:#fff;text-align:center;margin:0 auto 40px;
+  transition:opacity .2s}
+.social:hover{opacity:.85}
 .social .ig{display:inline-flex;align-items:center;justify-content:center;
-  width:42px;height:42px;border-radius:13px;flex:none;
-  background:rgba(242,184,138,.14);color:var(--peach);transition:background .2s}
-.social:hover .ig{background:rgba(242,184,138,.24)}
-.social svg{width:20px;height:20px}
-.social .txt{line-height:1.35}
-.social .txt b{display:block;font-weight:400;font-size:.82rem}
-.social .txt span{display:block;font-size:.76rem;color:rgba(255,255,255,.5)}
+  width:60px;height:60px;border-radius:18px;flex:none;
+  background:var(--peach);color:#0b1a2b;transition:transform .2s}
+.social:hover .ig{transform:translateY(-2px)}
+.social svg{width:26px;height:26px}
+.social .txt{line-height:1.3}
+.social .txt b{display:block;font-weight:400;font-family:var(--font-d);
+  font-size:1.5rem;letter-spacing:-.01em;color:#fff}
+.social .txt span{display:block;margin-top:4px;font-size:.78rem;
+  letter-spacing:.06em;color:rgba(255,255,255,.5)}
 
 /* ---------- responsivo ---------- */
 @media (max-width:1020px){
@@ -403,24 +406,24 @@ footer .note{max-width:52ch;line-height:1.6;margin-top:22px;font-size:.76rem;opa
 
 <footer class="dark">
   <div class="wrap">
+    <a class="social" href="https://www.instagram.com/drmarcelloruizgastroped/"
+       target="_blank" rel="noopener" aria-label="Instagram do Dr. Marcello Ruiz">
+      <span class="ig">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+          <circle cx="12" cy="12" r="4.2"/>
+          <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+      <span class="txt">
+        <b>Acompanhe no Instagram</b>
+        <span>@drmarcelloruizgastroped</span>
+      </span>
+    </a>
     <div class="fgrid">
       <img src="assets/logo.webp" alt="Logo Dr. Marcello Ruiz">
       <span class="crm">Dr. Marcello Ruiz da Silva · CRM 85878 · RQE Pediatria 150713</span>
-      <a class="social" href="https://www.instagram.com/drmarcelloruizgastroped/"
-         target="_blank" rel="noopener" aria-label="Instagram do Dr. Marcello Ruiz">
-        <span class="ig">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
-            <circle cx="12" cy="12" r="4.2"/>
-            <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
-          </svg>
-        </span>
-        <span class="txt">
-          <b>Acompanhe no Instagram</b>
-          <span>@drmarcelloruizgastroped</span>
-        </span>
-      </a>
       <span>© <span id="yy">2026</span> · Todos os direitos reservados</span>
     </div>
     <p class="note">Site institucional com caráter exclusivamente informativo. Nenhum conteúdo desta página substitui a consulta, o diagnóstico ou a orientação médica presencial.</p>
