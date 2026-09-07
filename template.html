@@ -175,32 +175,34 @@ footer{border-top:1px solid var(--line-l);padding:44px 0 54px;color:rgba(255,255
    Instagram sozinho no topo, uma linha, a faixa institucional (logo, CRM,
    direitos) e as tres notas legais em colunas. Antes as notas vinham
    empilhadas a esquerda e o lado direito ficava vazio. */
-footer .fsep{height:1px;background:var(--line-l)}
 footer .fgrid{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center;padding:26px 0}
 footer img{height:54px;filter:brightness(0) invert(1);opacity:.9}
 footer .crm{letter-spacing:.14em;text-transform:uppercase;font-size:11px}
 footer .fnotes{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7}
 @media (max-width:860px){footer .fnotes{grid-template-columns:1fr;gap:14px}footer .fgrid{justify-content:center;text-align:center}}
-/* Instagram no rodape - versao 12, aprovada pelo medico em 06/09/2026.
-   Bloco proprio, vertical e centralizado, acima da linha de creditos: o
-   icone cheio em pessego e o convite em serifa grande fazem o perfil ser a
-   ultima coisa que a pagina pede, e nao um detalhe no canto. A area do
-   icone e larga para o dedo no celular. */
-.social{display:flex;flex-direction:column;align-items:center;gap:14px;
-  text-decoration:none;color:#fff;text-align:center;margin:0 auto 40px;
-  transition:opacity .2s}
-.social:hover{opacity:.85}
-.social .ig{display:inline-flex;align-items:center;justify-content:center;
-  width:60px;height:60px;border-radius:18px;flex:none;
-  background:var(--peach);color:#0b1a2b;transition:transform .2s}
-.social:hover .ig{transform:translateY(-2px)}
-.social svg{width:26px;height:26px}
-.social .txt{line-height:1.3}
-.social .txt b{display:block;font-weight:400;font-family:var(--font-d);
-  font-size:1.5rem;letter-spacing:-.01em;color:#fff}
-.social .txt span{display:block;margin-top:4px;font-size:.78rem;
-  letter-spacing:.06em;color:rgba(255,255,255,.5)}
+/* ---------- redes sociais ---------- */
+/* Secao propria, e nao um link no rodape: com o rotulo numerado, o titulo em
+   serifa e a previa de tres posts, o Instagram ganha o mesmo peso das outras
+   partes do site. As tres fotos sao escolhidas pela clinica (assets/insta-1,
+   2 e 3) e todas levam ao perfil - o feed ao vivo dependeria de aprovacao da
+   Meta e quebraria a cada mudanca deles. */
+.redes{padding:clamp(80px,10vw,130px) 0;text-align:center;border-top:1px solid var(--line-l)}
+.redes .label{justify-content:center}
+.redes .label::after{content:"";width:34px;height:1px;background:var(--peach)}
+.redes h2{font-size:clamp(2.2rem,5vw,3.6rem);max-width:18ch;margin:22px auto 16px}
+.redes .sub{color:var(--txt-l);max-width:52ch;margin:0 auto;font-size:1.02rem}
+.redes .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,18px);max-width:860px;margin:44px auto 0}
+.redes .posts a{display:block;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:#12283d}
+.redes .posts img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.redes .posts a:hover img{transform:scale(1.04)}
+.seguir{display:inline-flex;align-items:center;gap:12px;margin-top:36px;padding:12px 22px 12px 12px;
+  border-radius:999px;background:var(--peach);color:#0b1a2b;text-decoration:none;font-weight:600;font-size:.92rem;
+  transition:transform .2s,background .2s}
+.seguir:hover{transform:translateY(-2px);background:var(--peach-deep)}
+.seguir .ig{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:11px;background:#0b1a2b;color:var(--peach)}
+.seguir svg{width:18px;height:18px}
+@media (max-width:640px){.redes .posts{gap:8px}.redes .posts a{border-radius:12px}}
 
 /* ---------- responsivo ---------- */
 @media (max-width:1020px){
@@ -411,10 +413,18 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
   </div>
 </section>
 
-<footer class="dark">
+<section class="redes dark" id="instagram">
   <div class="wrap">
-    <a class="social" href="https://www.instagram.com/drmarcelloruizgastroped/"
-       target="_blank" rel="noopener" aria-label="Instagram do Dr. Marcello Ruiz">
+    <p class="label reveal"><span class="num">05</span> Redes sociais</p>
+    <h2 class="reveal" style="--d:.08s">Acompanhe o consultório <em>no Instagram</em></h2>
+    <p class="sub reveal" style="--d:.16s">Dicas de saúde digestiva infantil, bastidores das unidades e respostas às dúvidas mais comuns das famílias.</p>
+    <div class="posts reveal" style="--d:.24s">
+      <a href="https://www.instagram.com/drmarcelloruizgastroped/" target="_blank" rel="noopener"><img src="%%ASSET:insta-1.jpg%%" alt="Publicação do Instagram do Dr. Marcello Ruiz" loading="lazy"></a>
+      <a href="https://www.instagram.com/drmarcelloruizgastroped/" target="_blank" rel="noopener"><img src="%%ASSET:insta-2.jpg%%" alt="Publicação do Instagram do Dr. Marcello Ruiz" loading="lazy"></a>
+      <a href="https://www.instagram.com/drmarcelloruizgastroped/" target="_blank" rel="noopener"><img src="%%ASSET:insta-3.jpg%%" alt="Publicação do Instagram do Dr. Marcello Ruiz" loading="lazy"></a>
+    </div>
+    <a class="seguir reveal" style="--d:.3s" href="https://www.instagram.com/drmarcelloruizgastroped/"
+       target="_blank" rel="noopener" aria-label="Seguir o Dr. Marcello Ruiz no Instagram">
       <span class="ig">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -423,12 +433,13 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
           <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
         </svg>
       </span>
-      <span class="txt">
-        <b>Acompanhe no Instagram</b>
-        <span>@drmarcelloruizgastroped</span>
-      </span>
+      Seguir @drmarcelloruizgastroped
     </a>
-    <div class="fsep"></div>
+  </div>
+</section>
+
+<footer class="dark">
+  <div class="wrap">
     <div class="fgrid">
       <img src="%%ASSET:logo.webp%%" alt="Logo Dr. Marcello Ruiz">
       <span class="crm">Dr. Marcello Ruiz da Silva · CRM 85878 · RQE Pediatria 150713</span>
