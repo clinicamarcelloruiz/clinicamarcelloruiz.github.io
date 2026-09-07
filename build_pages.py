@@ -80,7 +80,7 @@ shutil.rmtree(DIST, ignore_errors=True)
 # foto de perfil do WhatsApp e lida pela API da Meta a partir deste endereco.
 # Sem esta lista ela seria deixada para tras a cada publicacao, e a troca de
 # foto falharia com "nao consegui baixar a imagem".
-EXTRAS = ["perfil-whatsapp.png"]
+EXTRAS = ["perfil-whatsapp.png", "logo-email.png"]
 
 for nome in sorted(set(usados) | {e for e in EXTRAS if (ASSETS / e).exists()}):
     shutil.copy2(ASSETS / nome, DIST / "assets" / nome)
