@@ -9,64 +9,85 @@
 <link rel="icon" href="assets/logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#0A1526;
   --ink-2:#12264A;
   --paper:#F7F9FC;
   --white:#FFFFFF;
-  --peach:#F2B88A;
-  --peach-deep:#E09E63;
+  /* Acento (proposta 1, aprovada em 09/09/2026): azul-ceu sobre o escuro,
+     azul do sistema sobre o claro. Laranja saiu por pedido do medico. */
+  --acc-l:#7AB8EA;
+  --acc:#2F7FC1;
+  --acc-deep:#2A6EA8;
   --line-d:rgba(10,21,38,.12);
   --line-l:rgba(255,255,255,.16);
   --txt-d:#33405A;
   --txt-l:rgba(255,255,255,.72);
   --font-d:"Fraunces",Georgia,"Times New Roman",serif;
-  --font-b:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-b:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{font-family:var(--font-b);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--peach);color:var(--ink)}
+::selection{background:var(--acc-l);color:var(--ink)}
 
 /* ---------- utilitários ---------- */
-.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.wrap{width:min(1320px,calc(100% - 112px));max-width:none;margin:0 auto;padding:0}
 .label{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;display:flex;align-items:center;gap:14px}
-.label::before{content:"";width:34px;height:1px;background:var(--peach)}
-.label .num{color:var(--peach-deep);font-weight:500}
-.dark .label .num{color:var(--peach)}
-h1,h2,h3{font-family:var(--font-d);font-weight:380;line-height:1.06;letter-spacing:-.01em}
+.label::before{content:"";width:34px;height:1px;background:var(--acc-l)}
+.label .num{color:var(--acc);font-weight:500}
+.dark .label .num{color:var(--acc-l)}
+h1,h2,h3{font-family:var(--font-d);font-weight:400;line-height:1.13;letter-spacing:-.04em;font-optical-sizing:none}
 .title-xl{font-size:clamp(2.5rem,5.2vw,4.2rem)}
 .title-lg{font-size:clamp(2rem,4vw,3.1rem)}
-em.acc{font-style:italic;color:var(--peach-deep);font-weight:340}
-.dark em.acc{color:var(--peach)}
+em.acc{font-style:italic;color:var(--acc);font-weight:340}
+.dark em.acc{color:var(--acc-l)}
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1);transition-delay:var(--d,0s)}
 .reveal.in{opacity:1;transform:none}
 
 /* ---------- header ---------- */
 header{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .45s ease,box-shadow .45s ease,color .45s ease;color:var(--white)}
 header .bar{display:flex;align-items:center;justify-content:space-between;height:96px}
-.brand{display:flex;align-items:center;gap:12px;font-family:var(--font-d);font-size:1.22rem;letter-spacing:.01em}
-.brand small{display:block;font-family:var(--font-b);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;opacity:.72;margin-top:2px}
-.brand img{height:65px;width:auto;display:none}
+.brand{display:flex;align-items:center}
+/* A marca e a marca, sempre. Ate 09/09/2026 o topo mostrava o nome escrito e
+   so trocava pelo logo ao rolar: a primeira coisa que a pessoa via nao era a
+   identidade da clinica. Sobre o filme o logo vai em branco; quando a barra
+   clareia, volta ao original. */
+.brand img{width:220px;height:auto;display:block;filter:brightness(0) invert(1);transition:filter .45s ease}
 nav.desk{display:flex;align-items:center;gap:34px;font-size:13px;font-weight:500;letter-spacing:.04em}
 nav.desk a{opacity:.85;transition:opacity .25s}
 nav.desk a:hover{opacity:1}
-.btn{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.05em;padding:13px 26px;border-radius:999px;border:1px solid transparent;transition:transform .35s cubic-bezier(.19,1,.22,1),background .3s,color .3s,border-color .3s;cursor:pointer}
+/* Botoes (formato 2, aprovado em 09/09/2026).
+   Antes eram duas pilulas do mesmo tamanho, lado a lado, disputando o clique.
+   Agora existe uma acao principal - solida, quase reta, com a seta empurrada
+   para a direita, no ritmo dos titulos em serifa - e uma secundaria que perde
+   a caixa e vira texto sublinhado. Quem chega sabe onde clicar. */
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:26px;min-height:56px;padding:15px 22px;
+  font-size:.875rem;font-weight:500;letter-spacing:.01em;border-radius:2px;border:1px solid transparent;
+  transition:transform .35s cubic-bezier(.19,1,.22,1),background .3s,color .3s,border-color .3s;cursor:pointer}
 .btn:hover{transform:translateY(-2px)}
-.btn-peach{background:var(--peach);color:var(--ink)}
-.btn-peach:hover{background:var(--white)}
-.btn-ghost{border-color:rgba(255,255,255,.4);color:var(--white)}
-.btn-ghost:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
-header nav.desk .btn{padding:11px 22px}
+.btn .arr{font-size:1.05rem;line-height:1}
+.btn-acc{background:var(--acc);color:var(--white);border-color:var(--acc)}
+.btn-acc:hover{background:var(--acc-deep);border-color:var(--acc-deep)}
+/* Secundario: so texto e filete. O contorno saiu junto com o empate visual. */
+.btn-linha{gap:16px;min-height:44px;padding:0;background:none;border:0;color:var(--white)}
+.btn-linha .t{position:relative;padding-bottom:6px}
+.btn-linha .t::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(255,255,255,.45);transition:background .3s}
+.btn-linha:hover{transform:none}
+.btn-linha:hover .t::after{background:var(--acc-l)}
+/* Sobre fundo claro o filete escurece, senao some. */
+.claro-fundo .btn-linha,header.scrolled .btn-linha{color:var(--ink)}
+.claro-fundo .btn-linha .t::after,header.scrolled .btn-linha .t::after{background:rgba(10,21,38,.3)}
+.claro-fundo .btn-linha:hover .t::after,header.scrolled .btn-linha:hover .t::after{background:var(--acc)}
+/* No topo, o mesmo botao principal, so mais baixo: e a unica acao da barra. */
+header nav.desk .btn{min-height:44px;padding:11px 18px;gap:20px}
 header.scrolled{background:rgba(247,249,252,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--ink);box-shadow:0 1px 0 var(--line-d)}
-header.scrolled .brand img{display:block}
-header.scrolled .brand .wordmark{display:none}
-header.scrolled .btn-ghost{border-color:var(--line-d);color:var(--ink)}
-header.scrolled .btn-ghost:hover{border-color:var(--ink)}
+header.scrolled .brand img{filter:none}
+
 .burger{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px;position:relative;z-index:60}
 .burger span{position:absolute;left:10px;right:10px;height:2px;background:currentColor;transition:.35s}
 .burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:26px}
@@ -79,19 +100,72 @@ body.menu-open .mmenu a{opacity:1;transform:none}
 .mmenu a:nth-child(2){transition-delay:.06s}.mmenu a:nth-child(3){transition-delay:.12s}.mmenu a:nth-child(4){transition-delay:.18s}.mmenu a:nth-child(5){transition-delay:.24s}
 
 /* ---------- hero ---------- */
-.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;color:var(--white);overflow:hidden;background:var(--ink);padding-top:120px;box-sizing:border-box}
-.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
-.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,21,38,.62) 0%,rgba(10,21,38,.30) 42%,rgba(10,21,38,.88) 100%)}
-.hero .veil::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(10,21,38,.62) 0%,rgba(10,21,38,.05) 62%)}
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;color:var(--white);overflow:hidden;background:var(--ink);padding-top:175px;box-sizing:border-box}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% center;filter:saturate(.75) contrast(1.07);transform:scale(1.03);will-change:transform}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,21,38,.34) 0%,rgba(10,21,38,.10) 38%,rgba(10,21,38,.92) 100%)}
+.hero .veil::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,21,38,.86) 0%,rgba(10,21,38,.52) 44%,rgba(10,21,38,.06) 78%)}
 .hero .content{position:relative;z-index:2;padding-bottom:clamp(96px,14vh,150px)}
 .hero .label,.hero h1,.hero p.sub,.hero .foot{text-shadow:0 1px 3px rgba(10,21,38,.45),0 4px 26px rgba(10,21,38,.5)}
-.hero h1{font-size:clamp(2.9rem,7.4vw,6rem);max-width:14ch;margin:26px 0 22px}
+.hero h1{font-size:clamp(2.88rem,5.28vw,5.52rem);line-height:1.055;letter-spacing:-.055em;max-width:none;margin:30px 0 24px;text-shadow:0 3px 28px rgba(0,0,0,.13)}
+.hero h1 em.acc{display:block}
+.hero .label{font-size:11.5px;letter-spacing:.24em}
+.hero p.sub{max-width:44ch;color:rgba(255,255,255,.86);line-height:1.8}
 .hero p.sub{max-width:52ch;font-size:clamp(1rem,1.4vw,1.16rem);line-height:1.65;color:var(--txt-l);font-weight:400}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.hero .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:16px 30px;margin-top:38px}
 .hero .foot{position:relative;z-index:2;border-top:1px solid var(--line-l);padding:20px 0 26px;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.62)}
 .hero .scroll{display:flex;align-items:center;gap:12px}
-.hero .scroll i{display:block;width:1px;height:44px;background:linear-gradient(180deg,var(--peach),transparent);animation:drip 2.2s ease-in-out infinite}
+.hero .assina{display:flex;flex-direction:column;gap:3px;text-transform:none;letter-spacing:0;font-size:11.5px}
+.hero .assina strong{font-family:var(--font-d);font-weight:400;font-size:.95rem;letter-spacing:.01em;color:var(--white)}
+.hero .scroll i{display:block;width:1px;height:44px;background:linear-gradient(180deg,var(--acc-l),transparent);animation:drip 2.2s ease-in-out infinite}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* Pausar/reproduzir o video de fundo. Vem da reformulacao de 07/09/2026: quem
+   prefere movimento reduzido, ou esta no 4G economizando dados, ve a capa e
+   liga o video se quiser. O botao fica no rodape do hero, discreto. */
+.hero .play{display:inline-flex;align-items:center;gap:8px;background:none;border:0;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;padding:6px 0;opacity:.85}
+.hero .play:hover{opacity:1}
+.hero .play i{font-style:normal;display:inline-flex;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;align-items:center;justify-content:center;font-size:8px}
+/* Botao fixo de agendar, so no celular, e so depois que o hero saiu da tela: o
+   convite mais importante do site nao deveria depender de rolar de volta. */
+.agendar-fixo{position:fixed;left:0;right:0;bottom:0;z-index:45;display:none;padding:10px 16px max(10px,env(safe-area-inset-bottom));background:rgba(10,21,38,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line-l);transform:translateY(110%);transition:transform .4s cubic-bezier(.19,1,.22,1)}
+.agendar-fixo.on{transform:none}
+.agendar-fixo .btn{width:100%;justify-content:center}
+@media (max-width:760px){.agendar-fixo{display:block}body.menu-open .agendar-fixo{display:none}}
+.skip{position:fixed;left:16px;top:-80px;z-index:100;background:var(--white);color:var(--ink);padding:12px 16px;border-radius:8px;font-size:13px;font-weight:600}
+.skip:focus{top:12px}
+/* Telefones do fim com rotulo. Tres numeros sem nome obrigavam a adivinhar qual
+   e o do agendamento e qual e o fixo. */
+.final .fones{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;margin-top:30px}
+.final .fones a{display:flex;flex-direction:column;gap:4px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.final .fones a strong{font-family:var(--font-d);font-weight:400;font-size:1.15rem;letter-spacing:0;text-transform:none;color:var(--white)}
+.final .fones a:hover strong{color:var(--acc-l)}
+/* Convite no fim da lista de condicoes: a lista termina numa acao, nao num
+   item. */
+.cond .convite{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline;padding:28px 8px 0}
+.cond .convite p{font-family:var(--font-d);font-size:1.25rem;color:var(--ink)}
+.cond .convite a{font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;gap:8px;align-items:center;color:var(--ink)}
+.cond .convite a::after{content:"↓";color:var(--acc);transition:transform .3s}
+.cond .convite a:hover::after{transform:translateY(3px)}
+footer .topo{color:rgba(255,255,255,.4);font-size:.76rem;letter-spacing:.04em;transition:color .2s}
+footer .topo:hover{color:var(--acc-l)}
+
+/* Faixa de credenciais, logo depois da abertura.
+   Antes isto eram etiquetas soltas dentro da secao "sobre", que quebravam a
+   linha e deixavam "Professor · UNILUS" orfao embaixo. Em faixa, cada
+   credencial ganha uma explicacao curta e o conjunto vira leitura, nao enfeite. */
+.faixa{background:var(--ink);color:var(--white);border-top:1px solid var(--line-l);border-bottom:1px solid var(--line-l)}
+.faixa .g{display:grid;grid-template-columns:1fr 1fr 1.25fr;padding:30px 0}
+.faixa .g>span{padding:0 clamp(20px,3vw,40px);border-right:1px solid var(--line-l)}
+.faixa .g>span:first-child{padding-left:0}
+.faixa .g>span:last-child{border-right:0}
+.faixa strong{display:block;font-family:var(--font-d);font-weight:400;font-size:1.05rem;letter-spacing:.01em}
+.faixa small{display:block;margin-top:4px;font-size:.78rem;color:var(--txt-l)}
+@media (max-width:760px){
+  .faixa .g{grid-template-columns:1fr;padding:6px 0}
+  .faixa .g>span{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:15px 0;border-right:0;border-bottom:1px solid var(--line-l)}
+  .faixa .g>span:last-child{border-bottom:0}
+  .faixa small{margin-top:0;text-align:right;max-width:52%}
+}
 
 /* ---------- manifesto ---------- */
 .manifesto{padding:clamp(90px,12vw,150px) 0 clamp(70px,9vw,110px)}
@@ -100,7 +174,7 @@ body.menu-open .mmenu a{opacity:1;transform:none}
 .feat{border-top:1px solid var(--line-d);padding-top:22px}
 .feat h3{font-size:1.28rem;margin-bottom:10px}
 .feat p{font-size:.93rem;line-height:1.65;color:var(--txt-d)}
-.feat .k{font-family:var(--font-d);font-style:italic;color:var(--peach-deep);font-size:.95rem;display:block;margin-bottom:14px}
+.feat .k{font-family:var(--font-d);font-style:italic;color:var(--acc);font-size:.95rem;display:block;margin-bottom:14px}
 
 /* ---------- seções escuras ---------- */
 .dark{background:var(--ink);color:var(--white)}
@@ -111,11 +185,11 @@ body.menu-open .mmenu a{opacity:1;transform:none}
 .sobre .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(48px,6vw,96px);align-items:center}
 .sobre h2{margin:24px 0 20px}
 .sobre p.bio{color:var(--txt-l);line-height:1.75;font-size:1.02rem;max-width:54ch}
-.cred{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
-.cred span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line-l);border-radius:999px;padding:9px 16px;color:rgba(255,255,255,.85)}
+.registro{margin-top:30px;padding:18px 0;border-top:1px solid var(--line-l);border-bottom:1px solid var(--line-l);font-size:.82rem;letter-spacing:.06em;color:rgba(255,255,255,.85)}
+.registro span{margin:0 12px;color:var(--acc-l)}
 .promises{margin-top:38px;border-top:1px solid var(--line-l)}
 .promises li{list-style:none;display:flex;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line-l);font-size:.98rem;color:rgba(255,255,255,.88)}
-.promises li::before{content:"-";color:var(--peach);flex:none}
+.promises li::before{content:"-";color:var(--acc-l);flex:none}
 .sobre .photo{position:relative;display:flex;justify-content:center}
 .sobre .photo .halo{position:absolute;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2C4F8E 0%,#12264A 55%,#0A1526 100%);top:50%;left:50%;transform:translate(-50%,-50%);filter:saturate(1.1)}
 .sobre .photo .ring{position:absolute;width:86%;aspect-ratio:1;border-radius:50%;border:1px solid var(--line-l);top:50%;left:50%;transform:translate(-50%,-50%)}
@@ -128,7 +202,7 @@ body.menu-open .mmenu a{opacity:1;transform:none}
 .clist{border-top:1px solid var(--line-d)}
 .citem{display:grid;grid-template-columns:70px 1fr auto;gap:clamp(16px,3vw,40px);align-items:center;padding:26px 8px;border-bottom:1px solid var(--line-d);transition:background .35s,padding .35s}
 .citem:hover{background:var(--white);padding-left:20px;padding-right:20px}
-.citem .idx{font-family:var(--font-d);font-style:italic;font-size:1.05rem;color:var(--peach-deep)}
+.citem .idx{font-family:var(--font-d);font-style:italic;font-size:1.05rem;color:var(--acc)}
 .citem h3{font-size:clamp(1.15rem,2vw,1.5rem);font-weight:420}
 .citem p{font-size:.86rem;color:var(--txt-d);margin-top:6px;max-width:60ch;line-height:1.55}
 .citem .arr{font-size:1.3rem;color:var(--ink);opacity:.25;transition:.35s}
@@ -143,7 +217,7 @@ body.menu-open .mmenu a{opacity:1;transform:none}
 .consulta h2{margin:24px 0 34px}
 .steps{border-top:1px solid var(--line-d)}
 .step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid var(--line-d)}
-.step .n{font-family:var(--font-d);font-style:italic;color:var(--peach-deep);font-size:1.1rem;padding-top:2px}
+.step .n{font-family:var(--font-d);font-style:italic;color:var(--acc);font-size:1.1rem;padding-top:2px}
 .step h3{font-size:1.22rem;margin-bottom:8px}
 .step p{font-size:.92rem;line-height:1.65;color:var(--txt-d)}
 
@@ -154,19 +228,19 @@ body.menu-open .mmenu a{opacity:1;transform:none}
 .ugrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:clamp(44px,5vw,64px)}
 .ucard{border:1px solid var(--line-l);border-radius:6px;padding:34px 30px;display:flex;flex-direction:column;min-height:340px;transition:background .4s,border-color .4s,transform .4s cubic-bezier(.19,1,.22,1)}
 .ucard:hover{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.34);transform:translateY(-6px)}
-.ucard .city{font-size:10.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--peach)}
+.ucard .city{font-size:10.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--acc-l)}
 .ucard h3{font-size:1.55rem;margin:14px 0 18px}
 .ucard .addr{font-size:.92rem;line-height:1.65;color:var(--txt-l)}
 .ucard .hours{margin-top:18px;padding-top:18px;border-top:1px solid var(--line-l);font-size:.84rem;line-height:1.7;color:rgba(255,255,255,.6)}
 .ucard .go{margin-top:auto;padding-top:24px;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;gap:10px;align-items:center;color:var(--white)}
-.ucard .go::after{content:"↗";color:var(--peach);transition:transform .3s}
+.ucard .go::after{content:"↗";color:var(--acc-l);transition:transform .3s}
 .ucard:hover .go::after{transform:translate(3px,-3px)}
 
 /* ---------- cta final ---------- */
 .final{padding:clamp(110px,15vw,190px) 0;text-align:center;position:relative;overflow:hidden}
 .final h2{font-size:clamp(2.6rem,6vw,4.8rem);max-width:16ch;margin:26px auto 20px}
 .final p{color:var(--txt-l);font-size:1.05rem}
-.final .ctas{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:44px}
+.final .ctas{display:flex;justify-content:center;align-items:center;gap:16px 30px;flex-wrap:wrap;margin-top:44px}
 .final .phone{margin-top:26px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 
 /* ---------- footer ---------- */
@@ -182,7 +256,7 @@ footer .crm{letter-spacing:.14em;text-transform:uppercase;font-size:11px}
    e da clinica sabe onde esta, quem e paciente nem repara. O login e o que
    protege; o link so poupa a equipe de decorar o endereco. */
 footer .equipe{display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,.4);text-decoration:none;font-size:.76rem;letter-spacing:.04em;transition:color .2s}
-footer .equipe:hover{color:var(--peach)}
+footer .equipe:hover{color:var(--acc-l)}
 footer .equipe svg{width:13px;height:13px}
 footer .fnotes{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7}
@@ -195,7 +269,7 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
    Meta e quebraria a cada mudanca deles. */
 .redes{padding:clamp(80px,10vw,130px) 0;text-align:center;border-top:1px solid var(--line-l)}
 .redes .label{justify-content:center}
-.redes .label::after{content:"";width:34px;height:1px;background:var(--peach)}
+.redes .label::after{content:"";width:34px;height:1px;background:var(--acc-l)}
 .redes h2{font-size:clamp(2.2rem,5vw,3.6rem);max-width:18ch;margin:22px auto 16px}
 .redes .sub{color:var(--txt-l);max-width:52ch;margin:0 auto;font-size:1.02rem}
 .redes .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,18px);max-width:860px;margin:44px auto 0}
@@ -203,10 +277,10 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
 .redes .posts img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
 .redes .posts a:hover img{transform:scale(1.04)}
 .seguir{display:inline-flex;align-items:center;gap:12px;margin-top:36px;padding:12px 22px 12px 12px;
-  border-radius:999px;background:var(--peach);color:#0b1a2b;text-decoration:none;font-weight:600;font-size:.92rem;
+  border-radius:999px;background:var(--acc);color:var(--white);text-decoration:none;font-weight:600;font-size:.92rem;
   transition:transform .2s,background .2s}
-.seguir:hover{transform:translateY(-2px);background:var(--peach-deep)}
-.seguir .ig{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:11px;background:#0b1a2b;color:var(--peach)}
+.seguir:hover{transform:translateY(-2px);background:var(--acc-deep)}
+.seguir .ig{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:11px;background:rgba(255,255,255,.18);color:var(--white)}
 .seguir svg{width:18px;height:18px}
 @media (max-width:640px){.redes .posts{gap:8px}.redes .posts a{border-radius:12px}}
 
@@ -223,11 +297,15 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
 @media (max-width:760px){
   nav.desk{display:none}
   .burger{display:block}
-  .brand img{height:48px}
+  .wrap{width:calc(100% - 44px)}
+  .brand img{width:173px}
   .hero{justify-content:flex-start;padding-top:124px}
   .hero .content{padding-bottom:48px}
-  .hero h1{font-size:clamp(2.25rem,10.2vw,2.9rem);margin:20px 0 18px}
-  .hero .ctas{margin-top:30px}
+  .hero h1{font-size:clamp(2.16rem,8.48vw,3.44rem);line-height:1.08;letter-spacing:-.05em;margin:20px 0 18px}
+  .hero video{object-position:63% center}
+  .hero .veil::after{background:linear-gradient(90deg,rgba(10,21,38,.8) 0%,rgba(10,21,38,.45) 60%,rgba(10,21,38,.2) 100%)}
+  .hero .ctas{margin-top:30px;gap:14px 24px}
+  .hero .ctas .btn-acc,.final .ctas .btn-acc{width:100%;max-width:340px}
   .hero .foot{font-size:10px;letter-spacing:.12em;margin-top:auto}
   .citem{grid-template-columns:44px 1fr;gap:14px}
   .citem .arr{display:none}
@@ -244,19 +322,19 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
 </style>
 </head>
 <body>
+<a class="skip" href="#sobre">Ir para o conteúdo</a>
 
 <header id="header">
   <div class="wrap bar">
     <a class="brand" href="#top">
       <img src="assets/logo.webp" alt="Dr. Marcello Ruiz | Gastroenterologista Pediátrico">
-      <span class="wordmark">Dr. Marcello Ruiz<small>Gastroenterologia Pediátrica</small></span>
     </a>
     <nav class="desk">
       <a href="#sobre">Sobre</a>
       <a href="#condicoes">Condições</a>
       <a href="#consulta">A consulta</a>
       <a href="#unidades">Unidades</a>
-      <a class="btn btn-ghost" href="https://wa.me/5513996811279?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener">Agendar consulta</a>
+      <a class="btn btn-acc" href="https://wa.me/5513996811279?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener">Agendar consulta <span class="arr" aria-hidden="true">↗</span></a>
     </nav>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
   </div>
@@ -271,25 +349,36 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
 </div>
 
 <section class="hero" id="top">
-  <video autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" id="heroVideo">
+  <video muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" id="heroVideo" aria-hidden="true">
     <source src="assets/hero-video.mp4" type="video/mp4">
   </video>
   <div class="veil"></div>
   <div class="wrap content">
     <p class="label reveal">Gastroenterologista Pediátrico</p>
-    <h1 class="reveal" style="--d:.12s">A saúde digestiva do seu filho, tratada com <em class="acc">excelência.</em></h1>
+    <h1 class="reveal" style="--d:.12s">A saúde do seu<br>filho, tratada com
+      <em class="acc">excelência.</em></h1>
     <p class="sub reveal" style="--d:.24s">Diagnóstico preciso e atendimento humanizado para crianças e adolescentes, porque cada pequeno paciente merece tempo, escuta e cuidado de verdade.</p>
     <div class="ctas reveal" style="--d:.36s">
-      <a class="btn btn-peach" href="https://wa.me/5513996811279?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener">Agendar consulta →</a>
-      <a class="btn btn-ghost" href="#sobre">Conhecer o médico</a>
+      <a class="btn btn-acc" href="https://wa.me/5513996811279?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener">Agendar pelo WhatsApp <span class="arr" aria-hidden="true">↗</span></a>
+      <a class="btn btn-linha" href="#sobre"><span class="t">Conhecer o médico</span><span class="arr" aria-hidden="true">↓</span></a>
     </div>
   </div>
   <div class="wrap foot reveal" style="--d:.5s">
-    <span>CRM 85878 &nbsp;·&nbsp; RQE Pediatria 150713</span>
-    <span class="scroll">Role para descobrir <i></i></span>
-    <span>Santos · São Paulo</span>
+    <span class="assina"><strong>Dr. Marcello Ruiz da Silva</strong>CRM 85878 · RQE Pediatria 150713</span>
+    <a class="scroll" href="#sobre">Conheça o cuidado <i></i></a>
+    <span style="display:flex;align-items:center;gap:22px">Santos · São Paulo
+      <button class="play" id="playVideo" type="button" aria-label="Pausar vídeo de fundo"><i>❚❚</i><span>Pausar vídeo</span></button>
+    </span>
   </div>
 </section>
+
+<div class="faixa">
+  <div class="wrap g">
+    <span><strong>Gastroenterologia pediátrica</strong><small>Crianças e adolescentes</small></span>
+    <span><strong>Doutorado</strong><small>Formação e experiência</small></span>
+    <span><strong>Professor na UNILUS</strong><small>Faculdade de Ciências Médicas de Santos</small></span>
+  </div>
+</div>
 
 <section class="manifesto">
   <div class="wrap">
@@ -320,12 +409,7 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
       <p class="label reveal"><span class="num">01</span> Sobre o médico</p>
       <h2 class="title-lg reveal" style="--d:.1s">Dr. Marcello Ruiz da Silva</h2>
       <p class="bio reveal" style="--d:.2s">Médico gastroenterologista pediátrico com doutorado, professor da Faculdade de Ciências Médicas de Santos (UNILUS) e anos de experiência no diagnóstico e tratamento de doenças gastrointestinais em crianças e adolescentes. Referência na Baixada Santista, acredita que um atendimento humanizado faz toda a diferença na saúde dos pequenos.</p>
-      <div class="cred reveal" style="--d:.3s">
-        <span>CRM 85878</span>
-        <span>RQE Pediatria 150713</span>
-        <span>Doutorado</span>
-        <span>Professor · UNILUS</span>
-      </div>
+      <p class="registro reveal" style="--d:.3s">CRM 85878 <span>·</span> RQE Pediatria 150713</p>
       <ul class="promises reveal" style="--d:.4s">
         <li>Atendimento especializado, adaptado às necessidades de cada criança</li>
         <li>Diagnóstico preciso e abordagem eficiente para cada caso</li>
@@ -355,6 +439,10 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
       <div class="citem reveal" style="--d:.24s"><span class="idx">05</span><div><h3>Alergia alimentar</h3><p>Incluindo APLV (alergia à proteína do leite de vaca) e outras reações mediadas por alimentos.</p></div><span class="arr">→</span></div>
       <div class="citem reveal" style="--d:.3s"><span class="idx">06</span><div><h3>Constipação crônica e diarreia persistente</h3><p>Investigação das causas e tratamento seguro para restabelecer o ritmo intestinal.</p></div><span class="arr">→</span></div>
       <div class="citem reveal" style="--d:.36s"><span class="idx">07</span><div><h3>Dor abdominal funcional</h3><p>Avaliação completa das dores recorrentes sem causa aparente e de outras disfunções gastrointestinais.</p></div><span class="arr">→</span></div>
+    </div>
+    <div class="convite reveal" style="--d:.4s">
+      <p>Cada história merece uma avaliação individual.</p>
+      <a href="#unidades">Encontre sua unidade</a>
     </div>
   </div>
 </section>
@@ -406,16 +494,14 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
     <h2 class="reveal" style="--d:.1s">Vamos cuidar da <em class="acc">saúde do seu filho</em> juntos?</h2>
     <p class="reveal" style="--d:.2s">Agendamento rápido pelo WhatsApp: escolha a unidade e o melhor horário para a sua família.</p>
     <div class="ctas reveal" style="--d:.3s">
-      <a class="btn btn-peach" href="https://wa.me/5513996811279?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener">Chamar no WhatsApp →</a>
-      <a class="btn btn-ghost" href="#unidades">Ver unidades</a>
+      <a class="btn btn-acc" href="https://wa.me/5513996811279?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener">Agendar pelo WhatsApp <span class="arr" aria-hidden="true">↗</span></a>
+      <a class="btn btn-linha" href="#unidades"><span class="t">Ver unidades</span><span class="arr" aria-hidden="true">→</span></a>
     </div>
-    <p class="phone reveal" style="--d:.4s">
-      <a href="https://wa.me/5513996811279" target="_blank" rel="noopener">(13) 99681-1279</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://wa.me/5513997867273" target="_blank" rel="noopener">(13) 99786-7273</a>
-      <span aria-hidden="true"> · </span>
-      <a href="tel:+551332736828">(13) 3273-6828</a>
-    </p>
+    <div class="fones reveal" style="--d:.4s">
+      <a href="https://wa.me/5513996811279" target="_blank" rel="noopener">Agendamento<strong>(13) 99681-1279</strong></a>
+      <a href="https://wa.me/5513997867273" target="_blank" rel="noopener">Recepção<strong>(13) 99786-7273</strong></a>
+      <a href="tel:+551332736828">Telefone<strong>(13) 3273-6828</strong></a>
+    </div>
   </div>
 </section>
 
@@ -454,6 +540,7 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
         Acesso da equipe
       </a>
+      <a class="topo" href="#top">Voltar ao início ↑</a>
     </div>
     <div class="fnotes">
       <p class="note">Site institucional com caráter exclusivamente informativo. Nenhum conteúdo desta página substitui a consulta, o diagnóstico ou a orientação médica presencial.</p>
@@ -462,6 +549,10 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
     </div>
   </div>
 </footer>
+
+<div class="agendar-fixo" id="agendarFixo">
+  <a class="btn btn-acc" href="https://wa.me/5513996811279?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Dr.%20Marcello%20e%20gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener">Agendar consulta pelo WhatsApp <span class="arr" aria-hidden="true">↗</span></a>
+</div>
 
 <script>
 (function(){
@@ -492,6 +583,51 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
   }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
+  // video de fundo: toca quando faz sentido, e a pessoa manda.
+  //
+  // Sem autoplay no HTML de proposito: quem prefere movimento reduzido ou esta
+  // economizando dados ve a capa parada e liga se quiser. O video tambem pausa
+  // quando o hero sai da tela ou a aba vai para segundo plano - gasta menos
+  // bateria e ninguem ve a diferenca.
+  var play = document.getElementById('playVideo');
+  var fixo = document.getElementById('agendarFixo');
+  var pausadoPelaPessoa = false;
+  var heroVisivel = true;
+  var conn = navigator.connection || {};
+  function podeTocar(){ return !reduced && !conn.saveData && !pausadoPelaPessoa; }
+  function rotulo(){
+    if(!play || !video) return;
+    var pausado = video.paused;
+    play.querySelector('i').textContent = pausado ? '▶' : '❚❚';
+    play.querySelector('span').textContent = pausado ? 'Reproduzir vídeo' : 'Pausar vídeo';
+    play.setAttribute('aria-label', pausado ? 'Reproduzir vídeo de fundo' : 'Pausar vídeo de fundo');
+  }
+  function sincronizar(){
+    if(!video) return;
+    if(document.hidden || !heroVisivel){ video.pause(); return; }
+    if(podeTocar()) video.play().catch(rotulo);
+  }
+  if(video){
+    video.addEventListener('play', rotulo);
+    video.addEventListener('pause', rotulo);
+    video.addEventListener('error', function(){ if(play) play.style.display='none'; });
+    if(play) play.addEventListener('click', function(){
+      pausadoPelaPessoa = !video.paused;
+      if(video.paused) video.play().catch(rotulo); else video.pause();
+    });
+    document.addEventListener('visibilitychange', sincronizar);
+    var hero = document.querySelector('.hero');
+    if(hero && 'IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        heroVisivel = entries[0].isIntersecting;
+        if(fixo) fixo.classList.toggle('on', !heroVisivel);
+        sincronizar();
+      }, {threshold:0}).observe(hero);
+    }
+    sincronizar();
+    rotulo();
+  }
+
   // parallax sutil no vídeo do hero
   if(!reduced && video){
     var ticking = false;
@@ -500,7 +636,7 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
       ticking = true;
       requestAnimationFrame(function(){
         var y = Math.min(window.scrollY, window.innerHeight);
-        video.style.transform = 'translateY(' + (y * 0.22) + 'px) scale(1.08)';
+        video.style.transform = 'translateY(' + (y * 0.12) + 'px) scale(1.03)';
         ticking = false;
       });
     }, {passive:true});
