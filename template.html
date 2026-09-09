@@ -299,14 +299,26 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
   .burger{display:block}
   .wrap{width:calc(100% - 44px)}
   .brand img{width:173px}
-  .hero{justify-content:flex-start;padding-top:124px}
+  /* 160px: a barra do topo tem 96px, sobram 64px de respiro entre o logo e o
+     rotulo - a distancia que o Edu apontou no aparelho dele. Com 124px o rotulo
+     encostava no logo. */
+  .hero{justify-content:flex-start;padding-top:160px}
+  /* A sobra de altura fica no fim de tudo, depois da assinatura.
+     A abertura ocupa a tela cheia (100svh). Num celular estreito o texto ja
+     enche a tela e nada sobra. Num aparelho mais largo e alto, como o Pro Max,
+     sobram 200px ou mais; ate 09/09/2026 essa folga caia entre o botao e a
+     assinatura, virando um buraco no meio do texto. Agora texto e assinatura
+     vem colados no alto, na ordem de sempre, e o que sobra e so video: por isso
+     o veu clareia embaixo, para o que aparece ali ser a imagem e nao um bloco
+     de marinho vazio. Escolha do Edu em 09/09/2026, entre tres opcoes. */
   .hero .content{padding-bottom:48px}
+  .hero .veil{background:linear-gradient(180deg,rgba(10,21,38,.62) 0%,rgba(10,21,38,.5) 58%,rgba(10,21,38,.22) 100%)}
   .hero h1{font-size:clamp(2.16rem,8.48vw,3.44rem);line-height:1.08;letter-spacing:-.05em;margin:20px 0 18px}
   .hero video{object-position:63% center}
   .hero .veil::after{background:linear-gradient(90deg,rgba(10,21,38,.8) 0%,rgba(10,21,38,.45) 60%,rgba(10,21,38,.2) 100%)}
   .hero .ctas{margin-top:30px;gap:14px 24px}
   .hero .ctas .btn-acc,.final .ctas .btn-acc{width:100%;max-width:340px}
-  .hero .foot{font-size:10px;letter-spacing:.12em;margin-top:auto}
+  .hero .foot{font-size:10px;letter-spacing:.12em}
   .citem{grid-template-columns:44px 1fr;gap:14px}
   .citem .arr{display:none}
 }
@@ -318,6 +330,82 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none}
+}
+
+/* ---------- parte 4 ao fim: montagem da versao B (09/09/2026) ---------- */
+/* Unidades voltam ao claro. Antes eram tres colunas de cartao com borda em
+   volta - e so duas unidades, entao a terceira coluna ficava vazia. Agora sao
+   duas colunas abertas, separadas por um filete em cima, como uma ficha. */
+.units{background:var(--paper);color:var(--ink);padding:clamp(88px,11vw,150px) 0}
+.uhead{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(40px,7vw,90px);align-items:end;margin-bottom:clamp(44px,6vw,62px)}
+.uhead h2{margin:24px 0 0}
+.uhead>p{color:var(--txt-d);line-height:1.75;max-width:38ch;justify-self:end}
+.ugrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,4vw,50px);margin-top:0;max-width:none}
+.ucard{background:none;border:0;border-top:1px solid rgba(10,21,38,.3);border-radius:0;padding:30px 0 0;min-height:0;display:flex;flex-direction:column;transition:none}
+.ucard:hover{background:none;border-color:rgba(10,21,38,.3);transform:none}
+.utop{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
+.ucard .city{color:var(--acc)}
+.ucard .uidx{font-size:11px;letter-spacing:.12em;color:var(--txt-d);opacity:.65}
+.ucard h3{font-size:clamp(1.7rem,2.6vw,2.25rem);line-height:1.3;margin:0 0 20px}
+.ucard h3 span{color:var(--txt-d);font-size:.74em}
+.ucard .addr{color:var(--txt-d);font-size:1rem;line-height:1.8}
+.ucard .hours{margin-top:24px;padding:24px 0 26px;border-top:1px solid var(--line-d);color:var(--txt-d);font-size:.875rem;line-height:1.8;min-height:104px}
+/* Botao de contorno: as duas unidades tem o mesmo peso, e dois blocos azuis
+   lado a lado brigariam entre si. O solido continua sendo o da chamada final. */
+.btn-contorno{background:none;color:var(--ink);border-color:rgba(10,21,38,.28);width:100%}
+.btn-contorno:hover{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.ucard .btn{margin-top:auto}
+.unote{margin-top:26px;font-size:.82rem;color:var(--txt-d);opacity:.85}
+
+/* Instagram tambem no claro, com o perfil alinhado a direita do titulo. */
+.redes{background:var(--white);color:var(--ink);border-top:0;padding:0 0 clamp(80px,10vw,130px);text-align:left}
+.rhead{display:flex;align-items:flex-end;justify-content:space-between;gap:35px;border-top:1px solid var(--line-d);padding-top:clamp(56px,7vw,80px);margin-bottom:38px}
+.redes .label{justify-content:flex-start}
+.redes .label::after{display:none}
+.redes h2{font-size:clamp(2rem,3.4vw,3rem);max-width:22ch;margin:20px 0 14px}
+.redes .sub{color:var(--txt-d);max-width:54ch;margin:0;font-size:1rem;line-height:1.7}
+.redes .posts{grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,25px);max-width:none;margin:0}
+.redes .posts a{border-radius:0;aspect-ratio:4/5;background:#e6ecf2}
+.rhandle{white-space:nowrap;font-size:.875rem;font-weight:500;color:var(--acc);position:relative;padding-bottom:6px;flex-shrink:0}
+.rhandle::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(47,127,193,.45);transition:background .3s}
+.rhandle:hover::after{background:var(--acc)}
+
+/* A chamada final e o unico bloco escuro do fim: convite a esquerda, acoes a
+   direita, em vez de tudo centralizado. */
+.final{padding:clamp(80px,10vw,112px) 0;text-align:left}
+.final .cinner{display:flex;justify-content:space-between;align-items:center;gap:clamp(40px,6vw,70px);flex-wrap:wrap}
+.final .label{justify-content:flex-start}
+.final h2{font-size:clamp(2.3rem,4.6vw,4.2rem);max-width:13ch;margin:22px 0 0}
+.final .acoes{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.final .acoes .btn-acc{margin-bottom:6px}
+.final .fones{display:flex;flex-direction:column;justify-content:flex-start;gap:11px;margin-top:0}
+.final .fones a{flex-direction:row;align-items:baseline;gap:10px;font-size:11px;letter-spacing:.16em}
+.final .fones a strong{font-size:1rem}
+
+/* Rodape em tres faixas: marca, notas, direitos. */
+footer{border-top:0;padding:0 0 26px}
+footer .fmain{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:30px;padding:40px 0;border-top:1px solid var(--line-l);border-bottom:1px solid var(--line-l)}
+footer .fmain img{height:auto;width:190px}
+footer .fmain .crm{letter-spacing:.02em;text-transform:none;font-size:.82rem;line-height:1.7}
+footer .fnotes{grid-template-columns:1.1fr 1fr 1fr;gap:40px;padding:28px 0}
+footer .fbottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:19px;border-top:1px solid var(--line-l);font-size:.75rem}
+
+@media (max-width:1020px){
+  .uhead{grid-template-columns:1fr;align-items:start;gap:22px}
+  .uhead>p{justify-self:start;max-width:100%}
+  .ugrid{grid-template-columns:1fr;max-width:none;gap:38px}
+  .rhead{flex-direction:column;align-items:flex-start;gap:14px}
+  .final .cinner{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:760px){
+  .ucard .hours{min-height:0}
+  .redes .posts{gap:8px}
+  .redes .posts a{border-radius:0}
+  .final .acoes{width:100%}
+  .final .acoes .btn-acc{width:100%;max-width:none}
+  footer .fmain{flex-direction:column;align-items:flex-start;gap:20px}
+  footer .fnotes{grid-template-columns:1fr;gap:16px}
+  footer .fbottom{flex-direction:column;gap:8px}
 }
 </style>
 </head>
@@ -464,88 +552,88 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
   </div>
 </section>
 
-<section class="units dark" id="unidades">
+<section class="units" id="unidades">
   <div class="wrap">
-    <p class="label reveal"><span class="num">04</span> Onde atendo</p>
-    <h2 class="title-lg reveal" style="--d:.1s">Duas unidades para <em class="acc">você escolher</em></h2>
-    <p class="lead reveal" style="--d:.2s">Atendimento em São Paulo e em Santos. Escolha a unidade mais próxima e agende diretamente pelo WhatsApp.</p>
+    <div class="uhead">
+      <div>
+        <p class="label reveal"><span class="num">04</span> Onde atendo</p>
+        <h2 class="title-lg reveal" style="--d:.1s">Perto da sua família.<br><em class="acc">Em Santos e São Paulo.</em></h2>
+      </div>
+      <p class="reveal" style="--d:.2s">Atendimento em São Paulo e em Santos. Escolha a unidade mais próxima e agende diretamente pelo WhatsApp.</p>
+    </div>
     <div class="ugrid">
       <div class="ucard reveal" style="--d:.1s">
-        <span class="city">São Paulo · SP</span>
-        <h3>Livance · Ibirapuera</h3>
+        <div class="utop"><span class="city">São Paulo</span><span class="uidx" aria-hidden="true">SP / 01</span></div>
+        <h3>Livance <span>· Ibirapuera</span></h3>
         <p class="addr">R. Agostinho Rodrigues Filho, 550<br>Vila Clementino · CEP 04026-040</p>
         <p class="hours">Segunda a sexta: 7h às 22h<br>Sábado: 8h às 17h</p>
-        <a class="go" href="%%WA:ibirapuera%%" target="_blank" rel="noopener">Agendar nesta unidade</a>
+        <a class="btn btn-contorno" href="%%WA:ibirapuera%%" target="_blank" rel="noopener">Agendar em São Paulo <span class="arr" aria-hidden="true">↗</span></a>
       </div>
       <div class="ucard reveal" style="--d:.22s">
-        <span class="city">Santos · SP</span>
-        <h3>Liferty · Santos</h3>
+        <div class="utop"><span class="city">Santos</span><span class="uidx" aria-hidden="true">SP / 02</span></div>
+        <h3>Liferty <span>· Santos</span></h3>
         <p class="addr">Al. Armênio Mendes, 66, sala 2912<br>Aparecida · CEP 11030-000</p>
         <p class="hours">Segunda a sexta: 8h às 18h</p>
-        <a class="go" href="%%WA:santos%%" target="_blank" rel="noopener">Agendar nesta unidade</a>
+        <a class="btn btn-contorno" href="%%WA:santos%%" target="_blank" rel="noopener">Agendar em Santos <span class="arr" aria-hidden="true">↗</span></a>
       </div>
     </div>
+    <p class="unote reveal" style="--d:.3s">Confirme os dias e horários disponíveis no agendamento.</p>
   </div>
 </section>
 
-<section class="final dark">
+<section class="redes" id="instagram">
   <div class="wrap">
-    <p class="label reveal" style="justify-content:center">Agende sua consulta</p>
-    <h2 class="reveal" style="--d:.1s">Vamos cuidar da <em class="acc">saúde do seu filho</em> juntos?</h2>
-    <p class="reveal" style="--d:.2s">Agendamento rápido pelo WhatsApp: escolha a unidade e o melhor horário para a sua família.</p>
-    <div class="ctas reveal" style="--d:.3s">
-      <a class="btn btn-acc" href="%%WA:geral%%" target="_blank" rel="noopener">Agendar pelo WhatsApp <span class="arr" aria-hidden="true">↗</span></a>
-      <a class="btn btn-linha" href="#unidades"><span class="t">Ver unidades</span><span class="arr" aria-hidden="true">→</span></a>
+    <div class="rhead">
+      <div>
+        <p class="label reveal"><span class="num">05</span> Além do consultório</p>
+        <h2 class="reveal" style="--d:.08s">Acompanhe o consultório <em class="acc">no Instagram</em></h2>
+        <p class="sub reveal" style="--d:.16s">Dicas de saúde digestiva infantil, bastidores das unidades e respostas às dúvidas mais comuns das famílias.</p>
+      </div>
+      <a class="rhandle reveal" style="--d:.24s" href="https://www.instagram.com/drmarcelloruizgastroped/" target="_blank" rel="noopener">@drmarcelloruizgastroped ↗</a>
     </div>
-    <div class="fones reveal" style="--d:.4s">
-      <a href="https://wa.me/5513996811279" target="_blank" rel="noopener">Agendamento<strong>(13) 99681-1279</strong></a>
-      <a href="https://wa.me/5513997867273" target="_blank" rel="noopener">Recepção<strong>(13) 99786-7273</strong></a>
-      <a href="tel:+551332736828">Telefone<strong>(13) 3273-6828</strong></a>
-    </div>
-  </div>
-</section>
-
-<section class="redes dark" id="instagram">
-  <div class="wrap">
-    <p class="label reveal"><span class="num">05</span> Redes sociais</p>
-    <h2 class="reveal" style="--d:.08s">Acompanhe o consultório <em>no Instagram</em></h2>
-    <p class="sub reveal" style="--d:.16s">Dicas de saúde digestiva infantil, bastidores das unidades e respostas às dúvidas mais comuns das famílias.</p>
     <div class="posts reveal" style="--d:.24s">
       <a href="https://www.instagram.com/drmarcelloruizgastroped/" target="_blank" rel="noopener"><img src="%%ASSET:insta-1.jpg%%" alt="Publicação do Instagram do Dr. Marcello Ruiz" loading="lazy"></a>
       <a href="https://www.instagram.com/drmarcelloruizgastroped/" target="_blank" rel="noopener"><img src="%%ASSET:insta-2.jpg%%" alt="Publicação do Instagram do Dr. Marcello Ruiz" loading="lazy"></a>
       <a href="https://www.instagram.com/drmarcelloruizgastroped/" target="_blank" rel="noopener"><img src="%%ASSET:insta-3.jpg%%" alt="Publicação do Instagram do Dr. Marcello Ruiz" loading="lazy"></a>
     </div>
-    <a class="seguir reveal" style="--d:.3s" href="https://www.instagram.com/drmarcelloruizgastroped/"
-       target="_blank" rel="noopener" aria-label="Seguir o Dr. Marcello Ruiz no Instagram">
-      <span class="ig">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
-          <circle cx="12" cy="12" r="4.2"/>
-          <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
-        </svg>
-      </span>
-      Seguir @drmarcelloruizgastroped
-    </a>
+  </div>
+</section>
+
+<section class="final dark">
+  <div class="wrap cinner">
+    <div>
+      <p class="label reveal">Vamos conversar?</p>
+      <h2 class="reveal" style="--d:.1s">Vamos cuidar da <em class="acc">saúde do seu filho</em> juntos?</h2>
+    </div>
+    <div class="acoes reveal" style="--d:.2s">
+      <a class="btn btn-acc" href="%%WA:geral%%" target="_blank" rel="noopener">Agendar pelo WhatsApp <span class="arr" aria-hidden="true">↗</span></a>
+      <div class="fones">
+        <a href="https://wa.me/5513996811279" target="_blank" rel="noopener">Agendamento<strong>(13) 99681-1279</strong></a>
+        <a href="https://wa.me/5513997867273" target="_blank" rel="noopener">Recepção<strong>(13) 99786-7273</strong></a>
+        <a href="tel:+551332736828">Telefone<strong>(13) 3273-6828</strong></a>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer class="dark">
   <div class="wrap">
-    <div class="fgrid">
-      <img src="%%ASSET:logo.webp%%" alt="Logo Dr. Marcello Ruiz">
-      <span class="crm">Dr. Marcello Ruiz da Silva · CRM 85878 · RQE Pediatria 150713</span>
-      <span>© <span id="yy">2026</span> · Todos os direitos reservados</span>
+    <div class="fmain">
+      <a href="#top"><img src="%%ASSET:logo.webp%%" alt="Logo Dr. Marcello Ruiz"></a>
+      <p class="crm">Dr. Marcello Ruiz da Silva<br>CRM 85878 · RQE Pediatria 150713</p>
       <a class="equipe" href="/central-de-cuidado/" rel="nofollow" aria-label="Acesso da equipe ao sistema da clínica">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
         Acesso da equipe
       </a>
-      <a class="topo" href="#top">Voltar ao início ↑</a>
     </div>
     <div class="fnotes">
       <p class="note">Site institucional com caráter exclusivamente informativo. Nenhum conteúdo desta página substitui a consulta, o diagnóstico ou a orientação médica presencial.</p>
       <p class="note">Agendamento pelo WhatsApp: (13) 99681-1279, o mesmo dos botões desta página. Também atendemos em (13) 99786-7273 (WhatsApp) e (13) 3273-6828 (telefone).</p>
       <p class="note">Dr. Marcello Ruiz - Gastroenterologia Pediátrica é marca de AMIKA - Serviços Médicos LTDA · CNPJ 09.040.678/0001-72 · Av. Bartolomeu de Gusmão, 133 - Ponta da Praia, Santos - SP, 11030-500</p>
+    </div>
+    <div class="fbottom">
+      <span>© <span id="yy">2026</span> · Todos os direitos reservados</span>
+      <a class="topo" href="#top">Voltar ao início ↑</a>
     </div>
   </div>
 </footer>
