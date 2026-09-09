@@ -181,19 +181,25 @@ footer .topo:hover{color:var(--acc-l)}
 .dark .sub{color:var(--txt-l)}
 
 /* ---------- sobre ---------- */
+/* Modelo 2, escolhido pelo Edu em 09/09/2026 entre seis.
+   O retrato vira imagem de capa num quadro 4:5 a esquerda, com CRM e RQE
+   impressos sobre ele - a credencial e legenda da foto, nao um bloco de texto.
+   A direita fica so a leitura: nome, biografia e as tres promessas numeradas
+   como no resto do site. O arranjo anterior tinha a credencial entre dois
+   filetes no meio da coluna e a lista com outro filete logo abaixo, e entre os
+   dois sobrava uma faixa vazia. */
 .sobre{padding:clamp(90px,12vw,160px) 0;position:relative;overflow:hidden}
-.sobre .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(48px,6vw,96px);align-items:center}
-.sobre h2{margin:24px 0 20px}
+.sobre .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(48px,6vw,90px);align-items:center}
+.sobre h2{margin:20px 0 18px}
 .sobre p.bio{color:var(--txt-l);line-height:1.75;font-size:1.02rem;max-width:54ch}
-.registro{margin-top:30px;padding:18px 0;border-top:1px solid var(--line-l);border-bottom:1px solid var(--line-l);font-size:.82rem;letter-spacing:.06em;color:rgba(255,255,255,.85)}
-.registro span{margin:0 12px;color:var(--acc-l)}
-.promises{margin-top:38px;border-top:1px solid var(--line-l)}
-.promises li{list-style:none;display:flex;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line-l);font-size:.98rem;color:rgba(255,255,255,.88)}
-.promises li::before{content:"-";color:var(--acc-l);flex:none}
-.sobre .photo{position:relative;display:flex;justify-content:center}
-.sobre .photo .halo{position:absolute;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2C4F8E 0%,#12264A 55%,#0A1526 100%);top:50%;left:50%;transform:translate(-50%,-50%);filter:saturate(1.1)}
-.sobre .photo .ring{position:absolute;width:86%;aspect-ratio:1;border-radius:50%;border:1px solid var(--line-l);top:50%;left:50%;transform:translate(-50%,-50%)}
-.sobre .photo img{position:relative;z-index:2;max-height:560px;filter:drop-shadow(0 30px 60px rgba(0,0,0,.45))}
+.sobre .foto{position:relative;border-radius:3px;overflow:hidden;background:linear-gradient(160deg,#16305a,#0a1526)}
+.sobre .foto img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 12%}
+.sobre .cred{position:absolute;left:0;right:0;bottom:0;padding:16px 20px;background:linear-gradient(0deg,rgba(10,21,38,.92),transparent);font-size:.76rem;letter-spacing:.08em;color:rgba(255,255,255,.82)}
+.sobre .cred span{margin:0 8px;color:var(--acc-l)}
+.promises{margin-top:30px;display:grid;gap:2px}
+.promises li{list-style:none;display:flex;gap:14px;align-items:baseline;padding:14px 0;border-top:1px solid var(--line-l);font-size:.96rem;color:rgba(255,255,255,.88);line-height:1.55}
+.promises li:last-child{border-bottom:1px solid var(--line-l)}
+.promises .n{font-family:var(--font-d);font-style:italic;color:var(--acc-l);flex:none;width:26px}
 
 /* ---------- condições ---------- */
 .cond{padding:clamp(90px,12vw,160px) 0}
@@ -287,8 +293,9 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
 /* ---------- responsivo ---------- */
 @media (max-width:1020px){
   .sobre .grid,.consulta .grid{grid-template-columns:1fr;gap:56px}
-  .sobre .photo{order:-1}
-  .sobre .photo img{max-height:440px}
+  /* Numa coluna so, o quadro 4:5 tomaria a largura inteira e o rosto ficaria
+     maior que o titulo. Limitado, ele continua sendo abertura da secao. */
+  .sobre .foto{max-width:460px}
   .cond .head{grid-template-columns:1fr;align-items:start}
   .cond .head p{justify-self:start}
   .ugrid{grid-template-columns:1fr;max-width:520px}
@@ -493,19 +500,19 @@ footer .fbottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16
 
 <section class="sobre dark" id="sobre">
   <div class="wrap grid">
-    <div>
-      <p class="label reveal"><span class="num">01</span> Sobre o médico</p>
-      <h2 class="title-lg reveal" style="--d:.1s">Dr. Marcello Ruiz da Silva</h2>
-      <p class="bio reveal" style="--d:.2s">Médico gastroenterologista pediátrico com doutorado, professor da Faculdade de Ciências Médicas de Santos (UNILUS) e anos de experiência no diagnóstico e tratamento de doenças gastrointestinais em crianças e adolescentes. Referência na Baixada Santista, acredita que um atendimento humanizado faz toda a diferença na saúde dos pequenos.</p>
-      <p class="registro reveal" style="--d:.3s">CRM 85878 <span>·</span> RQE Pediatria 150713</p>
-      <ul class="promises reveal" style="--d:.4s">
-        <li>Atendimento especializado, adaptado às necessidades de cada criança</li>
-        <li>Diagnóstico preciso e abordagem eficiente para cada caso</li>
-        <li>Acompanhamento contínuo para garantir a melhor evolução clínica</li>
-      </ul>
-    </div>
-    <div class="photo reveal" style="--d:.25s">
+    <div class="foto reveal">
       <img src="assets/dr-marcello.webp" alt="Dr. Marcello Ruiz da Silva">
+      <p class="cred">CRM 85878 <span>·</span> RQE Pediatria 150713</p>
+    </div>
+    <div>
+      <p class="label reveal" style="--d:.1s"><span class="num">01</span> Sobre o médico</p>
+      <h2 class="title-lg reveal" style="--d:.16s">Dr. Marcello Ruiz da Silva</h2>
+      <p class="bio reveal" style="--d:.24s">Médico gastroenterologista pediátrico com doutorado, professor da Faculdade de Ciências Médicas de Santos (UNILUS) e anos de experiência no diagnóstico e tratamento de doenças gastrointestinais em crianças e adolescentes. Referência na Baixada Santista, acredita que um atendimento humanizado faz toda a diferença na saúde dos pequenos.</p>
+      <ul class="promises reveal" style="--d:.34s">
+        <li><span class="n">01</span>Atendimento especializado, adaptado às necessidades de cada criança</li>
+        <li><span class="n">02</span>Diagnóstico preciso e abordagem eficiente para cada caso</li>
+        <li><span class="n">03</span>Acompanhamento contínuo para garantir a melhor evolução clínica</li>
+      </ul>
     </div>
   </div>
 </section>
