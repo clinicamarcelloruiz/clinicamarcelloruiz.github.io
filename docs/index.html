@@ -325,7 +325,10 @@ footer .note{max-width:52ch;line-height:1.6;margin:0;font-size:.76rem;opacity:.7
   .hero .veil::after{background:linear-gradient(90deg,rgba(10,21,38,.8) 0%,rgba(10,21,38,.45) 60%,rgba(10,21,38,.2) 100%)}
   .hero .ctas{margin-top:30px;gap:14px 24px}
   .hero .ctas .btn-acc,.final .ctas .btn-acc{width:100%;max-width:340px}
-  .hero .foot{font-size:10px;letter-spacing:.12em}
+  /* No celular a assinatura vem logo depois do botao e a sobra fica no fim,
+     como o Edu escolheu. E por isso que ela precisa devolver o margin-top:auto
+     que o computador usa para prende-la no pe da tela. */
+  .hero .foot{font-size:10px;letter-spacing:.12em;margin-top:0}
   .citem{grid-template-columns:44px 1fr;gap:14px}
   .citem .arr{display:none}
 }
