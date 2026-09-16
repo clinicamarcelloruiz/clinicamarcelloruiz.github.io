@@ -399,6 +399,12 @@ footer .fmain img{height:auto;width:190px}
 footer .fmain .crm{letter-spacing:.02em;text-transform:none;font-size:.82rem;line-height:1.7}
 footer .fnotes{grid-template-columns:1.1fr 1fr 1fr;gap:40px;padding:28px 0}
 footer .fbottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:19px;border-top:1px solid var(--line-l);font-size:.75rem}
+/* Assinatura de quem fez o site. Discreta de proposito: menor que o resto,
+   sem cor de destaque, e so ganha sublinhado no hover. Quem procura acha; quem
+   nao procura nem repara. */
+footer .autoria{width:100%;margin-top:14px;text-align:center;font-size:.68rem;letter-spacing:.04em;color:var(--txt-d);opacity:.55}
+footer .autoria a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s,opacity .3s}
+footer .autoria a:hover{border-bottom-color:currentColor}
 
 @media (max-width:1020px){
   .uhead{grid-template-columns:1fr;align-items:start;gap:22px}
@@ -645,6 +651,10 @@ footer .fbottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16
     <div class="fbottom">
       <span>© <span id="yy">2026</span> · Todos os direitos reservados</span>
       <a class="topo" href="#top">Voltar ao início ↑</a>
+      <p class="autoria">
+        Desenvolvido por
+        <a href="mailto:eduaoe@gmail.com?subject=Site%20do%20Dr.%20Marcello%20Ruiz">ECM</a>
+      </p>
     </div>
   </div>
 </footer>
