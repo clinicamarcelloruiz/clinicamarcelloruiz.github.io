@@ -447,7 +447,10 @@ footer .fbottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16
 </div>
 
 <section class="hero" id="top">
-  <video muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" id="heroVideo" aria-hidden="true">
+  <!-- autoplay + muted + playsinline e a combinacao que todo navegador aceita
+       sem toque. preload="auto" porque o video precisa estar pronto quando a
+       pagina abre: e 1 MB, e a primeira impressao acontece uma vez so. -->
+  <video autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" id="heroVideo" aria-hidden="true">
     <source src="assets/hero-video.mp4" type="video/mp4">
   </video>
   <div class="veil"></div>
@@ -679,18 +682,26 @@ footer .fbottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16
   }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  // video de fundo: toca quando faz sentido, e a pessoa manda.
+  // Video de fundo: toca sempre, menos quando a propria pessoa pausa.
   //
-  // Sem autoplay no HTML de proposito: quem prefere movimento reduzido ou esta
-  // economizando dados ve a capa parada e liga se quiser. O video tambem pausa
-  // quando o hero sai da tela ou a aba vai para segundo plano - gasta menos
-  // bateria e ninguem ve a diferenca.
+  // Ate 16/09/2026 ele so tocava se o navegador nao pedisse movimento reduzido
+  // e nao estivesse economizando dados. A intencao era boa e o efeito foi ruim:
+  // em PC de escritorio, com "efeitos de animacao" desligados no Windows, o
+  // site abria com uma foto parada e ninguem entendia por que. Numa
+  // apresentacao para cliente, isso e o site nao funcionando.
+  //
+  // O botao de pausar continua visivel no canto, e e ele que atende quem nao
+  // quer o movimento: um clique e a coisa para, e o site lembra da escolha
+  // enquanto a pagina estiver aberta.
+  //
+  // O video continua parando quando o hero sai da tela ou a aba vai para
+  // segundo plano. Isso nao e sobre preferencia, e sobre nao gastar bateria
+  // desenhando o que ninguem esta vendo.
   var play = document.getElementById('playVideo');
   var fixo = document.getElementById('agendarFixo');
   var pausadoPelaPessoa = false;
   var heroVisivel = true;
-  var conn = navigator.connection || {};
-  function podeTocar(){ return !reduced && !conn.saveData && !pausadoPelaPessoa; }
+  function podeTocar(){ return !pausadoPelaPessoa; }
   function rotulo(){
     if(!play || !video) return;
     var pausado = video.paused;
