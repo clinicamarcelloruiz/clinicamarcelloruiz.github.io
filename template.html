@@ -410,10 +410,16 @@ footer .fnotes{grid-template-columns:1.1fr 1fr 1fr;gap:40px;padding:28px 0}
 footer .fbottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:19px;border-top:1px solid var(--line-l);font-size:.75rem}
 /* Assinatura de quem fez o site. Discreta de proposito: menor que o resto,
    sem cor de destaque, e so ganha sublinhado no hover. Quem procura acha; quem
-   nao procura nem repara. */
-footer .autoria{width:100%;margin-top:14px;text-align:center;font-size:.68rem;letter-spacing:.04em;color:var(--txt-d);opacity:.55}
-footer .autoria a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s,opacity .3s}
-footer .autoria a:hover{border-bottom-color:currentColor}
+   nao procura nem repara.
+   Em 21/09/2026 as letras "ECM" viraram a marca do desenvolvedor. A opacidade
+   do logo (.34) e menor que a do texto ao lado porque ele e branco com azul
+   aceso: no mesmo .55 do texto ele ficaria mais claro que o CRM do medico
+   logo acima, e roubaria a atencao de um rodape que nao e dele. */
+footer .autoria{width:100%;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:.68rem;letter-spacing:.04em;color:var(--txt-d)}
+footer .autoria>span{opacity:.55}
+footer .autoria a{display:inline-flex;align-items:center;opacity:.34;transition:opacity .3s}
+footer .autoria a:hover{opacity:.85}
+footer .autoria img{display:block;height:16px;width:auto;filter:none}
 
 @media (max-width:1020px){
   .uhead{grid-template-columns:1fr;align-items:start;gap:22px}
@@ -661,8 +667,10 @@ footer .autoria a:hover{border-bottom-color:currentColor}
       <span>© <span id="yy">2026</span> · Todos os direitos reservados</span>
       <a class="topo" href="#top">Voltar ao início ↑</a>
       <p class="autoria">
-        Desenvolvido por
-        <a href="mailto:eduaoe@gmail.com?subject=Site%20do%20Dr.%20Marcello%20Ruiz">ECM</a>
+        <span>Desenvolvido por</span>
+        <a href="mailto:eduaoe@gmail.com?subject=Site%20do%20Dr.%20Marcello%20Ruiz" aria-label="Eduardo Chaves Marques, desenvolvedor do site">
+          <img src="%%ASSET:logo-ecm.png%%" alt="ECM - Eduardo Chaves Marques, desenvolvedor">
+        </a>
       </p>
     </div>
   </div>
