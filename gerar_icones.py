@@ -1,107 +1,108 @@
-"""Gera todos os icones do site e do PWA do Dr. Marcello.
+# Gera o jogo de icones (favicon, atalho de celular, PWA) a partir do "M" do
+# logo. Rode de novo sempre que a marca mudar; nao edite os PNG na mao.
+#
+# A fonte e o proprio logo do site (logo-dr-marcello.png), nao uma imagem
+# solta: o "M" de la e o unico que vai continuar igual quando a marca mudar.
+# Ele vem em dois tons escuros, para fundo claro; aqui vira branco solido,
+# que e como o icone oficial (21/09/2026) mostra a marca sobre o azul.
 
-O simbolo completo do logo funciona bem em tamanho grande, mas perde a leitura
-na aba do navegador. Por isso os icones usam uma versao opticamente corrigida:
-um M geometrico, com o mesmo gesto inclinado da marca, traco branco mais largo
-e espaco negativo suficiente para continuar legivel em 16 x 16 pixels.
-"""
-
-from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
+from pathlib import Path
 
-
-FUNDO = (4, 30, 60)  # #041E3C
-BRANCO = (255, 255, 255, 255)
+FUNDO = (4, 30, 60)          # #041E3C - amostrado do icone oficial
 MASTER = 1024
 
+def m_branco(origem: Path) -> Image.Image:
+    """O 'M' do logo, recortado e pintado de branco solido."""
+    logo = Image.open(origem).convert("RGBA")
+    # Primeiro bloco horizontal com tinta = o simbolo; o resto e o texto.
+    import numpy as np
+    a = np.array(logo.split()[3])
+    cols = (a > 10).sum(axis=0)
+    ini = next(i for i, v in enumerate(cols) if v > 0)
+    fim = ini
+    for i in range(ini, len(cols)):
+        if cols[i] > 0:
+            fim = i
+        elif i - fim > 10:
+            break
+    sim = logo.crop((ini, 0, fim + 1, logo.height))
+    sim = sim.crop(sim.split()[3].getbbox())
+    branco = Image.new("RGBA", sim.size, (255, 255, 255, 0))
+    branco.putalpha(sim.split()[3])
+    branco.paste((255, 255, 255), (0, 0), sim.split()[3])
+    branco.putalpha(sim.split()[3])
+    return branco
 
-def fundo(lado: int, raio: float, opaco: bool = False) -> Image.Image:
-    """Cria a placa azul com um brilho discreto no canto superior direito."""
-    base = Image.new("RGBA", (lado, lado), (0, 0, 0, 0))
-    mascara = Image.new("L", (lado, lado), 0)
-    md = ImageDraw.Draw(mascara)
-    r = 0 if opaco else round(lado * raio)
-    md.rounded_rectangle((0, 0, lado - 1, lado - 1), radius=r, fill=255)
 
-    placa = Image.new("RGBA", (lado, lado), FUNDO + (255,))
-    brilho = Image.new("RGBA", (lado, lado), (0, 0, 0, 0))
-    bd = ImageDraw.Draw(brilho)
-    bd.ellipse(
-        (lado * 0.42, -lado * 0.28, lado * 1.28, lado * 0.58),
-        fill=(28, 83, 139, 82),
-    )
-    brilho = brilho.filter(ImageFilter.GaussianBlur(lado * 0.14))
-    placa = Image.alpha_composite(placa, brilho)
-    base.paste(placa, (0, 0), mascara)
-    return base
+def engrossar(m: Image.Image, px: int) -> Image.Image:
+    """Engorda o traco do M dilatando o alfa.
+
+    Existe por causa da aba do navegador. Ali o icone tem 16 a 20 pixels de
+    lado: o "M" inteiro cabe em ~400 pixels, e os bracos dele ficam com menos
+    de um pixel de espessura. O navegador entao pinta cinza claro em vez de
+    branco (antialiasing), e a marca some no azul - foi o que apareceu na aba
+    em 21/09/2026. Engordar o traco antes de encolher devolve o contraste.
+
+    So vale para os tamanhos miudos. Em 192 ou 512 isso deformaria a marca.
+    """
+    a = m.split()[3].filter(ImageFilter.MaxFilter(px * 2 + 1))
+    out = Image.new("RGBA", m.size, (255, 255, 255, 0))
+    out.paste((255, 255, 255), (0, 0), a)
+    out.putalpha(a)
+    return out
 
 
-def desenhar_m(img: Image.Image, ocupa: float, traco: float) -> None:
-    """Desenha um M simples e inequívoco, com pontas e encontros arredondados."""
-    lado = img.width
-    largura = lado * ocupa
-    x0 = (lado - largura) / 2
-    x1 = x0 + largura
-    topo = lado * 0.255
-    base = lado * 0.755
-    meio = lado * 0.585
-    pontos = [
-        (x0, base),
-        (x0 + largura * 0.235, topo),
-        (x0 + largura * 0.500, meio),
-        (x0 + largura * 0.765, topo),
-        (x1, base),
-    ]
-    espessura = max(1, round(lado * traco))
+def placa(m: Image.Image, lado: int, ocupa: float, raio: float) -> Image.Image:
+    """Quadrado azul com o M centralizado. `ocupa` = fracao da largura."""
+    img = Image.new("RGBA", (lado, lado), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    d.line(pontos, fill=BRANCO, width=espessura, joint="curve")
-    raio = espessura / 2
-    for x, y in pontos:
-        d.ellipse((x - raio, y - raio, x + raio, y + raio), fill=BRANCO)
-
-
-def icone(lado: int, ocupa: float, traco: float, raio: float, opaco: bool = False) -> Image.Image:
-    img = fundo(lado, raio, opaco=opaco)
-    desenhar_m(img, ocupa, traco)
+    if raio > 0:
+        d.rounded_rectangle([0, 0, lado - 1, lado - 1], radius=int(lado * raio), fill=FUNDO + (255,))
+    else:
+        d.rectangle([0, 0, lado - 1, lado - 1], fill=FUNDO + (255,))
+    lw = int(lado * ocupa)
+    lh = round(m.height * lw / m.width)
+    mm = m.resize((lw, lh), Image.LANCZOS)
+    img.paste(mm, ((lado - lw) // 2, (lado - lh) // 2), mm)
     return img
 
 
-def gerar(_origem: Path, saida: Path) -> None:
+def gerar(origem: Path, saida: Path):
     saida.mkdir(parents=True, exist_ok=True)
+    m = m_branco(origem)
 
-    # Icones comuns e do instalador PWA.
-    mestre = icone(MASTER, ocupa=0.66, traco=0.105, raio=0.22)
+    # "any": canto arredondado como o icone oficial.
+    mestre = placa(m, MASTER, 0.62, 0.22)
     for lado in (512, 192, 128, 64):
-        mestre.resize((lado, lado), Image.Resampling.LANCZOS).save(
-            saida / f"icone-{lado}.png", optimize=True
-        )
+        mestre.resize((lado, lado), Image.LANCZOS).save(saida / f"icone-{lado}.png", optimize=True)
 
-    # Correcao optica para abas e favoritos: M maior, mais grosso e com menos
-    # arredondamento na placa. Assim ele nao vira um triangulo em 16 pixels.
-    pequeno = icone(MASTER, ocupa=0.79, traco=0.135, raio=0.15)
+    # 16 e 32 nao saem do mestre: encolher o icone inteiro joga o "M" em 10
+    # pixels e ele vira mancha. Nesses tamanhos o M ocupa mais da placa e o
+    # canto arredonda menos - e o que o navegador mostra na aba, onde a marca
+    # precisa ser reconhecida, nao admirada.
+    miudo = placa(engrossar(m, 14), MASTER, 0.80, 0.14)
     for lado in (48, 32, 16):
-        pequeno.resize((lado, lado), Image.Resampling.LANCZOS).save(
-            saida / f"icone-{lado}.png", optimize=True
-        )
+        miudo.resize((lado, lado), Image.LANCZOS).save(saida / f"icone-{lado}.png", optimize=True)
 
-    pequeno.resize((48, 48), Image.Resampling.LANCZOS).save(
+    # favicon.ico com as tres medidas que o Windows e navegadores antigos pedem.
+    miudo.resize((48, 48), Image.LANCZOS).save(
         saida / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)]
     )
 
-    # O iOS e o Android aplicam suas proprias mascaras. Nesses dois arquivos o
-    # azul vai ate a borda; no maskable o M fica dentro da zona segura central.
-    icone(180, ocupa=0.66, traco=0.105, raio=0, opaco=True).convert("RGB").save(
-        saida / "apple-touch-icon.png", optimize=True
-    )
-    icone(512, ocupa=0.50, traco=0.080, raio=0, opaco=True).save(
-        saida / "icone-maskable-512.png", optimize=True
-    )
+    # apple-touch-icon: SEM canto arredondado e SEM transparencia. O iOS aplica
+    # a mascara dele por cima; se o arquivo ja vier arredondado, o corte
+    # acontece duas vezes e sobra um contorno escuro no canto.
+    placa(m, 180, 0.62, 0).convert("RGB").save(saida / "apple-touch-icon.png", optimize=True)
 
-    for arquivo in sorted(saida.iterdir()):
-        print(f"  {arquivo.name}  {arquivo.stat().st_size / 1024:.1f} KB")
+    # maskable (Android): o sistema pode cortar ate 20% de cada borda, entao o
+    # M encolhe para caber na zona segura e o azul sangra ate a borda.
+    placa(m, 512, 0.48, 0).save(saida / "icone-maskable-512.png", optimize=True)
+
+    for f in sorted(saida.iterdir()):
+        print(f"  {f.name}  {f.stat().st_size / 1024:.1f} KB")
 
 
 if __name__ == "__main__":
     import sys
-
     gerar(Path(sys.argv[1]), Path(sys.argv[2]))
