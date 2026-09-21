@@ -15,7 +15,21 @@
      PRECISA ficar dentro do <head> e vir no HTML de saida: a Meta le a fonte
      da pagina, nao o que o JavaScript monta depois. Nao remover. -->
 <meta name="facebook-domain-verification" content="8h4bx2xfl4rekh1p45nfbvz53jprns">
-<link rel="icon" href="%%ASSET:logo.webp%%">
+<!-- Icone oficial (21/09/2026): o "M" branco sobre o azul, gerado por
+     gerar_icones.py a partir do proprio logo. Antes a aba mostrava
+     logo.webp - a marca deitada inteira, com o nome - que em 32 pixels virava
+     um borrao cinza sem leitura nenhuma.
+     favicon.ico vem primeiro porque navegador antigo so entende esse; os PNG
+     abaixo e que os modernos usam de fato. -->
+<link rel="icon" href="%%ASSET:favicon.ico%%" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="%%ASSET:icone-32.png%%">
+<link rel="icon" type="image/png" sizes="16x16" href="%%ASSET:icone-16.png%%">
+<link rel="icon" type="image/png" sizes="192x192" href="%%ASSET:icone-192.png%%">
+<!-- Atalho na tela do celular. O arquivo do apple-touch vem quadrado e opaco
+     de proposito: o iOS aplica a mascara arredondada dele por cima, e um
+     arquivo ja arredondado seria cortado duas vezes. -->
+<link rel="apple-touch-icon" href="%%ASSET:apple-touch-icon.png%%">
+<meta name="apple-mobile-web-app-title" content="Dr. Marcello Ruiz">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
