@@ -76,11 +76,15 @@ shutil.rmtree(DIST, ignore_errors=True)
 # Copia so o que o HTML referencia. dr-marcello.png (1,1 MB) e
 # logo-dr-marcello.png (225 KB) nao sao usados - ficam de fora.
 #
-# EXTRAS sao arquivos que a pagina nao referencia mas precisam estar no ar: a
-# foto de perfil do WhatsApp e lida pela API da Meta a partir deste endereco.
-# Sem esta lista ela seria deixada para tras a cada publicacao, e a troca de
-# foto falharia com "nao consegui baixar a imagem".
-EXTRAS = ["perfil-whatsapp.png", "logo-email.png"]
+# EXTRAS sao arquivos que a pagina nao referencia diretamente mas precisam
+# estar no ar: a foto de perfil e lida pela API da Meta, enquanto os icones
+# de 512 px sao lidos pelo manifesto quando o site e instalado como aplicativo.
+EXTRAS = [
+    "perfil-whatsapp.png",
+    "logo-email.png",
+    "icone-512.png",
+    "icone-maskable-512.png",
+]
 
 for nome in sorted(set(usados) | {e for e in EXTRAS if (ASSETS / e).exists()}):
     shutil.copy2(ASSETS / nome, DIST / "assets" / nome)
