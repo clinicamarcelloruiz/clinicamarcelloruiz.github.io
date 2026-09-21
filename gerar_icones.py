@@ -6,7 +6,7 @@
 # Ele vem em dois tons escuros, para fundo claro; aqui vira branco solido,
 # que e como o icone oficial (21/09/2026) mostra a marca sobre o azul.
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 from pathlib import Path
 
 FUNDO = (4, 30, 60)          # #041E3C - amostrado do icone oficial
@@ -33,6 +33,24 @@ def m_branco(origem: Path) -> Image.Image:
     branco.paste((255, 255, 255), (0, 0), sim.split()[3])
     branco.putalpha(sim.split()[3])
     return branco
+
+
+def engrossar(m: Image.Image, px: int) -> Image.Image:
+    """Engorda o traco do M dilatando o alfa.
+
+    Existe por causa da aba do navegador. Ali o icone tem 16 a 20 pixels de
+    lado: o "M" inteiro cabe em ~400 pixels, e os bracos dele ficam com menos
+    de um pixel de espessura. O navegador entao pinta cinza claro em vez de
+    branco (antialiasing), e a marca some no azul - foi o que apareceu na aba
+    em 21/09/2026. Engordar o traco antes de encolher devolve o contraste.
+
+    So vale para os tamanhos miudos. Em 192 ou 512 isso deformaria a marca.
+    """
+    a = m.split()[3].filter(ImageFilter.MaxFilter(px * 2 + 1))
+    out = Image.new("RGBA", m.size, (255, 255, 255, 0))
+    out.paste((255, 255, 255), (0, 0), a)
+    out.putalpha(a)
+    return out
 
 
 def placa(m: Image.Image, lado: int, ocupa: float, raio: float) -> Image.Image:
@@ -63,7 +81,7 @@ def gerar(origem: Path, saida: Path):
     # pixels e ele vira mancha. Nesses tamanhos o M ocupa mais da placa e o
     # canto arredonda menos - e o que o navegador mostra na aba, onde a marca
     # precisa ser reconhecida, nao admirada.
-    miudo = placa(m, MASTER, 0.80, 0.14)
+    miudo = placa(engrossar(m, 14), MASTER, 0.80, 0.14)
     for lado in (48, 32, 16):
         miudo.resize((lado, lado), Image.LANCZOS).save(saida / f"icone-{lado}.png", optimize=True)
 
