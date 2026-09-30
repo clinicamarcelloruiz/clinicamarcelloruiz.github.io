@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dr. Marcello Ruiz · Gastroenterologia Pediátrica</title>
+<meta name="description" content="Dr. Marcello Ruiz, gastroenterologista pediátrico em Santos e São Paulo. Refluxo, intestino preso, alergia ao leite e dor de barriga que volta, em crianças e adolescentes.">
+<!-- Prévia para aprovação. Fotos das unidades são da Livance e dependem de autorização antes de publicar. -->
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#F2F0EB">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icone-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/abertura/fundo.webp">
+<link rel="preload" as="image" href="assets/abertura/medico.webp">
+<link rel="stylesheet" href="scrollcraft.css">
+<noscript><style>[data-sc-in],[data-sc-stagger]>*{opacity:1!important;transform:none!important}.aba{display:none}
+.abertura [data-sc-stage]{position:relative;height:100vh}.cam,.folha,.fala--dois{display:none}.cam[data-cam="fundo"]{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}</style></noscript>
+<style>
+/* Seis cores e duas letras. O marinho é o do logo; o verde-azulado é a única
+   cor de marcação e aparece só onde algo foi escolhido ou precisa ser notado. */
+:root{
+  --sc-canvas:#F2F0EB;
+  --sc-surface:#FFFFFF;
+  --sc-ink:#13275E;
+  --sc-ink-soft:#4B5572;
+  --sc-accent:#1E6B64;
+  --sc-accent-ink:#FFFFFF;
+  --sc-font-display:"Outfit",system-ui,sans-serif;
+  --sc-font-text:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif;
+
+  --noite:#0F1D45;
+  --noite-ink:#F2F0EB;
+  --noite-soft:#AEB6CF;
+  --noite-acc:#86CFC3;
+  --papel:#FFFFFF;
+  --linha:color-mix(in oklab,var(--sc-ink) 14%,transparent);
+  --raio:6px;
+  --sombra-papel:0 1px 0 rgba(255,255,255,.9) inset,0 2px 4px rgba(19,39,94,.06),0 18px 40px -12px rgba(19,39,94,.22);
+  --rail:clamp(272px,22vw,320px);
+  --rail-in:calc(var(--rail) - 56px);
+}
+html{scroll-padding-top:88px}
+body{background:var(--sc-canvas);color:var(--sc-ink);font-family:var(--sc-font-text);font-size:1.0625rem;line-height:1.6;overflow-x:clip}
+h1,h2,h3{font-family:var(--sc-font-display);font-weight:600;letter-spacing:-.02em;line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+.skip{position:fixed;left:16px;top:-80px;z-index:100;background:var(--sc-ink);color:#fff;padding:12px 16px;border-radius:var(--raio);font-weight:700}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid var(--sc-accent);outline-offset:3px;border-radius:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Marcador de pendência da prévia. Some quando o dado real entrar. */
+.confirmar{display:inline;background:#FFF1B8;color:#4D3D00;padding:.05em .4em;border-radius:3px;font-size:.92em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* ---------- botões: uma ação, um rótulo ---------- */
+.botao{display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:52px;padding:.8em 1.3em;border-radius:var(--raio);
+  background:var(--sc-ink);color:#fff;font-weight:700;text-decoration:none;border:0;cursor:pointer;
+  transition:background .25s,transform .25s var(--sc-ease-out)}
+.botao:hover{background:#0B1A45;transform:translateY(-1px)}
+.botao svg{width:20px;height:20px;flex:none}
+.botao--claro{background:var(--noite-ink);color:var(--noite)}
+.botao--claro:hover{background:#fff}
+.link{display:inline-block;padding-block:10px;font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.3em;text-decoration-color:color-mix(in oklab,currentColor 45%,transparent)}
+.link:hover{text-decoration-color:currentColor}
+
+/* ---------- índice: as perguntas são a navegação ---------- */
+.indice{position:fixed;z-index:40;top:0;left:0;padding:22px 28px 0}
+.indice__marca img{width:168px;height:auto}
+.indice__abrir{display:none}
+.indice ol{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:0;width:var(--rail-in);
+  opacity:0;transform:translateY(-6px);transition:opacity .4s,transform .4s var(--sc-ease-out);pointer-events:none}
+.pos-abertura .indice ol{opacity:1;transform:none;pointer-events:auto}
+.indice ol a{display:block;padding:10px 0 10px 16px;min-height:40px;font-size:.9rem;line-height:1.3;color:var(--sc-ink-soft);text-decoration:none;position:relative}
+.indice ol a::before{content:"";position:absolute;left:0;top:1.15em;width:7px;height:7px;border-radius:50%;border:1.5px solid color-mix(in oklab,var(--sc-ink) 30%,transparent)}
+.indice ol a:hover{color:var(--sc-ink)}
+.indice ol a[aria-current="true"]{color:var(--sc-ink);font-weight:700}
+.indice ol a[aria-current="true"]::before{background:var(--sc-accent);border-color:var(--sc-accent)}
+.indice ol a.feito::before{background:color-mix(in oklab,var(--sc-ink) 30%,transparent)}
+.na-noite .indice ol a{color:var(--noite-soft)}
+.na-noite .indice ol a[aria-current="true"]{color:var(--noite-ink)}
+.logo-noite .indice__marca img{filter:brightness(0) invert(.94)}
+
+/* ---------- abertura: uma câmera dentro do consultório ----------
+   Tudo o que é da sala mora em coordenadas da foto original (2400 x 1992) e
+   o JavaScript posiciona cada camada com uma transformação só. De trás para
+   frente:
+     fundo (nítido e desfocado), luz de janela, primeira frase, segunda frase,
+     médico, raios de luz, mesa (nítida e desfocada), a folha, grão.
+   O texto fica ENTRE a sala e o médico: quando a câmera chega perto, o ombro
+   dele passa na frente da segunda frase. A mesa é recortada da própria foto,
+   então esconde o corte do recorte dele exatamente onde a mesa está. */
+.abertura [data-sc-stage]{background:#EDE7DC;perspective:1400px;isolation:isolate}
+.cam{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;will-change:transform,opacity;max-width:none}
+.cam--sala{width:2400px;height:1992px}
+.cam--foco,.cam--mesa-foco{opacity:0}
+.cam--medico{width:1000px;height:1500px}
+.cam--luz{width:1100px;height:1100px;background:radial-gradient(closest-side,rgba(255,253,246,.85),rgba(255,251,240,.35) 45%,transparent 75%);mix-blend-mode:screen}
+.cam--raios{width:1600px;height:1500px;mix-blend-mode:screen;opacity:.8;
+  background:
+    linear-gradient(118deg,transparent 18%,rgba(255,249,236,.22) 26%,transparent 34%),
+    linear-gradient(118deg,transparent 38%,rgba(255,249,236,.16) 44%,transparent 51%),
+    linear-gradient(118deg,transparent 56%,rgba(255,249,236,.12) 61%,transparent 67%)}
+.grao{position:absolute;inset:-50%;pointer-events:none;z-index:20;opacity:.07;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.vinheta{position:absolute;inset:0;z-index:19;pointer-events:none;mix-blend-mode:multiply;
+  background:radial-gradient(120% 95% at 42% 45%,transparent 55%,rgba(92,64,34,.16) 100%)}
+/* primeira frase: sobre a claridade da janela, à direita */
+.fala{position:absolute;z-index:4;will-change:transform,opacity}
+.fala--um{right:clamp(24px,5.5vw,110px);top:clamp(110px,17vh,180px);width:min(36rem,42vw)}
+.abertura__quem{font-size:.95rem;font-weight:700;color:var(--sc-ink-soft);margin-bottom:1.1rem}
+.abertura h1{font-size:clamp(2.6rem,1.3rem + 3.9vw,5.2rem);letter-spacing:-.035em;line-height:.98}
+.abertura .lede{margin-top:1.3rem;font-size:clamp(1.06rem,1rem + .3vw,1.22rem);color:var(--sc-ink-soft);max-width:31rem}
+.abertura .acoes{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:1.8rem}
+/* segunda frase: enorme, atrás do médico */
+.fala--dois{z-index:5;left:47vw;top:40vh;font-family:var(--sc-font-display);font-weight:600;letter-spacing:-.045em;line-height:.92;
+  font-size:clamp(3.4rem,1rem + 6.6vw,8.6rem);color:var(--sc-ink);opacity:0;pointer-events:none;max-width:49vw}
+/* uma mancha de papel só onde a primeira frase mora: a maca e a cortina
+   atrás dela ficam, só perdem o contraste embaixo das letras */
+.veu-fala{position:absolute;z-index:3;right:-8vw;top:2vh;width:66vw;height:96vh;pointer-events:none;will-change:opacity;
+  background:radial-gradient(closest-side,rgba(244,241,235,.9),rgba(244,241,235,.72) 55%,rgba(244,241,235,0))}
+.cam--medico{z-index:6}
+.cam--raios{z-index:7}
+.cam--mesa,.cam--mesa-foco{z-index:8}
+/* a folha: sai das mãos dele e vira a página */
+.folha{position:absolute;left:0;top:0;z-index:10;width:420px;height:560px;transform-origin:50% 50%;opacity:0;pointer-events:none;
+  background:#FDFCF8;border-radius:3px;padding:34px 36px;color:var(--sc-ink);will-change:transform,opacity;
+  box-shadow:0 2px 3px rgba(19,39,94,.08),0 40px 80px -30px rgba(19,39,94,.45)}
+.folha__miolo{transition:none}
+.folha__cab{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;border-bottom:2px solid var(--sc-ink)}
+.folha__cab img{width:92px;height:auto}
+.folha__cab span{font-family:var(--sc-font-display);font-weight:600;font-size:.95rem;text-align:right;line-height:1.15}
+.folha__l{display:flex;gap:10px;align-items:baseline;margin-top:22px;font-size:.82rem;color:var(--sc-ink-soft)}
+.folha__l i{flex:1;height:1px;background:var(--linha);transform:translateY(-3px)}
+.folha__cobre{position:absolute;inset:0;background:var(--sc-canvas);opacity:0;border-radius:inherit}
+
+/* ---------- capítulos ---------- */
+main{position:relative}
+.capitulos{padding-left:var(--rail)}
+.capitulo{padding:clamp(88px,12vw,150px) var(--sc-gutter) 0;max-width:calc(1040px + 2*var(--sc-gutter))}
+.capitulo h2{font-size:clamp(2rem,1.4rem + 2.4vw,3.3rem)}
+.capitulo__cab{max-width:44rem}
+.capitulo__cab p{margin-top:1rem;color:var(--sc-ink-soft);font-size:1.1rem}
+
+/* 1. em casa: os sintomas são entradas reais de formulário */
+.grupos{margin-top:clamp(36px,5vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:34px 44px}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-family:var(--sc-font-display);font-weight:600;font-size:1.08rem;padding:0;margin-bottom:12px}
+.opcoes{display:flex;flex-wrap:wrap;gap:10px}
+.opcao{position:relative}
+.opcao input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opcao span{display:flex;align-items:center;gap:10px;min-height:48px;padding:10px 16px 10px 14px;border-radius:var(--raio);
+  background:var(--papel);border:1.5px solid color-mix(in oklab,var(--sc-ink) 18%,transparent);line-height:1.3;
+  transition:background .2s,border-color .2s,color .2s}
+.opcao span::before{content:"";flex:none;width:18px;height:18px;border-radius:4px;border:1.5px solid color-mix(in oklab,var(--sc-ink) 40%,transparent);background:#fff center/12px no-repeat}
+.opcao--radio span::before{border-radius:50%}
+.opcao input:hover + span{border-color:var(--sc-ink)}
+.opcao input:focus-visible + span{outline:3px solid var(--sc-accent);outline-offset:2px}
+.opcao input:checked + span{background:var(--sc-ink);border-color:var(--sc-ink);color:#fff}
+.opcao input:checked + span::before{border-color:#fff;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.3l2.5 2.4L10 3.2' fill='none' stroke='%2313275E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.idade{margin-top:clamp(32px,4vw,44px)}
+.alerta{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;max-width:46rem;padding:18px 20px;border-radius:var(--raio);
+  background:color-mix(in oklab,#B3261E 7%,var(--sc-canvas));border-left:3px solid #B3261E;color:#5A1712}
+.alerta strong{display:block;margin-bottom:2px}
+.alerta svg{width:22px;height:22px;margin-top:2px}
+
+/* 2. tem nome: um rótulo por condição, sempre o mesmo esquema */
+.condicoes{list-style:none;margin:clamp(36px,5vw,56px) 0 0;padding:0;border-top:1px solid var(--linha)}
+.condicao{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) auto;gap:8px 36px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--linha);background:var(--sc-canvas)}
+.condicao h3{font-size:clamp(1.25rem,1.1rem + .5vw,1.55rem)}
+.condicao p{color:var(--sc-ink-soft)}
+.condicao .sinal{grid-column:3;font-size:.86rem;font-weight:700;color:var(--sc-accent);white-space:nowrap;visibility:hidden}
+.condicao.liga .sinal{visibility:visible}
+.condicao.liga h3::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--sc-accent);margin-right:12px;transform:translateY(-3px)}
+.nome-nota{margin-top:22px;font-size:.95rem;color:var(--sc-ink-soft)}
+
+/* 3. quem */
+.quem{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,5vw,72px);align-items:end}
+.quem__foto{position:relative;border-radius:var(--raio);overflow:hidden;background:linear-gradient(180deg,#E4DFD4,#D9D2C4);aspect-ratio:4/5}
+.quem__foto img{position:absolute;left:50%;bottom:0;translate:-50% 0;height:100%;width:auto;max-width:none}
+.quem__nome{margin-top:.9rem;font-family:var(--sc-font-display);font-weight:500;font-size:1.3rem;color:var(--sc-ink-soft)}
+.quem__bio{margin-top:1.2rem;max-width:36rem}
+.creds{margin:2rem 0 0;display:grid;grid-template-columns:auto 1fr;border-top:1px solid var(--linha)}
+.creds dt,.creds dd{padding:12px 0;border-bottom:1px solid var(--linha);margin:0}
+.creds dt{font-size:.9rem;color:var(--sc-ink-soft);padding-right:28px}
+.creds dd{font-weight:700}
+.quem__insta{margin-top:1.4rem;color:var(--sc-ink-soft)}
+
+/* 4. consulta: o capítulo mais quieto */
+.consulta{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);margin-top:clamp(36px,5vw,56px)}
+.roteiro{display:grid;gap:26px;align-content:start}
+.roteiro h3{font-size:1.3rem;margin-bottom:6px}
+.roteiro p{color:var(--sc-ink-soft)}
+.levar{margin-top:10px;padding-top:24px;border-top:1px solid var(--linha)}
+.levar ul{margin:10px 0 0;padding-left:1.2em;color:var(--sc-ink-soft)}
+.levar li+li{margin-top:4px}
+.pendencias{margin-top:6px;display:grid;gap:8px;font-size:.98rem}
+.fotos{display:grid;gap:18px;align-content:start}
+.fotos figure{margin:0}
+.fotos .quadro{overflow:hidden;border-radius:var(--raio);aspect-ratio:4/3}
+.fotos .quadro img{width:100%;height:112%;object-fit:cover}
+.fotos figcaption{margin-top:8px;font-size:.88rem;color:var(--sc-ink-soft)}
+.fotos figure:nth-child(2){margin-left:18%}
+
+/* 5. onde: as unidades são a escolha da ficha */
+.unidades{margin-top:clamp(36px,5vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.unidade{position:relative;display:block;padding:26px 26px 24px;border-radius:var(--raio);background:var(--papel);border:1.5px solid transparent;box-shadow:0 1px 2px rgba(19,39,94,.06);cursor:pointer;transition:border-color .2s}
+.unidade input{position:absolute;opacity:0}
+.unidade:has(input:focus-visible){outline:3px solid var(--sc-accent);outline-offset:3px}
+.unidade:has(input:checked){border-color:var(--sc-ink)}
+.unidade__topo{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.unidade h3{font-size:1.5rem}
+.unidade__estado{font-size:.86rem;font-weight:700;color:var(--sc-ink-soft);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.unidade__estado::before{content:"";width:16px;height:16px;border-radius:50%;border:1.5px solid color-mix(in oklab,var(--sc-ink) 40%,transparent)}
+.unidade:has(input:checked) .unidade__estado{color:var(--sc-accent)}
+.unidade:has(input:checked) .unidade__estado::before{border:5px solid var(--sc-accent)}
+.unidade__estado .sim{display:none}
+.unidade:has(input:checked) .unidade__estado .sim{display:inline}
+.unidade:has(input:checked) .unidade__estado .nao{display:none}
+.unidade p{margin-top:10px;color:var(--sc-ink-soft)}
+.unidade .horas{margin-top:14px;padding-top:14px;border-top:1px solid var(--linha);font-size:.95rem}
+.unidade .mapa{display:inline-block;margin-top:14px;position:relative;z-index:1;font-size:.95rem}
+.unidades-nota{margin-top:16px;font-size:.95rem;color:var(--sc-ink-soft)}
+
+/* 6. a ficha: o pico. O papel acende sobre o marinho. */
+/* O marinho vai de ponta a ponta, por baixo da coluna do índice também: a
+   virada de papel para noite é a maior mudança da página e não pode ter uma
+   faixa clara sobrando na borda. */
+.noite{background:var(--noite);color:var(--noite-ink);margin-top:clamp(96px,12vw,160px);margin-left:calc(-1 * var(--rail));padding-left:var(--rail)}
+.noite .capitulo{padding-bottom:clamp(80px,10vw,130px)}
+.noite .capitulo__cab p{color:var(--noite-soft)}
+.ficha-mesa{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,4vw,56px);align-items:start;margin-top:clamp(36px,5vw,56px)}
+.papel{background:var(--papel);color:var(--sc-ink);border-radius:4px;box-shadow:0 2px 0 rgba(255,255,255,.08),0 30px 60px -20px rgba(0,0,0,.55);padding:clamp(24px,3vw,40px);rotate:-.6deg}
+.papel__cab{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:18px;border-bottom:2px solid var(--sc-ink)}
+.papel__cab img{width:120px;height:auto}
+.papel__cab span{font-family:var(--sc-font-display);font-weight:600;font-size:1.05rem;text-align:right}
+.linhas{margin:0;display:grid}
+.linha{display:grid;grid-template-columns:9.5rem 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--linha)}
+.linha dt{font-size:.92rem;color:var(--sc-ink-soft)}
+.linha dd{margin:0;font-weight:700}
+.linha dd ul{margin:0;padding-left:1.1em}
+.linha .vazio{font-weight:400;color:var(--sc-ink-soft)}
+.papel label.obs{display:block;margin-top:18px;font-size:.92rem;color:var(--sc-ink-soft)}
+.papel textarea{display:block;width:100%;margin-top:8px;min-height:92px;padding:12px 14px;border-radius:var(--raio);border:1.5px solid color-mix(in oklab,var(--sc-ink) 22%,transparent);background:#FBFAF7;color:var(--sc-ink);resize:vertical;line-height:1.5}
+.envio{position:sticky;top:110px}
+.balao{background:#DCF3E4;color:#0E2B1C;border-radius:10px 10px 10px 2px;padding:16px 18px;white-space:pre-line;font-size:.98rem;line-height:1.5;box-shadow:0 10px 30px -12px rgba(0,0,0,.5)}
+.balao-rotulo{font-size:.9rem;color:var(--noite-soft);margin-bottom:10px}
+.envio .botao{margin-top:22px;width:100%}
+.envio .miudo{margin-top:14px;font-size:.9rem;color:var(--noite-soft)}
+.envio .pessoa{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);color:var(--noite-soft);font-size:.95rem}
+
+/* o momento: as linhas da ficha se escrevem uma a uma */
+.escrevendo .linha,.escrevendo .obs,.escrevendo .papel__cab{opacity:0;transform:translateY(6px)}
+.escrita .linha,.escrita .obs,.escrita .papel__cab{opacity:1;transform:none;transition:opacity .5s var(--sc-ease-out),transform .5s var(--sc-ease-out);transition-delay:calc(var(--i,0) * 160ms)}
+
+/* ---------- rodapé: pequeno e firme ---------- */
+.colofao{background:var(--noite);color:var(--noite-soft);font-size:.9rem;padding:0 var(--sc-gutter) 120px var(--rail)}
+.colofao__in{max-width:1040px;padding:36px var(--sc-gutter) 0;border-top:1px solid rgba(255,255,255,.14);display:grid;grid-template-columns:auto 1fr 1fr;gap:28px 48px}
+.colofao img.marca{width:150px;height:auto;filter:brightness(0) invert(.94)}
+.colofao strong{color:var(--noite-ink);font-weight:700}
+.colofao p+p{margin-top:8px}
+.colofao a{color:var(--noite-ink)}
+.colofao .fim{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem}
+.colofao .fim img{height:15px;width:auto;display:inline-block;vertical-align:middle;opacity:.7}
+
+/* ---------- a aba: a ficha que acompanha a leitura ---------- */
+/* No computador a aba mora na coluna do índice, embaixo das perguntas: a
+   navegação e a ficha ficam juntas, e nenhuma das duas cobre o texto. */
+.aba{position:fixed;z-index:45;left:28px;bottom:22px;width:var(--rail-in);
+  opacity:0;transform:translateY(24px);pointer-events:none;transition:opacity .4s,transform .45s var(--sc-ease-out)}
+.aba.on{opacity:1;transform:none;pointer-events:auto}
+.aba__papel{display:block;background:var(--papel);border-radius:4px;box-shadow:var(--sombra-papel);padding:14px 16px 16px;text-decoration:none;color:var(--sc-ink);rotate:-1.5deg;transition:rotate .3s}
+.aba__papel:hover{rotate:0deg}
+.aba__t{display:flex;justify-content:space-between;font-family:var(--sc-font-display);font-weight:600}
+.aba__t small{font-family:var(--sc-font-text);font-weight:700;font-size:.8rem;color:var(--sc-accent)}
+.aba__r{display:block;margin-top:6px;font-size:.88rem;color:var(--sc-ink-soft);line-height:1.35}
+.aba__linhas{display:grid;gap:5px;margin-top:10px}
+.aba__linhas i{height:2px;border-radius:2px;background:var(--sc-ink);opacity:.7;transform-origin:left;animation:traco .5s var(--sc-ease-out) both}
+@keyframes traco{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.aba .botao{width:100%;margin-top:10px;min-height:48px;padding:.7em .9em;font-size:.97rem;white-space:nowrap}
+.voando{position:fixed;z-index:60;pointer-events:none;transition:transform .8s var(--sc-ease-out),opacity .8s}
+
+/* ---------- telas médias e celular ---------- */
+@media (max-width:1099px){
+  :root{--rail:0px}
+  .indice{right:0;display:flex;align-items:center;justify-content:space-between;padding:12px var(--sc-gutter);transition:background .3s,box-shadow .3s}
+  .pos-abertura .indice{background:rgba(242,240,235,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--linha)}
+  .na-noite .indice{background:rgba(15,29,69,.94);box-shadow:0 1px 0 rgba(255,255,255,.1)}
+  .indice__marca img{width:136px}
+  .indice__abrir{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:var(--raio);border:1.5px solid color-mix(in oklab,var(--sc-ink) 22%,transparent);background:transparent;color:inherit;font-weight:700;cursor:pointer}
+  .na-noite .indice__abrir{border-color:rgba(255,255,255,.3);color:var(--noite-ink)}
+  .indice ol{display:none;position:fixed;inset:68px 0 auto 0;margin:0;width:auto;padding:12px var(--sc-gutter) 20px;background:var(--sc-canvas);box-shadow:0 20px 40px -20px rgba(19,39,94,.4);opacity:1;transform:none;pointer-events:auto}
+  .indice.aberto ol{display:grid}
+  .indice ol a{font-size:1.05rem;padding:12px 0 12px 20px}
+  .indice ol a::before{top:1.2em}
+  .na-noite .indice ol{background:var(--noite)}
+  .capitulos{padding-left:0}
+  .colofao{padding-left:0;padding-bottom:110px}
+  /* Sem coluna lateral, a aba vira a barra de baixo: ficha de um lado,
+     agendar do outro. */
+  .aba{left:0;right:0;bottom:0;width:auto;display:flex;gap:10px;align-items:stretch;padding:10px 12px max(10px,env(safe-area-inset-bottom));background:rgba(242,240,235,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 -1px 0 var(--linha)}
+  .aba__papel{rotate:0deg;flex:0 0 42%;max-width:300px;padding:8px 12px;display:flex;flex-direction:column;justify-content:center}
+  .aba__r,.aba__linhas{display:none}
+  .aba__t{flex-direction:column;gap:2px}
+  .aba .botao{margin-top:0;flex:1;padding:.6em .8em;font-size:.95rem}
+}
+@media (max-width:860px){
+  .grupos,.consulta,.quem,.unidades,.ficha-mesa{grid-template-columns:1fr}
+  .condicao{grid-template-columns:1fr}
+  .condicao .sinal{grid-column:1;grid-row:1}
+  .condicao.liga .sinal{display:block}
+  .condicao:not(.liga) .sinal{display:none}
+  .quem__foto{max-width:420px}
+  .fotos figure:nth-child(2){margin-left:0}
+  .envio{position:static}
+  .colofao__in{grid-template-columns:1fr}
+  .linha{grid-template-columns:1fr;gap:4px}
+}
+@media (max-width:760px){
+  /* No celular a câmera enquadra a mesa e ele; o texto vai no alto, sobre o
+     teto e a janela, com uma faixa de papel só onde ele mora. */
+  .fala--um{left:var(--sc-gutter);right:var(--sc-gutter);top:auto;bottom:calc(22px + env(safe-area-inset-bottom));width:auto;z-index:11}
+  .abertura__quem{font-size:.86rem;margin-bottom:.6rem}
+  .abertura h1{font-size:clamp(2.1rem,1.1rem + 5.6vw,2.8rem)}
+  .abertura .lede{margin-top:.8rem;font-size:1rem}
+  .abertura .acoes{margin-top:1rem;gap:6px 22px}
+  .veu-base{position:absolute;left:0;right:0;bottom:0;height:58svh;z-index:9;pointer-events:none;will-change:opacity;
+    background:linear-gradient(0deg,rgba(242,240,235,.97) 0%,rgba(242,240,235,.94) 62%,rgba(242,240,235,0) 100%)}
+  .fala--dois{left:var(--sc-gutter);right:var(--sc-gutter);top:12svh;max-width:none;font-size:clamp(2.9rem,1rem + 10vw,4.2rem)}
+  .folha{width:300px;height:400px;padding:24px 24px}
+}
+@media (min-width:761px){.veu-base{display:none}}
+@media (max-width:760px){.veu-fala{display:none}}
+/* a folha vira esta página: o primeiro capítulo começa logo, no mesmo papel,
+   sem esperar a animação de entrada */
+#em-casa{padding-top:clamp(56px,7vw,88px)}
+@media (max-height:720px) and (min-width:761px){
+  .fala--um{top:96px}
+  .abertura h1{font-size:clamp(2.3rem,1.2rem + 3vw,3.8rem)}
+}
+@media (prefers-reduced-motion:reduce){
+  .fala--dois{display:none}
+  .abertura h1 .sr{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal}
+  .escrevendo .linha,.escrevendo .obs,.escrevendo .papel__cab{opacity:1;transform:none}
+  .aba__linhas i{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#em-casa">Pular para o conteúdo</a>
+
+<nav class="indice" id="indice" aria-label="Perguntas da consulta">
+  <a class="indice__marca" href="#topo"><img src="assets/logo.webp" width="1320" height="400" alt="Dr. Marcello Ruiz, gastroenterologista pediátrico. Voltar ao início"></a>
+  <button class="indice__abrir" type="button" aria-expanded="false" aria-controls="indice-lista">Perguntas</button>
+  <ol id="indice-lista">
+    <li><a href="#em-casa">O que está acontecendo em casa?</a></li>
+    <li><a href="#tem-nome">Isso tem nome?</a></li>
+    <li><a href="#quem">Quem vai atender vocês?</a></li>
+    <li><a href="#consulta">Como é a primeira consulta?</a></li>
+    <li><a href="#onde">Onde vocês preferem ir?</a></li>
+    <li><a href="#ficha">Sua ficha</a></li>
+  </ol>
+</nav>
+
+<main>
+  <section class="abertura" id="topo" data-sc-act="pin" data-sc-span="3" aria-labelledby="t-abertura">
+    <div data-sc-stage>
+      <img class="cam cam--sala" data-cam="fundo" src="assets/abertura/fundo.webp" width="2400" height="1992" alt="Consultório com mesa de madeira, maca e janelas amplas, com o Dr. Marcello em pé atrás da mesa" fetchpriority="high">
+      <img class="cam cam--sala cam--foco" data-cam="fundo-foco" src="assets/abertura/fundo-foco.webp" width="1200" height="996" alt="" aria-hidden="true">
+      <div class="cam cam--luz" data-cam="luz" aria-hidden="true"></div>
+      <div class="veu-fala" aria-hidden="true"></div>
+      <div class="fala fala--um" data-fala="um">
+        <p class="abertura__quem">Dr. Marcello Ruiz · Gastroenterologia pediátrica · Santos e São Paulo</p>
+        <h1 id="t-abertura">A barriga dele não melhora. <span class="sr">Vamos entender por quê.</span></h1>
+        <p class="lede">Refluxo, intestino preso, alergia ao leite, dor que vai e volta. Consulta para crianças e adolescentes, com tempo para ouvir a família.</p>
+        <div class="acoes">
+          <a class="botao js-wa" href="https://wa.me/5513996811279" target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
+          <a class="link" href="#em-casa">Começar pela ficha</a>
+        </div>
+      </div>
+      <p class="fala fala--dois" data-fala="dois" aria-hidden="true">Vamos entender por quê.</p>
+      <img class="cam cam--medico" data-cam="medico" src="assets/abertura/medico.webp" width="1000" height="1500" alt="">
+      <div class="cam cam--raios" data-cam="raios" aria-hidden="true"></div>
+      <img class="cam cam--sala cam--mesa" data-cam="mesa" src="assets/abertura/mesa.webp" width="2400" height="1992" alt="" aria-hidden="true">
+      <img class="cam cam--sala cam--mesa-foco" data-cam="mesa-foco" src="assets/abertura/mesa-foco.webp" width="1200" height="996" alt="" aria-hidden="true">
+      <div class="folha" id="folha" aria-hidden="true">
+        <div class="folha__miolo">
+          <p class="folha__cab"><img src="assets/logo.webp" width="1320" height="400" alt=""><span>Ficha de primeira consulta</span></p>
+          <p class="folha__l">Idade <i></i></p>
+          <p class="folha__l">O que acontece <i></i></p>
+          <p class="folha__l"><i></i></p>
+          <p class="folha__l"><i></i></p>
+          <p class="folha__l">Unidade <i></i></p>
+        </div>
+        <div class="folha__cobre"></div>
+      </div>
+      <div class="veu-base" aria-hidden="true"></div>
+      <div class="vinheta" aria-hidden="true"></div>
+      <div class="grao" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <form class="capitulos" id="formFicha" novalidate>
+
+    <section class="capitulo" id="em-casa" data-capitulo aria-labelledby="t-casa">
+      <div class="capitulo__cab">
+        <h2 id="t-casa">O que está acontecendo em casa?</h2>
+        <p>Marque o que você tem visto. Vai para a sua ficha e ajuda a organizar a conversa da consulta. Não é diagnóstico.</p>
+      </div>
+
+      <fieldset class="idade">
+        <legend>Idade da criança</legend>
+        <div class="opcoes">
+          <label class="opcao opcao--radio"><input type="radio" name="idade" value="menos de 1 ano"><span>Menos de 1 ano</span></label>
+          <label class="opcao opcao--radio"><input type="radio" name="idade" value="1 a 3 anos"><span>1 a 3 anos</span></label>
+          <label class="opcao opcao--radio"><input type="radio" name="idade" value="4 a 9 anos"><span>4 a 9 anos</span></label>
+          <label class="opcao opcao--radio"><input type="radio" name="idade" value="10 anos ou mais"><span>10 anos ou mais</span></label>
+        </div>
+      </fieldset>
+
+      <div class="grupos">
+        <fieldset>
+          <legend>Depois de mamar ou comer</legend>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="s" value="golfa"><span>Golfa ou vomita com frequência</span></label>
+            <label class="opcao"><input type="checkbox" name="s" value="choro"><span>Chora, se contorce ou arqueia o corpo</span></label>
+            <label class="opcao"><input type="checkbox" name="s" value="recusa"><span>Recusa comer ou come muito pouco</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>No intestino</legend>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="s" value="preso"><span>Fica dias sem evacuar</span></label>
+            <label class="opcao"><input type="checkbox" name="s" value="medo"><span>Sente dor ou tem medo de evacuar</span></label>
+            <label class="opcao"><input type="checkbox" name="s" value="diarreia"><span>Diarreia que não passa</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Na barriga</legend>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="s" value="gases"><span>Barriga inchada, muitos gases</span></label>
+            <label class="opcao"><input type="checkbox" name="s" value="dor"><span>Dor que vai e volta</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Alimentação e crescimento</legend>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="s" value="leite"><span>Piora com leite ou derivados</span></label>
+            <label class="opcao"><input type="checkbox" name="s" value="peso"><span>Não ganha peso ou altura como esperado</span></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="alerta" role="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17.5v.01"/></svg>
+        <p><strong>Estes sinais não esperam a consulta.</strong>Vômito com sangue ou esverdeado, sangue nas fezes, barriga muito dura e inchada, criança muito abatida ou urinando pouco: procure um pronto-socorro. <span class="confirmar">revisar com o médico</span></p>
+      </div>
+    </section>
+
+    <section class="capitulo" id="tem-nome" data-capitulo aria-labelledby="t-nome">
+      <div class="capitulo__cab" data-sc-in>
+        <h2 id="t-nome">Isso tem nome?</h2>
+        <p id="nomeLead">Na maioria das vezes, sim. Estas são as condições que ele mais acompanha no consultório.</p>
+      </div>
+      <ol class="condicoes" id="condicoes">
+        <li class="condicao" data-liga="golfa choro recusa peso"><h3>Refluxo gastroesofágico</h3><p>Regurgitação frequente, vômitos, irritabilidade e desconforto depois das mamadas ou refeições.</p><span class="sinal">Ligado ao que você marcou</span></li>
+        <li class="condicao" data-liga="choro golfa leite diarreia peso recusa"><h3>Alergia alimentar e APLV</h3><p>Alergia à proteína do leite de vaca e outras reações causadas por alimentos.</p><span class="sinal">Ligado ao que você marcou</span></li>
+        <li class="condicao" data-liga="gases diarreia leite dor"><h3>Intolerância à lactose</h3><p>Barriga distendida, gases e diarreia ligados ao consumo de leite e derivados.</p><span class="sinal">Ligado ao que você marcou</span></li>
+        <li class="condicao" data-liga="preso medo diarreia dor"><h3>Constipação crônica e diarreia persistente</h3><p>Investigação das causas e tratamento seguro para o intestino voltar ao ritmo.</p><span class="sinal">Ligado ao que você marcou</span></li>
+        <li class="condicao" data-liga="gases diarreia peso recusa dor"><h3>Doença celíaca</h3><p>Reação ao glúten que pode afetar o crescimento, a absorção de nutrientes e o bem-estar.</p><span class="sinal">Ligado ao que você marcou</span></li>
+        <li class="condicao" data-liga="dor gases preso diarreia"><h3>Síndrome do intestino irritável</h3><p>Dor abdominal que volta, junto com mudanças no ritmo do intestino.</p><span class="sinal">Ligado ao que você marcou</span></li>
+        <li class="condicao" data-liga="dor"><h3>Dor abdominal funcional</h3><p>Dores que se repetem sem causa aparente, avaliadas com calma e por completo.</p><span class="sinal">Ligado ao que você marcou</span></li>
+      </ol>
+      <p class="nome-nota">A ligação entre sintoma e condição é só um ponto de partida. Quem confirma é a consulta. <span class="confirmar">mapa sintoma e condição: revisar com o médico</span></p>
+    </section>
+
+    <section class="capitulo" id="quem" data-capitulo aria-labelledby="t-quem">
+      <div class="quem">
+        <div class="quem__foto" data-sc-in>
+          <img src="assets/dr-marcello-ficha.webp" width="667" height="1000" alt="Dr. Marcello Ruiz segurando papéis de consulta" loading="lazy">
+        </div>
+        <div data-sc-in>
+          <h2 id="t-quem">Quem vai atender vocês?</h2>
+          <p class="quem__nome">Dr. Marcello Ruiz da Silva</p>
+          <p class="quem__bio">Gastroenterologista pediátrico, com doutorado e professor da Faculdade de Ciências Médicas de Santos (UNILUS). Acompanha crianças e adolescentes com problemas do aparelho digestivo, em Santos e em São Paulo.</p>
+          <dl class="creds">
+            <dt>Registro</dt><dd>CRM 85878</dd>
+            <dt>Especialidade</dt><dd>Pediatria · RQE 150713</dd>
+            <dt>Área de atuação</dt><dd>Gastroenterologia Pediátrica · <span class="confirmar">RQE a confirmar</span></dd>
+            <dt>Formação</dt><dd>Doutorado · <span class="confirmar">instituição e tema a confirmar</span></dd>
+            <dt>Ensino</dt><dd>Professor na UNILUS</dd>
+          </dl>
+          <p class="quem__insta">No Instagram ele publica a série <em>Gastroenterologia em pequenas doses</em>: <a class="link" href="https://www.instagram.com/drmarcelloruizgastroped/" target="_blank" rel="noopener">@drmarcelloruizgastroped</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="capitulo" id="consulta" data-capitulo data-sc-act="flow" aria-labelledby="t-consulta">
+      <div class="capitulo__cab" data-sc-in>
+        <h2 id="t-consulta">Como é a primeira consulta?</h2>
+        <p>Sem pressa. Dá para mostrar as fotos para o seu filho antes, para ele chegar sabendo onde vai estar.</p>
+      </div>
+      <div class="consulta">
+        <div class="roteiro">
+          <div><h3>Primeiro, a conversa</h3><p>A história da criança contada com calma e sem julgamento: quando começou, o que piora, o que já foi tentado.</p></div>
+          <div><h3>Depois, o exame</h3><p>Exame físico no ritmo da criança, com os pais por perto.</p></div>
+          <div><h3>No fim, o plano</h3><p>Hipóteses explicadas com clareza, exames só quando necessários e o acompanhamento combinado com a família.</p></div>
+          <div class="levar">
+            <h3>O que levar</h3>
+            <ul>
+              <li>Exames que a criança já fez</li>
+              <li>Receitas e remédios em uso</li>
+              <li>Caderneta de saúde, com peso e altura</li>
+              <li>O que você anotou (a sua ficha ajuda)</li>
+            </ul>
+          </div>
+          <div class="pendencias">
+            <p>Duração da consulta: <span class="confirmar">a confirmar</span></p>
+            <p>Convênio, particular e reembolso: <span class="confirmar">a confirmar</span></p>
+            <p>Retorno: <span class="confirmar">a confirmar</span></p>
+          </div>
+        </div>
+        <div class="fotos">
+          <figure>
+            <div class="quadro" data-sc-reveal="up" data-sc-reveal-at="0.02 0.3"><img src="assets/cantinho-santos.webp" width="1600" height="1066" alt="Espaço infantil com mesinha de madeira e estantes em forma de casinha, ao lado de sofás" loading="lazy" data-sc-parallax="-0.04"></div>
+            <figcaption>Livance Santos, espaço infantil da recepção.</figcaption>
+          </figure>
+          <figure>
+            <div class="quadro" data-sc-reveal="up" data-sc-reveal-at="0.12 0.42"><img src="assets/sala-kids-ibirapuera.webp" width="1600" height="1328" alt="Sala infantil clara, com mesa redonda, banquinhos e janelas amplas para a cidade" loading="lazy" data-sc-parallax="-0.04"></div>
+            <figcaption>Livance Ibirapuera, sala kids.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="capitulo" id="onde" data-capitulo aria-labelledby="t-onde">
+      <div class="capitulo__cab" data-sc-in>
+        <h2 id="t-onde">Onde vocês preferem ir?</h2>
+        <p>Escolha uma unidade. Ela entra na ficha e a Central de Cuidado já mostra os horários de lá.</p>
+      </div>
+      <div class="unidades" role="radiogroup" aria-labelledby="t-onde">
+        <label class="unidade">
+          <input type="radio" name="unidade" value="Santos">
+          <span class="unidade__topo"><h3>Santos</h3><span class="unidade__estado"><span class="nao">Escolher</span><span class="sim">Escolhida</span></span></span>
+          <p>Livance Santos · Av. Anna Costa, 228, 20º e 21º andares<br>Gonzaga · CEP 11060-000</p>
+          <p class="horas">Segunda a sexta, 8h às 20h · Sábado, 8h às 14h</p>
+          <a class="mapa link" href="https://www.google.com/maps/search/?api=1&query=Av.+Anna+Costa,+228,+Santos+SP" target="_blank" rel="noopener">Ver no mapa</a>
+        </label>
+        <label class="unidade">
+          <input type="radio" name="unidade" value="São Paulo (Ibirapuera)">
+          <span class="unidade__topo"><h3>São Paulo</h3><span class="unidade__estado"><span class="nao">Escolher</span><span class="sim">Escolhida</span></span></span>
+          <p>Livance Ibirapuera · R. Agostinho Rodrigues Filho, 550<br>Vila Clementino · CEP 04026-040</p>
+          <p class="horas">Segunda a sexta, 7h às 22h · Sábado, 8h às 17h</p>
+          <a class="mapa link" href="https://www.google.com/maps/search/?api=1&query=R.+Agostinho+Rodrigues+Filho,+550,+São+Paulo+SP" target="_blank" rel="noopener">Ver no mapa</a>
+        </label>
+      </div>
+      <p class="unidades-nota">Os horários são os de funcionamento da unidade. Os dias de atendimento do Dr. Marcello aparecem no agendamento.</p>
+    </section>
+
+    <div class="noite" id="noite">
+      <section class="capitulo" id="ficha" data-capitulo aria-labelledby="t-ficha">
+        <div class="capitulo__cab">
+          <h2 id="t-ficha">Sua ficha</h2>
+          <p>Confira, complete se quiser e envie. A conversa abre no WhatsApp da Central de Cuidado, onde você escolhe o dia e o horário.</p>
+        </div>
+        <div class="ficha-mesa">
+          <div class="papel escrevendo" id="papel">
+            <div class="papel__cab" style="--i:0"><img src="assets/logo.webp" width="1320" height="400" alt=""><span>Ficha de primeira consulta</span></div>
+            <dl class="linhas">
+              <div class="linha" style="--i:1"><dt>Idade</dt><dd id="fIdade"></dd></div>
+              <div class="linha" style="--i:2"><dt>O que acontece</dt><dd id="fSintomas"></dd></div>
+              <div class="linha" style="--i:3"><dt>Unidade</dt><dd id="fUnidade"></dd></div>
+            </dl>
+            <label class="obs" style="--i:4" for="obs">Quer contar mais alguma coisa? (opcional)
+              <textarea id="obs" name="obs" maxlength="400" placeholder="Por exemplo: desde quando começou, o que já tentaram"></textarea>
+            </label>
+          </div>
+          <div class="envio">
+            <p class="balao-rotulo" id="rotuloMsg">A mensagem que vai para o WhatsApp</p>
+            <div class="balao" id="balao" aria-live="polite" aria-labelledby="rotuloMsg"></div>
+            <a class="botao botao--claro js-wa" href="https://wa.me/5513996811279" target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
+            <p class="miudo">Nada do que você marcou fica guardado neste site. O texto só sai daqui quando você toca em agendar.</p>
+            <p class="pessoa">Prefere falar com uma pessoa? Recepção: <span class="confirmar">telefone a confirmar</span></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </form>
+</main>
+
+<footer class="colofao">
+  <div class="colofao__in">
+    <img class="marca" src="assets/logo.webp" width="1320" height="400" alt="Dr. Marcello Ruiz">
+    <div>
+      <p><strong>Dr. Marcello Ruiz da Silva</strong></p>
+      <p>CRM 85878 · RQE Pediatria 150713</p>
+      <p>Agendamento pelo WhatsApp: (13) 99681-1279</p>
+      <p><a class="link" href="https://www.instagram.com/drmarcelloruizgastroped/" target="_blank" rel="noopener">Instagram</a> · <a class="link" href="/central-de-cuidado/" rel="nofollow">Acesso da equipe</a></p>
+    </div>
+    <div>
+      <p>Site informativo. Nenhum conteúdo daqui substitui a consulta, o diagnóstico ou a orientação médica presencial.</p>
+      <p>Dr. Marcello Ruiz · Gastroenterologia Pediátrica é marca de AMIKA Serviços Médicos LTDA · CNPJ 09.040.678/0001-72 · Av. Bartolomeu de Gusmão, 133, Ponta da Praia, Santos, SP.</p>
+      <p>Fotos das unidades: Livance. <span class="confirmar">uso em prévia, depende de autorização</span></p>
+    </div>
+    <div class="fim">
+      <span>© <span id="ano">2026</span> Dr. Marcello Ruiz</span>
+      <span>Desenvolvido por <a href="mailto:eduaoe@gmail.com?subject=Site%20do%20Dr.%20Marcello%20Ruiz"><img src="assets/logo-ecm.png" alt="ECM, Eduardo Chaves Marques"></a></span>
+    </div>
+  </div>
+</footer>
+
+<aside class="aba" id="aba" aria-label="Resumo da sua ficha">
+  <a class="aba__papel" href="#ficha">
+    <span class="aba__t">Sua ficha <small id="abaConta"></small></span>
+    <span class="aba__r" id="abaResumo">Nada marcado ainda</span>
+    <span class="aba__linhas" id="abaLinhas" aria-hidden="true"></span>
+  </a>
+  <a class="botao js-wa" href="https://wa.me/5513996811279" target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
+</aside>
+
+<script src="scrollcraft.js"></script>
+<script>
+// Com movimento reduzido a abertura é uma composição parada; segurar a rolagem
+// nela seria só tempo morto.
+// No celular o trajeto é mais curto: a tela é menor e o dedo cansa antes.
+(function () {
+  var ab = document.querySelector('.abertura');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) ab.setAttribute('data-sc-span', '1');
+  else if (innerWidth <= 760) ab.setAttribute('data-sc-span', '2.6');
+})();
+ScrollCraft.mount(document.body);
+
+(function () {
+  'use strict';
+  var WHATSAPP = '5513996811279';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  var form = document.getElementById('formFicha');
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+
+  // ---- a ficha ------------------------------------------------------------
+  // Tudo mora na memória da página. Nada vai para armazenamento local nem para
+  // estatística: é dado de saúde de criança e só sai no toque em agendar.
+  var nomes = {};
+  form.querySelectorAll('input[name="s"]').forEach(function (i) {
+    nomes[i.value] = i.parentNode.querySelector('span').textContent;
+  });
+
+  function estado() {
+    var idade = form.querySelector('input[name="idade"]:checked');
+    var unidade = form.querySelector('input[name="unidade"]:checked');
+    return {
+      idade: idade ? idade.value : '',
+      sintomas: Array.prototype.map.call(form.querySelectorAll('input[name="s"]:checked'), function (i) { return i.value; }),
+      unidade: unidade ? unidade.value : '',
+      obs: document.getElementById('obs').value.trim()
+    };
+  }
+
+  function mensagem(s) {
+    var m = 'Olá! Vim pelo site do Dr. Marcello e gostaria de agendar uma consulta' +
+      (s.unidade ? ' em ' + s.unidade : '') + '.';
+    var linhas = [];
+    if (s.idade) linhas.push('Idade: ' + s.idade);
+    if (s.sintomas.length) linhas.push('O que tenho notado: ' + s.sintomas.map(function (k) { return nomes[k].toLowerCase(); }).join('; '));
+    if (s.obs) linhas.push('Mais: ' + s.obs);
+    if (linhas.length) m += '\n\nFicha do site:\n' + linhas.map(function (l) { return '• ' + l; }).join('\n');
+    return m;
+  }
+
+  var vazioSintomas = '<span class="vazio">Nada marcado. <a class="link" href="#em-casa">Marcar agora</a></span>';
+  var abaLinhas = document.getElementById('abaLinhas');
+  var ultimoTotal = 0;
+
+  function atualizar() {
+    var s = estado();
+    var msg = mensagem(s);
+    var url = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+    document.querySelectorAll('.js-wa').forEach(function (a) { a.href = url; });
+
+    document.getElementById('fIdade').innerHTML = s.idade ? s.idade : '<span class="vazio">Não informada</span>';
+    document.getElementById('fUnidade').innerHTML = s.unidade ? s.unidade : '<span class="vazio">A escolher no agendamento</span>';
+    var fs = document.getElementById('fSintomas');
+    if (s.sintomas.length) {
+      var ul = document.createElement('ul');
+      s.sintomas.forEach(function (k) { var li = document.createElement('li'); li.textContent = nomes[k]; ul.appendChild(li); });
+      fs.innerHTML = ''; fs.appendChild(ul);
+    } else fs.innerHTML = vazioSintomas;
+    document.getElementById('balao').textContent = msg;
+
+    // a aba cresce um traço por item marcado
+    var total = s.sintomas.length + (s.idade ? 1 : 0) + (s.unidade ? 1 : 0);
+    document.getElementById('abaConta').textContent = total ? total + (total === 1 ? ' item' : ' itens') : '';
+    var partes = [];
+    if (s.idade) partes.push(s.idade);
+    if (s.sintomas.length) partes.push(s.sintomas.length + (s.sintomas.length === 1 ? ' sintoma' : ' sintomas'));
+    if (s.unidade) partes.push(s.unidade);
+    document.getElementById('abaResumo').textContent = partes.length ? partes.join(' · ') : 'Nada marcado ainda';
+    if (total !== ultimoTotal) {
+      abaLinhas.innerHTML = '';
+      for (var i = 0; i < Math.min(total, 6); i++) {
+        var t = document.createElement('i');
+        t.style.width = (58 + ((i * 37) % 40)) + '%';
+        if (i < ultimoTotal) t.style.animation = 'none';
+        abaLinhas.appendChild(t);
+      }
+      ultimoTotal = total;
+    }
+
+    reordenar(s.sintomas);
+  }
+
+  // ---- as condições se reordenam pelo que foi marcado -----------------------
+  var lista = document.getElementById('condicoes');
+  var ordemOriginal = Array.prototype.slice.call(lista.children);
+  function reordenar(marcados) {
+    var itens = ordemOriginal.map(function (li, idx) {
+      var liga = li.getAttribute('data-liga').split(' ');
+      var pontos = marcados.filter(function (k) { return liga.indexOf(k) > -1; }).length;
+      return { li: li, pontos: pontos, idx: idx };
+    });
+    var antes = new Map();
+    if (!reduce) itens.forEach(function (it) { antes.set(it.li, it.li.getBoundingClientRect().top); });
+    itens.sort(function (a, b) { return (b.pontos - a.pontos) || (a.idx - b.idx); });
+    // Destaca só as que mais combinam. Marcar cinco de sete condições por causa
+    // de três sintomas não organiza nada; com um sintoma só, vale qualquer ligação.
+    var max = itens[0].pontos;
+    var corte = max <= 1 ? 1 : Math.max(2, max - 1);
+    itens.forEach(function (it) {
+      it.li.classList.toggle('liga', it.pontos >= corte && it.pontos > 0);
+      lista.appendChild(it.li);
+    });
+    document.getElementById('nomeLead').textContent = marcados.length
+      ? 'Com o que você marcou, estas são as que mais conversam com o caso. Estão no topo, com um ponto verde.'
+      : 'Na maioria das vezes, sim. Estas são as condições que ele mais acompanha no consultório.';
+    if (reduce) return;
+    itens.forEach(function (it) {
+      var d = antes.get(it.li) - it.li.getBoundingClientRect().top;
+      if (!d) return;
+      it.li.animate([{ transform: 'translateY(' + d + 'px)' }, { transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    });
+  }
+
+  form.addEventListener('change', atualizar);
+  document.getElementById('obs').addEventListener('input', atualizar);
+  atualizar();
+
+  // ---- abertura: uma câmera dentro do consultório ------------------------------
+  // Coordenadas em pixels da foto original da sala (2400 x 1992). Cada camada
+  // recebe uma transformação só: onde ela está no mundo, quanto ela anda em
+  // relação às outras e onde a câmera está.
+  var abertura = document.querySelector('.abertura');
+  var cams = {};
+  abertura.querySelectorAll('[data-cam]').forEach(function (el) { cams[el.getAttribute('data-cam')] = el; });
+  var falaUm = abertura.querySelector('[data-fala="um"]');
+  var falaDois = abertura.querySelector('[data-fala="dois"]');
+  var veuBase = abertura.querySelector('.veu-base');
+  var veuFala = abertura.querySelector('.veu-fala');
+  var vinheta = abertura.querySelector('.vinheta');
+  var grao = abertura.querySelector('.grao');
+  var folha = document.getElementById('folha');
+  var folhaMiolo = folha.querySelector('.folha__miolo');
+  var folhaCobre = folha.querySelector('.folha__cobre');
+
+  var MUNDO = { w: 2400, h: 1992 };
+  // o médico em pé atrás da mesa: 400 x 600 no mundo, a partir de 1000 x 1500
+  var MEDICO = { x: 140, y: 772, esc: 0.4 };
+  // ponto onde o corpo dele encontra a borda da mesa. Todas as camadas crescem
+  // ou encolhem em volta deste ponto, então a borda da mesa nunca descola dele
+  // e a mesa do fundo nunca aparece por baixo da mesa da frente.
+  var O = { x: 340, y: 1298 };
+  var ROSTO = { x: 338, y: 910 };
+  var PAPEL = { x: 285, y: 1208, w: 177 };   // os papéis nas mãos dele
+  var LUZ = { x: -370, y: 250, esc: 1 };      // brilho da janela atrás dele
+  var RAIOS = { x: 0, y: 520, esc: 1 };
+
+  var clamp = function (x, a, b) { return x < a ? a : x > b ? b : x; };
+  var inOut = function (x) { x = clamp(x, 0, 1); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+
+  function enquadre(vw, vh) {
+    var celular = vw / vh < 0.9;
+    var R = celular ? { w: 760, h: 1992, cx: 470, cy: 1180 } : { w: 2400, h: 1500, cx: 1200, cy: 1140 };
+    var s0 = Math.max(vw / R.w, vh / R.h);
+    var mw = vw / (2 * s0), mh = vh / (2 * s0);
+    return {
+      celular: celular, s0: s0,
+      C0: { x: clamp(R.cx, mw, MUNDO.w - mw), y: clamp(R.cy, mh, MUNDO.h - mh) },
+      alvo: celular ? { x: 0.5 * vw, y: 0.5 * vh } : { x: 0.26 * vw, y: 0.4 * vh },
+      zoom: celular ? 1.65 : 2.15
+    };
+  }
+
+  function cena(p) {
+    var vw = abertura.clientWidth || innerWidth, vh = innerHeight;
+    var E = enquadre(vw, vh), meio = { x: vw / 2, y: vh / 2 };
+    var d = inOut((p - 0.03) / 0.6);                       // avanço da câmera
+    var s = E.s0 * (1 + (E.zoom - 1) * d);
+    var r0 = { x: (ROSTO.x - E.C0.x) * E.s0 + meio.x, y: (ROSTO.y - E.C0.y) * E.s0 + meio.y };
+    var rt = { x: r0.x + (E.alvo.x - r0.x) * d, y: r0.y + (E.alvo.y - r0.y) * d };
+    var cam = { x: ROSTO.x - (rt.x - meio.x) / s, y: ROSTO.y - (rt.y - meio.y) / s };
+    // a câmera nunca enquadra além da foto
+    var mw = meio.x / s, mh = meio.y / s;
+    cam.x = clamp(cam.x, mw, MUNDO.w - mw);
+    cam.y = clamp(cam.y, mh, MUNDO.h - mh);
+    function tela(pt) { return { x: (pt.x - cam.x) * s + meio.x, y: (pt.y - cam.y) * s + meio.y }; }
+    // e: quanto a camada anda a mais ou a menos que a câmera (profundidade)
+    function camada(el, x, y, base, e) {
+      if (!el) return;
+      var t = tela({ x: O.x + e * (x - O.x), y: O.y + e * (y - O.y) });
+      el.style.transform = 'translate3d(' + t.x.toFixed(2) + 'px,' + t.y.toFixed(2) + 'px,0) scale(' + (base * e * s).toFixed(5) + ')';
+    }
+    // O fundo não encolhe (encolher mostraria a borda da foto); a profundidade
+    // vem do médico e da mesa crescendo mais depressa que a sala.
+    var eFundo = 1, eMedico = 1 + 0.07 * d, eMesa = 1 + 0.5 * d;
+    camada(cams.fundo, 0, 0, 1, eFundo);
+    camada(cams['fundo-foco'], 0, 0, 2, eFundo);
+    camada(cams.luz, LUZ.x, LUZ.y, LUZ.esc, 1 - 0.06 * d);
+    camada(cams.medico, MEDICO.x, MEDICO.y, MEDICO.esc, eMedico);
+    camada(cams.raios, RAIOS.x, RAIOS.y, RAIOS.esc, 1 + 0.18 * d);
+    camada(cams.mesa, 0, 0, 1, eMesa);
+    camada(cams['mesa-foco'], 0, 0, 2, eMesa);
+
+    // o foco sai da sala e vai para ele; a mesa, perto demais da lente, borra
+    cams['fundo-foco'].style.opacity = inOut((p - 0.1) / 0.4).toFixed(3);
+    cams['mesa-foco'].style.opacity = inOut((p - 0.14) / 0.34).toFixed(3);
+    cams.mesa.style.opacity = (1 - inOut((p - 0.5) / 0.12)).toFixed(3);
+    cams.raios.style.opacity = (0.8 - 0.35 * d).toFixed(3);
+
+    // primeira frase: fica, depois recua para dentro da sala
+    var sai = inOut((p - 0.09) / 0.2);
+    falaUm.style.opacity = (1 - sai).toFixed(3);
+    falaUm.style.transform = 'translate3d(0,' + (-3 * sai).toFixed(2) + 'vh,0) scale(' + (1 - 0.05 * sai).toFixed(4) + ')';
+    falaUm.style.visibility = sai > 0.98 ? 'hidden' : 'visible';
+    if (veuBase) veuBase.style.opacity = (1 - sai).toFixed(3);
+    veuFala.style.opacity = (1 - sai).toFixed(3);
+
+    // segunda frase: aparece atrás dele quando a câmera chega
+    var entra = inOut((p - 0.27) / 0.15), some = inOut((p - 0.64) / 0.08);
+    falaDois.style.opacity = (entra * (1 - some)).toFixed(3);
+    falaDois.style.transform = 'translate3d(' + (-1.5 * d).toFixed(2) + 'vw,' + ((1 - entra) * 5).toFixed(2) + 'vh,0)';
+
+    // a folha: nasce nas mãos dele, vem até a lente e vira a página
+    var aparece = inOut((p - 0.55) / 0.06);
+    var f = inOut((p - 0.58) / 0.36);
+    var pw = folha.offsetWidth, ph = folha.offsetHeight;
+    var inicio = tela({ x: O.x + eMedico * (PAPEL.x - O.x), y: O.y + eMedico * (PAPEL.y - O.y) });
+    var sIni = (PAPEL.w * eMedico * s) / pw;
+    var sFim = Math.max(vw / pw, vh / ph) * 1.08;
+    var sc = sIni * Math.pow(sFim / sIni, f);
+    var cx = inicio.x + (meio.x - inicio.x) * f, cy = inicio.y + (meio.y - inicio.y) * f;
+    folha.style.opacity = aparece.toFixed(3);
+    folha.style.transform = 'translate3d(' + (cx - pw / 2).toFixed(2) + 'px,' + (cy - ph / 2).toFixed(2) + 'px,0) rotateX(' + (38 * (1 - f)).toFixed(2) + 'deg) rotateZ(' + (-9 * (1 - f)).toFixed(2) + 'deg) scale(' + sc.toFixed(5) + ')';
+    folhaMiolo.style.opacity = (1 - inOut((p - 0.83) / 0.08)).toFixed(3);
+    folhaCobre.style.opacity = inOut((p - 0.85) / 0.1).toFixed(3);
+    // vinheta e grão são da fotografia; saem quando a folha vira página, senão
+    // a emenda com o questionário (sem nenhum dos dois) apareceria
+    var foto = (1 - inOut((p - 0.8) / 0.12)).toFixed(3);
+    vinheta.style.opacity = foto;
+    grao.style.opacity = (0.07 * foto).toFixed(4);
+  }
+
+  var aba = document.getElementById('aba');
+  var noite = document.getElementById('noite');
+  var indiceLista = document.getElementById('indice-lista');
+  var fichaSec = document.getElementById('ficha');
+  var naFicha = false, voou = false;
+
+  function progressoAbertura() {
+    // O motor define a altura da abertura no primeiro quadro dele. Antes disso
+    // ela mede uma tela só; tratar isso como "abertura vencida" acenderia o
+    // índice e a aba por cima do título.
+    var h = abertura.offsetHeight - innerHeight;
+    return h > 0 ? Math.min(Math.max(scrollY / h, 0), 1) : 0;
+  }
+  var ease = function (x) { return x < 0 ? 0 : x > 1 ? 1 : x * x * (3 - 2 * x); };
+
+  function quadro() {
+    var p = progressoAbertura();
+    // Com movimento reduzido a câmera fica no plano de abertura: a cena
+    // continua inteira e em camadas, só não anda.
+    cena(reduce ? 0 : p);
+    var passou = reduce ? abertura.getBoundingClientRect().bottom < innerHeight * 0.4 : p > 0.93;
+    root.classList.toggle('pos-abertura', passou);
+    // o índice troca para as cores da noite quando o marinho passa por baixo do logo
+    // Duas linhas de corte: a lista troca quando o marinho chega embaixo dela, o
+    // logo quando chega nele. No celular a barra inteira troca junto com o logo.
+    var rn = noite.getBoundingClientRect();
+    var lista = innerWidth > 1099 ? indiceLista.getBoundingClientRect().bottom : 56;
+    root.classList.toggle('na-noite', rn.top < lista && rn.bottom > 56);
+    root.classList.toggle('logo-noite', rn.top < 56 && rn.bottom > 56);
+    aba.classList.toggle('on', passou && !naFicha);
+  }
+  var agendado = false;
+  function pedir() { if (!agendado) { agendado = true; requestAnimationFrame(function () { agendado = false; quadro(); }); } }
+  addEventListener('scroll', pedir, { passive: true });
+  addEventListener('resize', pedir);
+  requestAnimationFrame(function () { requestAnimationFrame(quadro); });
+
+  // ---- o pico: a aba entra na ficha e a ficha se escreve ---------------------
+  var papel = document.getElementById('papel');
+  new IntersectionObserver(function (es) {
+    var e = es[0];
+    var abaVisivel = aba.classList.contains('on');
+    naFicha = e.isIntersecting;
+    quadro();
+    if (e.isIntersecting && !voou) {
+      voou = true;
+      voar(abaVisivel);
+    }
+  }, { threshold: 0.28 }).observe(fichaSec);
+
+  function escrever() { papel.classList.add('escrita'); }
+  function voar(abaVisivel) {
+    var origem = aba.querySelector('.aba__papel');
+    var r1 = origem.getBoundingClientRect();
+    if (reduce || !abaVisivel || r1.width === 0) { escrever(); return; }
+    var r2 = papel.getBoundingClientRect();
+    var fantasma = origem.cloneNode(true);
+    fantasma.classList.add('voando');
+    fantasma.removeAttribute('href');
+    fantasma.setAttribute('aria-hidden', 'true');
+    fantasma.style.cssText += ';left:' + r1.left + 'px;top:' + r1.top + 'px;width:' + r1.width + 'px;height:' + r1.height + 'px;margin:0';
+    document.body.appendChild(fantasma);
+    requestAnimationFrame(function () {
+      var sx = r2.width / r1.width, sy = Math.min(r2.height, 420) / r1.height;
+      fantasma.style.transformOrigin = '0 0';
+      fantasma.style.transform = 'translate(' + (r2.left - r1.left) + 'px,' + (r2.top - r1.top) + 'px) scale(' + sx + ',' + sy + ')';
+      fantasma.style.opacity = '0';
+    });
+    setTimeout(escrever, 380);
+    setTimeout(function () { fantasma.remove(); }, 900);
+  }
+
+  // ---- índice: onde a pessoa está ---------------------------------------------
+  var links = {};
+  document.querySelectorAll('#indice-lista a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  var ordem = Object.keys(links);
+  var onde = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var id = e.target.id, n = ordem.indexOf(id);
+      ordem.forEach(function (k, i) {
+        links[k].setAttribute('aria-current', k === id ? 'true' : 'false');
+        links[k].classList.toggle('feito', i < n);
+      });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('[data-capitulo]').forEach(function (s) { onde.observe(s); });
+
+  // índice recolhido (telas menores): abre, fecha com Esc, fecha ao escolher
+  var indice = document.getElementById('indice');
+  var abrir = indice.querySelector('.indice__abrir');
+  function fechar() { indice.classList.remove('aberto'); abrir.setAttribute('aria-expanded', 'false'); }
+  abrir.addEventListener('click', function () {
+    var aberto = indice.classList.toggle('aberto');
+    abrir.setAttribute('aria-expanded', String(aberto));
+    if (aberto) indice.querySelector('ol a').focus();
+  });
+  indice.querySelectorAll('ol a').forEach(function (a) { a.addEventListener('click', fechar); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape' && indice.classList.contains('aberto')) { fechar(); abrir.focus(); } });
+
+  document.getElementById('ano').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
