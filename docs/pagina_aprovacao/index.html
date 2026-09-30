@@ -328,13 +328,18 @@ legend{font-family:var(--sc-font-display);font-weight:600;font-size:1.08rem;padd
   .abertura h1{font-size:clamp(2.1rem,1.1rem + 5.6vw,2.8rem)}
   .abertura .lede{margin-top:.8rem;font-size:1rem}
   .abertura .acoes{margin-top:1rem;gap:6px 22px}
-  .veu-base{position:absolute;left:0;right:0;bottom:0;height:58svh;z-index:9;pointer-events:none;will-change:opacity;
-    background:linear-gradient(0deg,rgba(242,240,235,.97) 0%,rgba(242,240,235,.94) 62%,rgba(242,240,235,0) 100%)}
+  /* o topo desta faixa é posto pelo JavaScript logo acima da primeira frase,
+     abaixo das mãos dele: o papel cobre a mesa, nunca o médico */
+  .veu-base{position:absolute;left:0;right:0;bottom:0;top:45%;z-index:9;pointer-events:none;will-change:opacity;
+    background:linear-gradient(180deg,rgba(242,240,235,0) 0,rgba(242,240,235,.93) 56px,rgba(242,240,235,.97) 100%)}
   .fala--dois{left:var(--sc-gutter);right:var(--sc-gutter);top:12svh;max-width:none;font-size:clamp(2.9rem,1rem + 10vw,4.2rem)}
   .folha{width:300px;height:400px;padding:24px 24px}
 }
 @media (min-width:761px){.veu-base{display:none}}
-@media (max-width:760px){.veu-fala{display:none}}
+@media (max-width:760px){.veu-fala{display:none}.so-largo{display:none}}
+/* tela baixa (barra do navegador aberta, aparelho pequeno): o parágrafo cede
+   o lugar para ele; título e botão ficam. */
+@media (max-width:760px) and (max-height:720px){.abertura .lede{display:none}.abertura .acoes{margin-top:.9rem}}
 /* a folha vira esta página: o primeiro capítulo começa logo, no mesmo papel,
    sem esperar a animação de entrada */
 #em-casa{padding-top:clamp(56px,7vw,88px)}
@@ -374,7 +379,7 @@ legend{font-family:var(--sc-font-display);font-weight:600;font-size:1.08rem;padd
       <div class="cam cam--luz" data-cam="luz" aria-hidden="true"></div>
       <div class="veu-fala" aria-hidden="true"></div>
       <div class="fala fala--um" data-fala="um">
-        <p class="abertura__quem">Dr. Marcello Ruiz · Gastroenterologia pediátrica · Santos e São Paulo</p>
+        <p class="abertura__quem"><span class="so-largo">Dr. Marcello Ruiz · </span>Gastroenterologia pediátrica · Santos e São Paulo</p>
         <h1 id="t-abertura">A barriga dele não melhora. <span class="sr">Vamos entender por quê.</span></h1>
         <p class="lede">Refluxo, intestino preso, alergia ao leite, dor que vai e volta. Consulta para crianças e adolescentes, com tempo para ouvir a família.</p>
         <div class="acoes">
@@ -781,21 +786,54 @@ ScrollCraft.mount(document.body);
   var clamp = function (x, a, b) { return x < a ? a : x > b ? b : x; };
   var inOut = function (x) { x = clamp(x, 0, 1); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
 
+  // do alto da cabeça até a borda da mesa, no mundo
+  var CABECA = 800, CINTURA = 1300;
+  var CABELO = 829;        // onde o cabelo dele realmente começa
+  var E_MEDICO = 0.07;     // quanto ele cresce a mais que a sala no avanço
+
   function enquadre(vw, vh) {
     var celular = vw / vh < 0.9;
-    var R = celular ? { w: 760, h: 1992, cx: 470, cy: 1180 } : { w: 2400, h: 1500, cx: 1200, cy: 1140 };
-    var s0 = Math.max(vw / R.w, vh / R.h);
-    var mw = vw / (2 * s0), mh = vh / (2 * s0);
+    if (!celular) {
+      var s = Math.max(vw / 2400, vh / 1500), mw = vw / (2 * s), mh = vh / (2 * s);
+      return {
+        celular: false, s0: s,
+        C0: { x: clamp(1200, mw, MUNDO.w - mw), y: clamp(1140, mh, MUNDO.h - mh) },
+        alvo: { x: 0.26 * vw, y: 0.4 * vh }, zoom: 2.15
+      };
+    }
+    // No celular o enquadramento se mede pelo texto, e não o contrário: ele
+    // ocupa a faixa entre a barra do topo e o começo da primeira frase. Com
+    // enquadramento fixo, numa tela baixa (barra do navegador aberta) o texto
+    // subia para cima do peito e das mãos dele. offsetTop ignora a
+    // transformação da frase, então a medida não muda enquanto ela recua.
+    var TETO = 76, FOLGA = 22;
+    var topoTexto = falaUm.offsetTop;
+    var faixa = Math.max(topoTexto - FOLGA - TETO, 150);
+    var s0 = Math.max(faixa / (CINTURA - CABECA), vh / MUNDO.h, vw / MUNDO.w);
+    var mw2 = vw / (2 * s0), mh2 = vh / (2 * s0);
+    var topoMundo = CABECA - TETO / s0;
+    // chega perto até ele encher a largura; se já está grande, avança pouco
+    var zoom = Math.max(1.2, (vw * 1.04 / 400) / s0);
+    // A câmera para com o alto da cabeça logo abaixo do fim da segunda frase,
+    // sem tapar nenhuma letra. No fim do avanço ele está 7% maior que a sala
+    // (E_MEDICO), crescendo a partir da mesa, então o cabelo sobe: a conta usa
+    // onde o cabelo vai estar, e não onde ele começa.
+    var fimFrase = falaDois.offsetTop + falaDois.offsetHeight;
+    var cabeloFim = O.y + (1 + E_MEDICO) * (CABELO - O.y);
+    var rostoY = fimFrase + 12 + (ROSTO.y - cabeloFim) * s0 * zoom;
     return {
-      celular: celular, s0: s0,
-      C0: { x: clamp(R.cx, mw, MUNDO.w - mw), y: clamp(R.cy, mh, MUNDO.h - mh) },
-      alvo: celular ? { x: 0.5 * vw, y: 0.5 * vh } : { x: 0.26 * vw, y: 0.4 * vh },
-      zoom: celular ? 1.65 : 2.15
+      celular: true, s0: s0, topoTexto: topoTexto,
+      C0: { x: clamp(O.x, mw2, MUNDO.w - mw2), y: clamp(topoMundo + mh2, mh2, MUNDO.h - mh2) },
+      alvo: { x: 0.5 * vw, y: Math.max(0.45 * vh, rostoY) },
+      zoom: zoom
     };
   }
 
+  var palco = abertura.querySelector('[data-sc-stage]');
   function cena(p) {
-    var vw = abertura.clientWidth || innerWidth, vh = innerHeight;
+    // altura do palco, e não da janela: no celular a janela muda de altura
+    // quando a barra do navegador recolhe, o palco não
+    var vw = palco.clientWidth || innerWidth, vh = palco.clientHeight || innerHeight;
     var E = enquadre(vw, vh), meio = { x: vw / 2, y: vh / 2 };
     var d = inOut((p - 0.03) / 0.6);                       // avanço da câmera
     var s = E.s0 * (1 + (E.zoom - 1) * d);
@@ -815,7 +853,7 @@ ScrollCraft.mount(document.body);
     }
     // O fundo não encolhe (encolher mostraria a borda da foto); a profundidade
     // vem do médico e da mesa crescendo mais depressa que a sala.
-    var eFundo = 1, eMedico = 1 + 0.07 * d, eMesa = 1 + 0.5 * d;
+    var eFundo = 1, eMedico = 1 + E_MEDICO * d, eMesa = 1 + 0.5 * d;
     camada(cams.fundo, 0, 0, 1, eFundo);
     camada(cams['fundo-foco'], 0, 0, 2, eFundo);
     camada(cams.luz, LUZ.x, LUZ.y, LUZ.esc, 1 - 0.06 * d);
@@ -835,7 +873,10 @@ ScrollCraft.mount(document.body);
     falaUm.style.opacity = (1 - sai).toFixed(3);
     falaUm.style.transform = 'translate3d(0,' + (-3 * sai).toFixed(2) + 'vh,0) scale(' + (1 - 0.05 * sai).toFixed(4) + ')';
     falaUm.style.visibility = sai > 0.98 ? 'hidden' : 'visible';
-    if (veuBase) veuBase.style.opacity = (1 - sai).toFixed(3);
+    if (veuBase) {
+      veuBase.style.opacity = (1 - sai).toFixed(3);
+      if (E.celular) veuBase.style.top = Math.max(E.topoTexto - 52, 0) + 'px';
+    }
     veuFala.style.opacity = (1 - sai).toFixed(3);
 
     // segunda frase: aparece atrás dele quando a câmera chega
