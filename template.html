@@ -454,6 +454,19 @@ footer .autoria img{display:block;height:16px;width:auto;filter:none}
   footer .fbottom{flex-direction:column;gap:8px}
 }
 </style>
+<!-- Tag do Google Ads (conta 399-318-9566, criada em 18/10/2026).
+     Sem ela o Google nao sabe quem do anuncio tocou no WhatsApp, e a campanha
+     fica so contando clique, sem aprender quem vira consulta. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18521077972"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  // Sem lista de remarketing: saude e categoria sensivel no Google, que nao
+  // deixa anunciar de novo para quem visitou site medico. Coletar a lista sem
+  // poder usar so guardaria dado de familia a toa.
+  gtag('config', 'AW-18521077972', {'allow_ad_personalization_signals': false});
+</script>
 </head>
 <body>
 <a class="skip" href="#sobre">Ir para o conteúdo</a>
@@ -696,6 +709,46 @@ footer .autoria img{display:block;height:16px;width:auto;filter:none}
 </div>
 
 <script>
+// Quem chega pelo anuncio do Google (18/10/2026).
+//
+// Duas coisas, as duas no clique do WhatsApp:
+// 1. Conta a conversao no Google Ads. E o unico sinal de que o anuncio trouxe
+//    alguem de verdade; sem ele o lance automatico otimiza para clique vazio.
+// 2. Troca a frase pronta de "Vim pelo site" para "Encontrei no Google". A
+//    Central so ve a conversa, nao o anuncio: e essa frase que deixa a equipe
+//    (e o relatorio do dia 15) saber quantas consultas vieram do Google.
+//
+// O Google marca o clique pago com gclid (ou gbraid/wbraid no iPhone). Guarda
+// na sessao porque a pessoa pode rolar, voltar e so tocar no botao depois.
+// Sessao bloqueada (aba anonima, cookie desligado) nao pode quebrar o botao:
+// no pior caso a frase fica "Vim pelo site".
+(function(){
+  var veioDoAnuncio = /[?&](gclid|gbraid|wbraid)=/.test(location.search) ||
+    /[?&]utm_source=google/.test(location.search);
+  try {
+    if(veioDoAnuncio) sessionStorage.setItem('veioDoGoogle', '1');
+    else veioDoAnuncio = sessionStorage.getItem('veioDoGoogle') === '1';
+  } catch(e) {}
+
+  document.querySelectorAll('a[href*="wa.me/"]').forEach(function(a){
+    if(veioDoAnuncio){
+      try {
+        var u = new URL(a.href);
+        var texto = u.searchParams.get('text') || '';
+        u.searchParams.set('text', texto.replace('Vim pelo site do Dr. Marcello', 'Encontrei o Dr. Marcello no Google'));
+        a.href = u.toString();
+      } catch(e) {}
+    }
+    a.addEventListener('click', function(){
+      // transport beacon: o WhatsApp abre em outra aba ou no app, e sem o
+      // beacon o navegador pode cortar o envio antes de ele sair.
+      if(typeof gtag === 'function'){
+        gtag('event', 'conversion', {'send_to': 'AW-18521077972/Cm4XCPzvv6EdENTxxP9E', 'transport_type': 'beacon'});
+      }
+    });
+  });
+})();
+
 (function(){
   var header = document.getElementById('header');
   var video = document.getElementById('heroVideo');
