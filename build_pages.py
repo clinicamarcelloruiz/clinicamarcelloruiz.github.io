@@ -84,10 +84,44 @@ EXTRAS = [
     "logo-email.png",
     "icone-512.png",
     "icone-maskable-512.png",
+    "previa-avaliar.jpg",
 ]
 
 for nome in sorted(set(usados) | {e for e in EXTRAS if (ASSETS / e).exists()}):
     shutil.copy2(ASSETS / nome, DIST / "assets" / nome)
+
+# O endereco proprio da avaliacao do Google (30/10/2026).
+#
+# O link g.page do Google aparece no WhatsApp com a previa em ingles ("would
+# love your feedback"), e nem ?hl=pt-BR muda isso. Esta pagina so leva para o
+# mesmo link, mas a previa e nossa. noindex: nao e pagina para aparecer na busca.
+AVALIAR = {
+    "santos": ("Santos", "https://g.page/r/CYVa1XxZCvKoEBM/review"),
+}
+for pasta, (cidade, destino) in AVALIAR.items():
+    (DIST / f"avaliar-{pasta}").mkdir(parents=True, exist_ok=True)
+    (DIST / f"avaliar-{pasta}" / "index.html").write_text(f"""<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<title>Avalie a consulta com o Dr. Marcello Ruiz em {cidade}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="description" content="Conte no Google como foi a consulta. Sua avaliação ajuda outras famílias.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Dr. Marcello Ruiz">
+<meta property="og:title" content="Avalie a consulta com o Dr. Marcello Ruiz em {cidade}">
+<meta property="og:description" content="Conte no Google como foi a consulta. Sua avaliação ajuda outras famílias.">
+<meta property="og:url" content="https://drmarcelloruiz.com.br/avaliar-{pasta}/">
+<meta property="og:image" content="https://drmarcelloruiz.com.br/assets/previa-avaliar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta http-equiv="refresh" content="0;url={destino}">
+<script>location.replace("{destino}")</script>
+</head><body style="font-family:sans-serif;padding:32px;line-height:1.5">
+<p>Abrindo a página de avaliação no Google...</p>
+<p><a href="{destino}">Se não abrir sozinha, toque aqui.</a></p>
+</body></html>
+""", encoding="utf-8")
 
 # Impede o GitHub Pages de processar os arquivos com Jekyll.
 (DIST / ".nojekyll").write_text("", encoding="utf-8")

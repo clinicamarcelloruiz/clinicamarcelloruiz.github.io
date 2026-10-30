@@ -1,2 +1,15 @@
 node_modules/
 dist/
+
+# Material interno, nunca vai para o repositorio publico (30/10/2026).
+# O PUBLICAR SITE.bat ja envia so os arquivos do site; isto segura um "git add ." feito a mao.
+google-perfil/
+instagram/
+reformulacao-para-aprovacao/
+relatorio-empresa-marketing/
+trafego-pago/
+versao-anamnese/
+videos/
+PREVIA*.html
+resposta-pronta-sobre-o-dr-marcello.txt
+PUBLICAR SITE.bat
