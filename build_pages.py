@@ -97,6 +97,7 @@ for nome in sorted(set(usados) | {e for e in EXTRAS if (ASSETS / e).exists()}):
 # mesmo link, mas a previa e nossa. noindex: nao e pagina para aparecer na busca.
 AVALIAR = {
     "santos": ("Santos", "https://g.page/r/CYVa1XxZCvKoEBM/review"),
+    "sao-paulo": ("São Paulo", "https://g.page/r/CRGQnYNpj3otEBM/review"),
 }
 for pasta, (cidade, destino) in AVALIAR.items():
     (DIST / f"avaliar-{pasta}").mkdir(parents=True, exist_ok=True)
